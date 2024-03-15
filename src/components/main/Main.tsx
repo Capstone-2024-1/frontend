@@ -10,6 +10,7 @@ const Main = () => {
   const handleHome = () => {
     router.push('/home');
   };
+  
   return (
     <Box sx={{bgcolor: '#937062', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
 

@@ -3,7 +3,7 @@ import React from 'react'
 
 const LoginButton = () => {
   const handleLogin = () => {
-    //로그인
+    window.open(process.env.NEXT_PUBLIC_LOGIN_URL);
   };
   return (
     <Button 
