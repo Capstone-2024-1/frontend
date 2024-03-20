@@ -21,10 +21,10 @@ const Main = () => {
         const response = await postLogin(code);
         if(response){
           if(response.isRegistered === true){
-            router.push('home');
+            router.push('/home');
           }
           else{
-            console.log('hi');
+            router.push('/register')
           }
         }
       }

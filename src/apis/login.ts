@@ -8,7 +8,7 @@ export const postLogin = async (code: string) => {
     // return response;
 
     const temp = {
-      "isRegistered": true,
+      "isRegistered": false,
     }
     return temp;
   }catch(error){
