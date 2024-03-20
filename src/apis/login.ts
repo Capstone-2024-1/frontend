@@ -1,12 +1,17 @@
 import { requestAPIWithoutToken } from "./api-helper"
 
-const baseURL = process.env.NEXT_PUBLIC_SERVER_URL
+const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
-// export const getLogin = () => {
-//   try{
-//     const url = ;
+export const postLogin = async (code: string) => {
+  try{
+    // const response = await requestAPIWithoutToken('POST', '/login/oauth/google', {code});
+    // return response;
 
-//   }catch(error){
-//     console.error(error);
-//   }
-// }
+    const temp = {
+      "isRegistered": true,
+    }
+    return temp;
+  }catch(error){
+    console.error(error);
+  }
+}
