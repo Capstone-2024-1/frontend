@@ -1,3 +1,4 @@
+import { setColor } from '@/utils/setColor';
 import { Button, CardMedia } from '@mui/material'
 import React from 'react'
 
@@ -31,7 +32,7 @@ const buttonStyle = () => ({
   width: '300px', height: '55px', bgcolor: 'white',
   borderRadius: '10px', 
   font: 'pretendard',
-  color: '#75574B',
+  color: setColor("main"),
   fontWeight: 'bold',
   justifyContent: 'flex-start',
   textTransform: 'none',

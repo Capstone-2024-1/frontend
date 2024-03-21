@@ -4,27 +4,28 @@ import { Box, CardMedia } from '@mui/material';
 import LoginButton from './LoginButton';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { postLogin } from '@/apis/login';
+import { setColor } from '@/utils/setColor';
 
 const Main = () => {
   const router = useRouter();
   
   const params = useSearchParams();
 
-  const handleHome = () => {
-    router.push('/home');
-  };
+  // const handleHome = () => {
+  //   router.push('/home');
+  // };
   useEffect(()=>{
     const fetchCode = async () => {
       const code = params?.get('code') ;
-      if(code!==null && code!==undefined){
+      if(code && code!==null && code!==undefined){
         console.log(code);
         const response = await postLogin(code);
         if(response){
           if(response.isRegistered === true){
-            router.push('/home');
+            router.push('page/home');
           }
           else{
-            router.push('/register')
+            router.push('page/register');
           }
         }
       }
@@ -33,7 +34,7 @@ const Main = () => {
   }, []);
   
   return (
-    <Box sx={{bgcolor: '#937062', width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+    <Box sx={{bgcolor: setColor("main"), width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
 
     <Box sx={{ //logo
       width: '200px', 
@@ -53,7 +54,7 @@ const Main = () => {
     />
 
     <LoginButton/>
-    <Box sx={{width: '10px', height: '10px', bgcolor: 'red'}} onClick={handleHome}/>
+    {/* <Box sx={{width: '10px', height: '10px', bgcolor: 'red'}} onClick={handleHome}/> */}
   </Box>
   )
 }
