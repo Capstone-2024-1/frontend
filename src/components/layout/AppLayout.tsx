@@ -1,6 +1,8 @@
+import { useTheme } from "@emotion/react";
 import { Box } from "@mui/material";
 
 const AppLayout = (props: { children: React.ReactNode }) => {
+  const theme = useTheme();
   return (
     <Box sx={{display: 'flex', justifyContent: 'center'}}>
       <Box sx={{
