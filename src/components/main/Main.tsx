@@ -26,6 +26,13 @@ const Main = () => {
   }, [router.query]);
   return (
     <Box sx={container}>
+
+      <Box sx={{ //logo
+        width: '200px', 
+        height: '200px', 
+        bgcolor: '#EFDCD4', 
+        borderRadius: '100px',
+        margin: '50px'}}/>
       
       <CardMedia
         component="img"
