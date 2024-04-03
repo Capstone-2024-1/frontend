@@ -24,6 +24,10 @@ const Main = () => {
     }
     fetchCode();
   }, [router.query]);
+
+  const tempMove = () => {
+    router.push('/register');
+  }
   return (
     <Box sx={container}>
 
@@ -32,7 +36,9 @@ const Main = () => {
         height: '200px', 
         bgcolor: '#EFDCD4', 
         borderRadius: '100px',
-        margin: '50px'}}/>
+        margin: '50px'}}
+        onClick={tempMove}
+        />
       
       <CardMedia
         component="img"
