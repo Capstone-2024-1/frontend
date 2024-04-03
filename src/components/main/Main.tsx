@@ -32,7 +32,7 @@ const Main = () => {
     <Box sx={container}>
 
       <Box sx={{ //logo
-        width: '200px', 
+        width: '200px',
         height: '200px', 
         bgcolor: '#EFDCD4', 
         borderRadius: '100px',
