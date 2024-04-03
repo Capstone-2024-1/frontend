@@ -26,7 +26,7 @@ const Main = () => {
   }, [router.query]);
 
   const tempMove = () => {
-    router.push('/register');
+    router.push('/register/nickname');
   }
   return (
     <Box sx={container}>
