@@ -1,5 +1,6 @@
 import Header from '@/components/common/Header';
 import Progress from '@/components/common/Progress';
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Box, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -8,10 +9,11 @@ import React, { useState } from 'react'
 const nickname = () => {
   const router = useRouter();
   const [nickName, setNickName] = useState('');
+  const { setName } = useUser();
 
   const handleClick = () => {
-    console.log(nickName);
     router.push('/register/ingredient');
+    setName(nickName);
   }
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
