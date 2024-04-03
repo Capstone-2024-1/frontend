@@ -15,7 +15,7 @@ const headerStyle = {
   height: '3.75rem',
   bgcolor: setColor('main'),
   boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.25)',
-  padding: '0.5rem',
+  padding: '0.8rem',
 
   font: 'Inter',
   color: 'white',
