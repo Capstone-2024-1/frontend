@@ -1,11 +1,13 @@
 import Header from '@/components/common/Header'
 import Progress from '@/components/common/Progress'
+import { useUser } from '@/hook/useUser'
 import { Box } from '@mui/material'
 import React from 'react'
 
 const index = () => {
+  const {user} = useUser();
   const handleClick = () => {
-    console.log('1');
+    console.log(user.name);
   }
   return (
     <>
