@@ -8,7 +8,7 @@ const AppLayout = (props: { children: React.ReactNode }) => {
       <Box sx={{
         width:{
           xs: '100%',
-          md: '500px',
+          sm: '500px',
         },
         bgcolor: 'white',
         }}>
