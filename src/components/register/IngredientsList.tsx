@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import IngredientContainer from './IngredientContainer';
 import { Box } from '@mui/material';
 
@@ -14,19 +14,20 @@ interface IngredientsListProps{
 }
 
 const IngredientsList: React.FC<IngredientsListProps> = ({data}) => {
-  const renderCategory = (category: Category) => (
+
+  const renderCategory = (category: Category, depth: number): JSX.Element => (
   <IngredientContainer 
-  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"}>
+  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"} depth={depth}>
     {category.childCategories.length > 0 &&
       <>
-      {category.childCategories.map(renderCategory)}
+      {category.childCategories.map(childCategory => renderCategory(childCategory, depth + 1))}
       </>
     }
   </IngredientContainer>
   );
   return (
-    data.map((renderCategory))
+    data.map(category => renderCategory(category, 0))
   )
 }
 
-export default IngredientsList
+export default IngredientsList;

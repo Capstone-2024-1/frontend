@@ -4,12 +4,13 @@ interface IngredientContainerProps {
   english: string;
   korean: string;
   children?: React.ReactNode;
+  depth: number;
 }
 
-const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, korean, children }) => {
+const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, korean, children, depth }) => {
   return (
     <Box sx={containerStyle}>
-      <span>{english} ({korean})</span>
+      <span>{english} ({korean}){depth}</span>
         {children && <div>{children}</div>}
     </Box>
     );
