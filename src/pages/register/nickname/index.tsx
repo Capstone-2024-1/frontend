@@ -12,7 +12,7 @@ const nickname = () => {
   const { setName } = useUser();
 
   const handleClick = () => {
-    router.push('/register/ingredient');
+    router.push('/register/ingredient?type=vegeterian');
     setName(nickName);
   }
 
