@@ -1,4 +1,6 @@
 import React from 'react'
+import IngredientContainer from './IngredientContainer';
+import { Box } from '@mui/material';
 
 interface Category {
   id: number;
@@ -13,13 +15,14 @@ interface IngredientsListProps{
 
 const IngredientsList: React.FC<IngredientsListProps> = ({data}) => {
   const renderCategory = (category: Category) => (
-    <li key={category.id}>
-      {category.englishName} ({category.koreanName})
-    
-    {category.childCategories.length > 0 && (
-      <ul>{category.childCategories.map(renderCategory)}</ul>
-    )}
-  </li>
+  <IngredientContainer 
+  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"}>
+    {category.childCategories.length > 0 &&
+      <>
+      {category.childCategories.map(renderCategory)}
+      </>
+    }
+  </IngredientContainer>
   );
   return (
     data.map((renderCategory))

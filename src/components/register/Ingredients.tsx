@@ -32,8 +32,9 @@ export default Ingredient;
 
 const container = {
     display: 'flex',
-    padding: '2rem',
+    flexDirection: 'column',
+    padding: '1rem',
     width: '100%',
     height: '100%',
-    bgcolor: setColor('lightGrey'),
+    bgcolor: setColor('lightGrey') || 'grey',
 }
