@@ -14,15 +14,25 @@ const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, kore
     console.log(open);
     setOpen(!open);
   }
+  const handleArrow = () => {
+    if(open)return `url(/images/arrow-down.png)`;
+    else return `url(/images/arrow-left.png)`;
+  }
   return (
     <Box sx={containerStyle}>
-      <span>
-        {english} ({korean}){depth} 
+      <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+        <>
+        {english} ({korean}) 
+        </>
         {
-        (depth === 0 || depth === 1) && 
-        <Box sx={{width: '10px', height:'10px', bgcolor: 'yellow'}} onClick={handleToggle}/>
+        (depth === 0 || depth === 1 && children) && 
+        <Box sx={{
+          backgroundImage: handleArrow(),
+          width: '30px', height: '30px', backgroundPosition: 'center'}}
+          onClick={handleToggle}/>
         }
-      </span>
+        
+      </Box>
         {open && children && <div>{children}</div>}
     </Box>
     );
