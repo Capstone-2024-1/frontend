@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, FormControl, FormControlLabel, Radio } from "@mui/material";
 import { useEffect, useState } from "react";
 
 interface IngredientContainerProps {
@@ -21,9 +21,10 @@ const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, kore
   return (
     <Box sx={containerStyle}>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-        <>
-        {english} ({korean}) 
-        </>
+        <Box sx={{display: 'flex', alignItems: 'center', paddingRight: '10px'}}>
+        <Box sx={{width: '10px', height: '10px', bgcolor: 'yellow',}}></Box>
+          {english} ({korean}) 
+        </Box>
         {
         (depth === 0 || depth === 1 && children) && 
         <Box sx={{

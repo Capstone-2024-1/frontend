@@ -20,7 +20,7 @@ const Ingredient = () => {
       setStep(step+1);
     }
     else {
-      router.push('/register/nickname');
+      router.push('/home');
     }
   };
 
