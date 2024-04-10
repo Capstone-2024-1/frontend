@@ -1,3 +1,4 @@
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
 import React, { useState } from 'react'
@@ -9,9 +10,11 @@ interface IngredientContainerProps {
   depth: number;
   open: boolean;
   setOpen: (value: boolean) => void;
+  id: number;
 }
 
-const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen }) => {
+const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen, id }) => {
+  const {user} = useUser();
   const [check, setCheck] = useState<boolean>(false);
   const handleToggle = () => {
     console.log(open);
@@ -19,6 +22,12 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
   }
 
   const handleCheck = () => {
+    if(check){
+      //체크 제거
+      
+    }else{
+
+    }
     setCheck(!check);
   }
 
@@ -26,8 +35,6 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
     if(check)return setColor('main');
     else return setColor('grey');
   }
-
-
 
   const handleArrow = () => {
     if(open)return `url(/images/arrow-down.png)`;

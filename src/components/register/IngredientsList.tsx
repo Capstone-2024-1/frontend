@@ -3,7 +3,7 @@ import IngredientContainer from './IngredientContainer';
 import { Box } from '@mui/material';
 
 interface Category {
-  id: number;
+  id: string;
   englishName: string;
   koreanName: string;
   childCategories: Category[];
@@ -17,7 +17,7 @@ const IngredientsList: React.FC<IngredientsListProps> = ({data}) => {
 
   const renderCategory = (category: Category, depth: number): JSX.Element => (
   <IngredientContainer 
-  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"} depth={depth}>
+  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"} depth={depth} id={category.id}>
     {category.childCategories.length > 0 &&
       <>
       {category.childCategories.map(childCategory => renderCategory(childCategory, depth + 1))}

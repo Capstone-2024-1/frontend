@@ -7,14 +7,15 @@ interface IngredientContainerProps {
   korean: string;
   children?: React.ReactNode;
   depth: number;
+  id: number;
 }
 
-const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, korean, children, depth }) => {
+const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, id }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <Box sx={containerStyle}>
-      <IngredientItem english={english} korean={korean} children={children} depth={depth} open={open} setOpen={setOpen}/>
+      <IngredientItem english={english} korean={korean} children={children} depth={depth} open={open} setOpen={setOpen} id={id}/>
       {open && children && <div>{children}</div>}
     </Box>
     );
