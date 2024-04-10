@@ -4,4 +4,5 @@ export const setColor = (name: string) => {
     else if(name === "background")return "#F5F5F5";
     else if(name === "emphasize")return '#07CA61';
     else if(name === "lightGrey")return '#F5F5F5';
+    else if(name === "grey")return '#E0E0E0';
 }

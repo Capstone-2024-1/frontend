@@ -1,5 +1,6 @@
 import { Box, FormControl, FormControlLabel, Radio } from "@mui/material";
 import { useEffect, useState } from "react";
+import IngredientItem from "./IngredientItem";
 
 interface IngredientContainerProps {
   english: string;
@@ -10,31 +11,11 @@ interface IngredientContainerProps {
 
 const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, korean, children, depth }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const handleToggle = () => {
-    console.log(open);
-    setOpen(!open);
-  }
-  const handleArrow = () => {
-    if(open)return `url(/images/arrow-down.png)`;
-    else return `url(/images/arrow-left.png)`;
-  }
+
   return (
     <Box sx={containerStyle}>
-      <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-        <Box sx={{display: 'flex', alignItems: 'center', paddingRight: '10px'}}>
-        <Box sx={{width: '10px', height: '10px', bgcolor: 'yellow',}}></Box>
-          {english} ({korean}) 
-        </Box>
-        {
-        (depth === 0 || depth === 1 && children) && 
-        <Box sx={{
-          backgroundImage: handleArrow(),
-          width: '30px', height: '30px', backgroundPosition: 'center'}}
-          onClick={handleToggle}/>
-        }
-        
-      </Box>
-        {open && children && <div>{children}</div>}
+      <IngredientItem english={english} korean={korean} children={children} depth={depth} open={open} setOpen={setOpen}/>
+      {open && children && <div>{children}</div>}
     </Box>
     );
 };
