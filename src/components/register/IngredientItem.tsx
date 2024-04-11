@@ -14,7 +14,7 @@ interface IngredientContainerProps {
 }
 
 const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen, id }) => {
-  const {user} = useUser();
+  const {user, addBanIngredient, removeBanIngredient} = useUser();
   const [check, setCheck] = useState<boolean>(false);
   const handleToggle = () => {
     console.log(open);
@@ -24,9 +24,9 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
   const handleCheck = () => {
     if(check){
       //체크 제거
-      
+      removeBanIngredient(id);
     }else{
-
+      addBanIngredient(id);
     }
     setCheck(!check);
   }
@@ -39,7 +39,7 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
   const handleArrow = () => {
     if(open)return `url(/images/arrow-down.png)`;
     else return `url(/images/arrow-left.png)`;
-  }
+  };
 
   return (
     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
