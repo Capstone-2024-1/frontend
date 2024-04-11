@@ -23,10 +23,13 @@ const navigationBarStyle = {
   transform: 'translateX(-50%)',
   zIndex: 3,
 
-  width: '500px',
-  height: '60px',
+  width: {
+    xs: '100%',
+    md: '500px',
+  },
+  height: '10px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  paddingBottom: '30px',
+  paddingBottom: '45px',
 }

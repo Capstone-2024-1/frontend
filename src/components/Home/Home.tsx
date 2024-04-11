@@ -24,7 +24,7 @@ const home = () => {
 
   return (
     <Box>
-      <Box style={{ backgroundColor: 'yellow', }}>
+      <Box sx={{ width: '100%', bgcolor: 'yellow', height: 'calc(100vh - 90px)' }}>
         {renderContent()}
       </Box>
       <NavigationBar/>
