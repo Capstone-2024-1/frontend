@@ -9,6 +9,8 @@ export interface UserContextValues {
   setName: (value: string) => void;
   addBanIngredient: (value: number) => void;
   removeBanIngredient: (value: number) => void;
+  navigationName: string;
+  setNavigationName: (value: string) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -20,6 +22,8 @@ const contextDefaultValue: UserContextValues = {
   setName: () => {},
   addBanIngredient: (value: number) => {},
   removeBanIngredient: (value: number) => {},
+  navigationName: 'camera',
+  setNavigationName: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -28,6 +32,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [name, setName] = useState(contextDefaultValue.user.name);
   const [isVegeterian, setIsVegeterian] = useState(contextDefaultValue.user.isVegeterian);
   const [banIngredient, setBanIngredient] = useState(contextDefaultValue.user.banIngredient);
+  const [navigationName, setNavigationName] = useState(contextDefaultValue.navigationName);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -46,7 +51,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, isVegeterian, banIngredient}, setName, addBanIngredient, removeBanIngredient}}>
+    <UserContext.Provider value={{user: {name, isVegeterian, banIngredient}, setName, addBanIngredient, removeBanIngredient, navigationName, setNavigationName}}>
       {children}
     </UserContext.Provider>
 
