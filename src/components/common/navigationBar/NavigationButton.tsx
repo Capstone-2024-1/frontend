@@ -1,12 +1,12 @@
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
 import React, { useState } from 'react'
 
-const NavigationButton = ({name, active, onClick}:{name: string, active: boolean, onClick: () => void}) => {
-  const [click, setClick] = useState<string>('camera');
+const NavigationButton = ({name, active}:{name: string, active: boolean}) => {
+  const {navigationName, setNavigationName} = useUser();
   const handleClick = () => {
-    onClick();
-    setClick(name);
+    setNavigationName(name);
     //클릭했을 때 화면 내용 바뀌는 내용 넣기
 
   };
@@ -20,7 +20,7 @@ const NavigationButton = ({name, active, onClick}:{name: string, active: boolean
   };
 
   return (
-    <Box sx={buttonStyle} onClick={handleClick}>
+    <Box sx={buttonStyle(active)} onClick={handleClick}>
       <CardMedia
       component="img"
       image={handleButtonImage()}
@@ -39,13 +39,17 @@ const NavigationButton = ({name, active, onClick}:{name: string, active: boolean
 
 export default NavigationButton;
 
-const buttonStyle = {
-  color: setColor('middleGrey'),
+const buttonStyle = (active: boolean) => ({
+  color: active ? 'black' : setColor('middleGrey'),
   ':hover':{
     color: 'black',
   },
   fontWeight: 'bold',
   font: 'pretendard',
 
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+
   cursor: 'pointer',
-}
+});

@@ -1,17 +1,15 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
 import NavigationButton from './NavigationButton';
+import { useUser } from '@/hook/useUser';
 
 const NavigationBar = () => {
-  const [activeButton, setActiveButton] = useState<string>('camera');
-  const handleClick = () => {
-    setActiveButton(activeButton);
-  }
+  const {navigationName} = useUser();
   return (
     <Box sx={navigationBarStyle}>
-      <NavigationButton name={"camera"} active={activeButton === 'camera'} onClick={handleClick}/>
-      <NavigationButton name={"group"} active={activeButton === 'group'} onClick={handleClick}/>
-      <NavigationButton name={"my"} active={activeButton === 'my'} onClick={handleClick}/>
+      <NavigationButton name={"camera"} active={navigationName === 'camera'}/>
+      <NavigationButton name={"group"} active={navigationName === 'group'}/>
+      <NavigationButton name={"my"} active={navigationName === 'my'}/>
     </Box>
   )
 }
@@ -30,4 +28,5 @@ const navigationBarStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
+  paddingBottom: '30px',
 }
