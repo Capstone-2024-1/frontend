@@ -1,9 +1,14 @@
+import NavigationBar from '@/components/common/navigationBar/NavigationBar'
+import { Box } from '@mui/material'
 import React from 'react'
 
 const index = () => {
   return (
-    <div>home</div>
+    <Box>
+
+      <NavigationBar/>
+    </Box>
   )
 }
 
-export default index
+export default index;
