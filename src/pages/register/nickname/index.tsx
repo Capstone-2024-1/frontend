@@ -12,7 +12,7 @@ const nickname = () => {
   const { setName } = useUser();
 
   const handleClick = () => {
-    router.push('/register/ingredient');
+    router.push('/register/ingredient?type=vegeterian');
     setName(nickName);
   }
 
@@ -26,7 +26,7 @@ const nickname = () => {
     <Box sx={container}>
     <TextField sx={textFieldStyle} id='outlined-basic' label='NickName' variant='outlined' onChange={handleNameChange}/>
     </Box>
-    <Progress num={"1"} onClick={handleClick}/>
+    <Progress num={1} onClick={handleClick}/>
     </>
   )
 }
