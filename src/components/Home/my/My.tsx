@@ -2,7 +2,6 @@ import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
 import React from 'react'
 import Profile from './Profile';
-import MyButton from './buttons/MyButton';
 import MyInformation from './MyInformation';
 import Service from './Service';
 
