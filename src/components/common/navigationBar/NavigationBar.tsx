@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 import NavigationButton from './NavigationButton';
 import { useUser } from '@/hook/useUser';
 

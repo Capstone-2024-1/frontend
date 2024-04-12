@@ -1,14 +1,12 @@
 import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
-import React, { useState } from 'react'
+import React from 'react'
 
 const NavigationButton = ({name, active}:{name: string, active: boolean}) => {
-  const {navigationName, setNavigationName} = useUser();
+  const { setNavigationName } = useUser();
   const handleClick = () => {
     setNavigationName(name);
-    //클릭했을 때 화면 내용 바뀌는 내용 넣기
-
   };
 
   const handleButtonImage = () => {

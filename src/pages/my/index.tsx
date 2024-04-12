@@ -1,8 +1,13 @@
-import React from 'react'
+import { useRouter } from 'next/router';
+import React, { useEffect } from 'react'
 
 const index = () => {
+  const router = useRouter();
+  useEffect(()=>{
+    router.push('/home');
+  })
   return (
-    <div>my</div>
+    <div>index</div>
   )
 }
 

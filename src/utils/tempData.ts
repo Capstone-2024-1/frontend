@@ -103,3 +103,9 @@ export const getTempIngredientData2 = [ {
   } ]
 },  ];
 
+export const getProfile = [
+  {
+    "name": 'Junyewdd 하이',
+    "image": '/images/groupBlack.png',
+  }
+]

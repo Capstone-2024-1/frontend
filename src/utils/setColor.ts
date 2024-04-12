@@ -7,4 +7,5 @@ export const setColor = (name: string) => {
     else if(name === "lightGrey")return '#F5F5F5';
     else if(name === "grey")return '#E0E0E0';
     else if(name==="middleGrey")return "#9E9E9E";
+    else return "white";
 }

@@ -29,7 +29,8 @@ const LoginButton = () => {
 export default LoginButton;
 
 const buttonStyle = () => ({
-  width: '300px', height: '55px', bgcolor: 'white',
+  width: '85%', height: '55px', bgcolor: 'white',
+  marginBottom: '30px',
   borderRadius: '10px', 
   font: 'pretendard',
   color: setColor("main"),
