@@ -1,5 +1,5 @@
-import { Box, FormControl, FormControlLabel, Radio } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
+import { useState } from "react";
 import IngredientItem from "./IngredientItem";
 
 interface IngredientContainerProps {

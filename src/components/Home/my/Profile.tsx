@@ -1,8 +1,7 @@
 import { useUser } from '@/hook/useUser';
 import { getProfile } from '@/utils/tempData';
 import { Box, CardMedia } from '@mui/material'
-import { Just_Another_Hand } from 'next/font/google';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 const Profile = () => {
   const {user, setName, setImage} = useUser();
@@ -46,7 +45,6 @@ const profileStyle = {
   margin: '10px',
   display: 'flex',
   justifyContent: 'space-evenly',
-
 };
 
 const nameStyle = {

@@ -59,6 +59,5 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
     <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, setNavigationName}}>
       {children}
     </UserContext.Provider>
-
   );
 };

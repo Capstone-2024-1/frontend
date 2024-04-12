@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import IngredientContainer from './IngredientContainer';
-import { Box } from '@mui/material';
 
 interface Category {
   id: number;
