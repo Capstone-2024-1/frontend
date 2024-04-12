@@ -4,7 +4,7 @@ import NavigationBar from '../common/navigationBar/NavigationBar';
 import { useUser } from '@/hook/useUser';
 import Main from './Main';
 import Group from './Group';
-import My from './My';
+import My from './my/My';
 
 const home = () => {
   const { navigationName } = useUser();
@@ -24,7 +24,7 @@ const home = () => {
 
   return (
     <Box>
-      <Box sx={{ width: '100%', bgcolor: 'yellow', height: 'calc(100vh - 90px)' }}>
+      <Box sx={{ width: '100%', height: 'calc(100vh - 90px)' }}>
         {renderContent()}
       </Box>
       <NavigationBar/>
