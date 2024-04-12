@@ -1,5 +1,5 @@
 import React from 'react'
-import MyButton from './buttons/MyButton'
+import MyButton from './components/MyButton'
 import { Box } from '@mui/material'
 
 const MyInformation = () => {

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Profile from './Profile';
 import MyInformation from './MyInformation';
 import Service from './Service';
+import LogoutModal from './components/LogoutModal';
 
 const My = () => {
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
@@ -23,20 +24,9 @@ const My = () => {
       <Profile/>
       <MyInformation/>
       <Service setLogoutOpen={setLogoutOpen}/>
-      <Dialog open={logoutOpen} onClose={handleClose}>
-        <DialogTitle>{"Log Out"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to log out?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleLogout} autoFocus>
-            Log Out
-          </Button>
-        </DialogActions>
-      </Dialog>
+
+      <LogoutModal logoutOpen={logoutOpen} handleClose={handleClose} handleLogout={handleLogout}/>
+
     </Box>
   )
 }

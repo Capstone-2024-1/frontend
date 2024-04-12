@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import MyButton from './buttons/MyButton'
+import MyButton from './components/MyButton'
 
 const Service = ({setLogoutOpen}: {setLogoutOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
   const handleLogout = () => {
