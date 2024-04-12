@@ -2,12 +2,16 @@ import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
 import React from 'react'
 import Profile from './Profile';
+import MyButton from './buttons/MyButton';
+import MyInformation from './MyInformation';
+import Service from './Service';
 
 const My = () => {
   return (
-    <Box sx={myStyle}>
+    <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
       <Profile/>
-
+      <MyInformation/>
+      <Service/>
     </Box>
   )
 }
@@ -18,5 +22,9 @@ const myStyle = {
   width: '100%',
   height: '100%',
   display: 'flex',
-  bgcolor: setColor('lightGrey'),
-}
+  flexDirection: 'column',
+  alignItems: 'center',
+  overflowY: 'scroll',
+  overflowX: 'hidden',
+  gap: '35px',
+};
