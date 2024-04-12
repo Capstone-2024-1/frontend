@@ -5,27 +5,36 @@ import Profile from './Profile';
 import MyInformation from './MyInformation';
 import Service from './Service';
 import LogoutModal from './components/LogoutModal';
+import ContactModal from './components/ContactModal';
 
 const My = () => {
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
-  const handleOpen = () => {
+  const [contactOpen, setContactOpen] = useState<boolean>(false);
+  const handleLogoutOpen = () => {
     setLogoutOpen(true);
   }
-  const handleClose = () => {
+  const handleLogoutClose = () => {
     setLogoutOpen(false);
   }
-
   const handleLogout = () => {
-    handleClose();
+    handleLogoutClose();
+  }
+  const handleContactClose = () => {
+    setContactOpen(false);
+  }
+
+  const handleContact = () => {
+    handleContactClose();
   }
 
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
       <Profile/>
       <MyInformation/>
-      <Service setLogoutOpen={setLogoutOpen}/>
+      <Service setLogoutOpen={setLogoutOpen} setContactOpen={setContactOpen}/>
 
-      <LogoutModal logoutOpen={logoutOpen} handleClose={handleClose} handleLogout={handleLogout}/>
+      <LogoutModal logoutOpen={logoutOpen} handleClose={handleLogoutClose} handleLogout={handleLogout}/>
+      <ContactModal contactOpen={contactOpen} handleClose={handleContactClose} handleContact={handleContact}/>
 
     </Box>
   )

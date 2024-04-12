@@ -1,17 +1,17 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import MyButton from './components/MyButton'
+interface ServiceProps {
+  setLogoutOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setContactOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Service = ({setLogoutOpen}: {setLogoutOpen: React.Dispatch<React.SetStateAction<boolean>>}) => {
-  const handleLogout = () => {
-    setLogoutOpen(true);
-  }
+const Service = ({ setLogoutOpen, setContactOpen }: ServiceProps) => {
   return (
     <Box sx={serviceStyle}>
-      <MyButton name={"Contact To Us"}/>
+      <MyButton name={"Contact To Us"} click={()=>setContactOpen(true)}/>
       <MyButton name={"Log Out"} click = {()=>setLogoutOpen(true)}/>
     </Box>
-
   )
 }
 

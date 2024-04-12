@@ -1,9 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import React from 'react'
 interface LogoutModalProps {
-  logoutOpen: boolean;              // 모달이 열려있는지 여부
-  handleClose: () => void;          // 모달을 닫는 함수
-  handleLogout: () => void;         // 로그아웃 처리 함수
+  logoutOpen: boolean;
+  handleClose: () => void;
+  handleLogout: () => void;
 }
 
 const LogoutModal: React.FC<LogoutModalProps> = ({ logoutOpen, handleClose, handleLogout }) => {
@@ -25,4 +25,4 @@ const LogoutModal: React.FC<LogoutModalProps> = ({ logoutOpen, handleClose, hand
   )
 }
 
-export default LogoutModal
+export default LogoutModal;
