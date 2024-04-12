@@ -1,3 +1,4 @@
+import Ingredient from '@/components/register/ingredient/Ingredients';
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react'
@@ -7,10 +8,8 @@ const Modify = () => {
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
   return (
-    <Box>
-      {type}
-    </Box>
+    <Ingredient list={true}/>
   )
 }
 
-export default Modify
+export default Modify;
