@@ -8,7 +8,7 @@ import React, { useState } from 'react'
 import IngredientsList from './IngredientsList'
 import { getTempIngredientData, getTempIngredientData2 } from '@/utils/tempData'
 
-const Ingredient = () => {
+const Ingredient = ({list}:{list?: boolean}) => {
   const {user} = useUser();
   const [step, setStep] = useState<number>(2);
   const router = useRouter();
@@ -35,7 +35,7 @@ const Ingredient = () => {
     <Box sx={container}>
       <IngredientsList data={handleIngredient()}/>
     </Box>
-    <Progress num={step} onClick={handleClick}/>
+    <Progress num={list? -1 : step} onClick={handleClick}/>
     </>
   )
 }
