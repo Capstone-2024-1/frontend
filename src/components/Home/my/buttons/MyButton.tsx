@@ -3,7 +3,7 @@ import { Box } from '@mui/material'
 import { useRouter } from 'next/router';
 import React from 'react'
 
-const MyButton = ({name}:{name: string}) => {
+const MyButton = ({name, click}:{name: string, click?:()=>void}) => {
   const router = useRouter();
   const handleClick = () => {
     if(name === "My Ingredient List"){
@@ -15,9 +15,11 @@ const MyButton = ({name}:{name: string}) => {
     }else if(name === "modify - religion"){
       router.push('/my/modify?type=religion');
     }else if(name === "Contact To Us"){
-
+      
     }else if(name === "Log Out"){
-
+      if(click){
+        click();
+      }
     }
   }
   return (
