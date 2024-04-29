@@ -4,12 +4,12 @@ import NavigationButton from './NavigationButton';
 import { useUser } from '@/hook/useUser';
 
 const NavigationBar = () => {
-  const {navigationName} = useUser();
+  const {navigationGroupName} = useUser();
   return (
     <Box sx={navigationBarStyle}>
-      <NavigationButton name={"home"} active={navigationName === 'home'}/>
-      <NavigationButton name={"food"} active={navigationName === 'food'}/>
-      <NavigationButton name={"setting"} active={navigationName === 'setting'}/>
+      <NavigationButton name={"home"} active={navigationGroupName === 'home'}/>
+      <NavigationButton name={"food"} active={navigationGroupName === 'food'}/>
+      <NavigationButton name={"setting"} active={navigationGroupName === 'setting'}/>
     </Box>
   )
 }

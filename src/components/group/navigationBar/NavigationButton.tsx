@@ -4,9 +4,9 @@ import { Box, CardMedia } from '@mui/material';
 import React from 'react'
 
 const NavigationButton = ({name, active}:{name: string, active: boolean}) => {
-  const { setNavigationName } = useUser();
+  const { setNavigationGroupName } = useUser();
   const handleClick = () => {
-    setNavigationName(name);
+    setNavigationGroupName(name);
   };
 
   const handleButtonImage = () => {
