@@ -1,4 +1,5 @@
 import { Box, CardMedia } from '@mui/material'
+import { useRouter } from 'next/router';
 import React from 'react'
 
 interface GroupProps {
@@ -9,8 +10,13 @@ interface GroupProps {
 }
 
 const GroupBox: React.FC<GroupProps> = ({profile, name, num, creater}) => {
+  const router = useRouter();
+  const handleClick= () => {
+    router.push(`/group?name=${name}`);
+  }
+
   return (
-    <Box sx={boxStyle}>
+    <Box sx={boxStyle} onClick={handleClick}>
       <CardMedia
         component="img"
         image={profile}
@@ -42,6 +48,7 @@ const boxStyle = {
     borderBottom: '1px solid #D9D9D9',
     
     display: 'flex',
+    cursor: 'pointer',
 };
 
 const profileStyle = {

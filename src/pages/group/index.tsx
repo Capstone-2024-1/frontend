@@ -1,8 +1,9 @@
+import Group from '@/components/group/Group';
 import React from 'react'
 
 const index = () => {
   return (
-    <div>group</div>
+    <Group/>
   )
 }
 
