@@ -8,17 +8,11 @@ const MyButton = ({name, click}:{name: string, click?:()=>void}) => {
   const handleClick = () => {
     if(name === "My Ingredient List"){
       router.push('/my/list');
-    }else if(name === "modify - Vegeterianism"){
-      router.push('/my/modify?type=vegeterianism');
-    }else if(name === "modify - Allergy"){
-      router.push('/my/modify?type=allergy');
-    }else if(name === "modify - religion"){
-      router.push('/my/modify?type=religion');
-    }else if(name === "Contact To Us"){
+    }else if(name === "Leave the Group"){
       if(click){
         click();
       }
-    }else if(name === "Log Out"){
+    }else if(name === "Remove the Member"){
       if(click){
         click();
       }

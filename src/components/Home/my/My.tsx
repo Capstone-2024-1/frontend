@@ -1,5 +1,5 @@
 import { setColor } from '@/utils/setColor';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { Box } from '@mui/material'
 import React, { useState } from 'react'
 import Profile from './Profile';
 import MyInformation from './MyInformation';
