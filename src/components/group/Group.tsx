@@ -64,6 +64,7 @@ const containerStyle = {
 
 const backBoxStyle = {
   width: '100%',
+  padding: '4px',
 };
 
 const backStyle = {
