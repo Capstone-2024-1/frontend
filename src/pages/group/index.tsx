@@ -1,9 +1,10 @@
+import Group from '@/components/group/Group';
 import React from 'react'
 
 const index = () => {
   return (
-    <div>group</div>
+    <Group/>
   )
 }
 
-export default index
+export default index;
