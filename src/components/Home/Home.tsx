@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import NavigationBar from '../common/navigationBar/NavigationBar';
+import NavigationBar from './navigationBar/NavigationBar';
 import { useUser } from '@/hook/useUser';
 import Main from './Main';
 import Group from './Group';

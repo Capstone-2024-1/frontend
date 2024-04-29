@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import React from 'react'
 import Member from './Member';
 import { useRouter } from 'next/router';
+import NavigationBar from './navigationBar/NavigationBar';
 
 const Group = () => {
   const router = useRouter();
@@ -15,28 +16,31 @@ const Group = () => {
   }
   return (
     <Box sx={containerStyle}>
-      <Box sx={backBoxStyle}>
-        <CardMedia
-          component="img"
-          image={'/images/arrow-left.png'}
-          title="profile"
-          sx={backStyle}
-          onClick={handleBack}
-          />
-      </Box>
-      <Box sx={groupNameStyle}>
-        {groupName}
-      </Box>
+      <Box sx={contentStyle}>
+        <Box sx={backBoxStyle}>
+          <CardMedia
+            component="img"
+            image={'/images/arrow-left.png'}
+            title="profile"
+            sx={backStyle}
+            onClick={handleBack}
+            />
+        </Box>
+        <Box sx={groupNameStyle}>
+          {groupName}
+        </Box>
 
-      <Box sx={centerAlignBoxStyle}>
-        <Box sx={memberBoxStyle}>
-          <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-          <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-          <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-          <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-          <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+        <Box sx={centerAlignBoxStyle}>
+          <Box sx={memberBoxStyle}>
+            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+          </Box>
         </Box>
       </Box>
+      <NavigationBar/>
     </Box>
   )
 }
@@ -44,7 +48,6 @@ const Group = () => {
 export default Group;
 
 const containerStyle = {
-  bgcolor: setColor('lightGrey'),
   width: '100%',
   height: '100%',
 };
@@ -83,4 +86,10 @@ const centerAlignBoxStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+};
+
+const contentStyle = {
+  bgcolor: setColor('lightGrey'),
+  width: '100%',
+  height: 'calc(100vh - 90px)'
 }
