@@ -5,12 +5,29 @@ import React from 'react'
 import Member from './Member';
 import { useRouter } from 'next/router';
 import NavigationBar from './navigationBar/NavigationBar';
+import { useUser } from '@/hook/useUser';
+import Home from './Home';
+import Food from './Food';
+import Setting from './Setting';
 
 const Group = () => {
+  const {navigationGroupName} = useUser();
   const router = useRouter();
   const params = useSearchParams();
   const groupName = params.get('name');
 
+  const renderContent = () => {
+    switch (navigationGroupName) {
+      case 'home':
+        return <Home/>
+      case 'food':
+        return <Food/>
+      case 'setting':
+        return <Setting/>
+      default:
+        return <Home/>
+    }
+  }
   const handleBack = () => {
     router.push('/home');
   }
@@ -30,15 +47,8 @@ const Group = () => {
           {groupName}
         </Box>
 
-        <Box sx={centerAlignBoxStyle}>
-          <Box sx={memberBoxStyle}>
-            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-            <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-          </Box>
-        </Box>
+        {renderContent()}
+
       </Box>
       <NavigationBar/>
     </Box>
@@ -74,19 +84,19 @@ const groupNameStyle = {
   marginBottom: '2rem',
 };
 
-const memberBoxStyle = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'flex-start',
-  width: '85%',
-};
+// const memberBoxStyle = {
+//   display: 'flex',
+//   flexDirection: 'row',
+//   flexWrap: 'wrap',
+//   justifyContent: 'flex-start',
+//   width: '85%',
+// };
 
-const centerAlignBoxStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
+// const centerAlignBoxStyle = {
+//   display: 'flex',
+//   justifyContent: 'center',
+//   alignItems: 'center',
+// };
 
 const contentStyle = {
   bgcolor: setColor('lightGrey'),
