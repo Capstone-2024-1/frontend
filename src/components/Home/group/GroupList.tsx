@@ -2,6 +2,7 @@ import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material';
 import { Roboto_Flex } from 'next/font/google';
 import React from 'react'
+import GroupBox from './GroupBox';
 
 const GroupList = () => {
   return (
@@ -9,6 +10,8 @@ const GroupList = () => {
       <Box sx={textStyle}>
         My Group List
       </Box>
+      <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
+      <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
     </Box>
   )
 }
@@ -24,7 +27,6 @@ const myStyle = {
   
   overflowY: 'scroll',
   overflowX: 'hidden',
-  gap: '35px',
 };
 
 const textStyle = {
@@ -36,4 +38,5 @@ const textStyle = {
   fontWeight: 'bold',
   fontSize: '30px',
   fontFamily: 'pretendard',
+  marginBottom: '30px',
 }
