@@ -1,12 +1,18 @@
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
 import { Roboto_Flex } from 'next/font/google';
-import React from 'react'
+import React, { useState } from 'react'
 import GroupBox from './GroupBox';
+import Buttons from './Buttons';
 
 const GroupList = () => {
+  const [click, setClick] = useState<boolean>(false);
   const handleAdd = () => {
+    if(click)return 'images/add2.png';
     return 'images/add1.png';
+  }
+  const changeClick = () => {
+    setClick(!click);
   }
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
@@ -15,11 +21,15 @@ const GroupList = () => {
       </Box>
       <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
       <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
+      {click &&
+        <Buttons/>
+      }
       <CardMedia
             component="img"
             image={handleAdd()}
             title="profile"
             sx={imageStyle}
+            onClick={changeClick}
             />
     </Box>
   )
