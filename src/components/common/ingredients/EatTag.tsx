@@ -1,9 +1,14 @@
+import { useUser } from '@/hook/useUser';
 import { Box } from '@mui/material';
 import React from 'react'
 
 const EatTag = ({tag}:{tag: string}) => {
+  const {setMenuSort} = useUser();
+  const handleClick = () => {
+    setMenuSort(tag);
+  }
   return (
-    <Box sx={tagStyle}>
+    <Box sx={tagStyle} onClick={handleClick}>
         {tag}
     </Box>
   )
@@ -27,4 +32,5 @@ const tagStyle = {
   display: 'flex',
   justifyContent: 'center',
   textAlign: 'center',
+  cursor: 'pointer',
 }
