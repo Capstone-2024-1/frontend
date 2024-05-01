@@ -1,12 +1,12 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import EatTag from './EatTag'
+import Tag from './Tag'
 import IngredientCard from './IngredientCard'
 
 const IngredientsBox = ({tag}:{tag: string}) => {
   return (
     <Box sx={containerStyle}>
-      <EatTag tag={tag}/>
+      <Tag tag={tag}/>
       <Box sx={ingredientStyle}>
         <IngredientCard name={'shrimp'} type={'seafood'}/>
         <IngredientCard name={'shrimp'} type={'seafood'}/>
