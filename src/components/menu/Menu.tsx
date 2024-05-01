@@ -1,5 +1,5 @@
 import { useUser } from '@/hook/useUser';
-import MenuNavigationBar from '@/pages/menu/MenuNavigationBar'
+import MenuNavigationBar from '@/components/menu/MenuNavigationBar'
 import { Box } from '@mui/material'
 import React from 'react'
 import Foods from './Foods';

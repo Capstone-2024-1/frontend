@@ -1,9 +1,14 @@
 import { Box } from '@mui/material'
+import { useRouter } from 'next/router';
 import React from 'react'
 
 const Food = ({name}:{name: string}) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/menu/detail?name=${name}`)
+  }
   return (
-    <Box sx={containerStyle}>
+    <Box sx={containerStyle} onClick = {handleClick}>
       {name}
     </Box>
   )
