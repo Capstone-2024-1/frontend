@@ -23,9 +23,9 @@ const navigationBarStyle = {
   transform: 'translateX(-50%)',
   zIndex: 3,
 
-  width: {
-    xs: '100%',
-    md: '500px',
+  width: '100%',
+  '@media (min-width: 560px)': {
+    width: '550px',
   },
   height: '10px',
   display: 'flex',
