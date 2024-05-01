@@ -1,3 +1,4 @@
+import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
 import { useRouter } from 'next/router';
 import React from 'react'
@@ -28,4 +29,9 @@ const containerStyle = {
   display: 'flex',
   alignItems: 'center',
   borderBottom: '1px solid #D9D9D9',
+  cursor: 'pointer',
+  ':hover':{
+    bgcolor: setColor("main"),
+    color: 'white',
+  }
 }

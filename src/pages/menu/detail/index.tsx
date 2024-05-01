@@ -1,4 +1,4 @@
-import FoodDetail from '@/components/menu/FoodDetail'
+import FoodDetail from '@/components/foodDetail/FoodDetail'
 import React from 'react'
 
 const index = () => {
