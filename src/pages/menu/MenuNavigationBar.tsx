@@ -23,4 +23,5 @@ const containerStyle = {
   alignItems: 'center',
   gap: '30px',
   borderBottom: '1px solid #D9D9D9',
+  padding: '10px',
 }

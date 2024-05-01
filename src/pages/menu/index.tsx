@@ -1,12 +1,9 @@
-import { Box } from '@mui/material'
 import React from 'react'
-import MenuNavigationBar from './MenuNavigationBar'
+import Menu from '@/components/menu/Menu'
 
 const index = () => {
   return (
-    <Box>
-      <MenuNavigationBar/>
-    </Box>
+    <Menu/>
   )
 }
 
