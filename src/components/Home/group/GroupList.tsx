@@ -1,6 +1,5 @@
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
-import { Roboto_Flex } from 'next/font/google';
 import React, { useState } from 'react'
 import GroupBox from './GroupBox';
 import Buttons from './Buttons';
