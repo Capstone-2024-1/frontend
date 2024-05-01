@@ -1,14 +1,24 @@
 import { useUser } from '@/hook/useUser';
+import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const EatTag = ({tag}:{tag: string}) => {
-  const {setMenuSort} = useUser();
+  const [click, setClick] = useState<boolean>(false);
+  const {setMenuSort, menuSort} = useUser();
   const handleClick = () => {
     setMenuSort(tag);
   }
+  useEffect(()=> {
+    if(menuSort === tag)setClick(true);
+    else setClick(false);
+  }, [menuSort])
   return (
-    <Box sx={tagStyle} onClick={handleClick}>
+    <Box sx={{
+      ...tagStyle, 
+      bgcolor: click?setColor('sub'):'white',
+      color: click ? 'white': 'black',
+    }} onClick={handleClick}>
         {tag}
     </Box>
   )
