@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useState } from 'react'
 import Title from './Title';
 import { setColor } from '@/utils/setColor';
-import IngredientContainer from '../register/ingredient/IngredientContainer';
 import IngredientsBox from '../common/ingredients/IngredientsBox';
+import SelectBox from './SelectBox';
 
 const FoodDetail = () => {
   const router = useRouter();
@@ -15,6 +15,7 @@ const FoodDetail = () => {
 
       <IngredientsBox tag={'cannot eat'}/>
       <IngredientsBox tag={'can eat'}/>
+      <SelectBox />
     </Box>
   )
 }
