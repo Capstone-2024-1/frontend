@@ -39,9 +39,9 @@ const boxStyle = {
   height: '3.25rem',
   position: 'fixed',
   '@media (max-width: 560px)': {
-    left: '10%',
+    left: '15%',
   },
-  bottom: '70px',
+  bottom: '40px',
   bgcolor: setColor('main'),
   display: 'flex',
   alignItems: 'center',

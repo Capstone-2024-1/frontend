@@ -64,9 +64,9 @@ const boxStyle = {
   height: '3.25rem',
   position: 'fixed',
   '@media (max-width: 560px)': {
-    left: '10%',
+    left: '15%',
   },
-  bottom: '70px',
+  bottom: '40px',
   bgcolor: setColor('main'),
   display: 'flex',
   alignItems: 'center',
@@ -84,7 +84,7 @@ const addStyle = {
   maxWidth: '450px',
   height: '10rem',
   position: 'fixed',
-  bottom: '60px',
+  bottom: '30px',
   bgcolor: 'white',
   zIndex: 2,
   border: '1px solid #F5F5F5',
@@ -94,7 +94,7 @@ const addStyle = {
   flexDirection: 'column',
   alignItems: 'center',
   '@media (max-width: 560px)': {
-    left: '5%',
+    left: '10%',
   },
 };
 const imageStyle = {
