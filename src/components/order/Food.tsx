@@ -1,5 +1,6 @@
 import { Box, CardMedia } from '@mui/material'
 import React, { useState } from 'react'
+import NavigationBar from '../Home/navigationBar/NavigationBar';
 
 const Food = ({name}:{name: string}) => {
   const [num, setNum] = useState<number>(0);
@@ -35,6 +36,7 @@ const Food = ({name}:{name: string}) => {
       <Box sx={{...numStyle, marginTop: '30px'}}>
         {num}
       </Box>
+      <NavigationBar/>
     </Box>
   )
 }
@@ -61,11 +63,6 @@ const titleStyle = {
   padding: '15px',
 };
 
-const addBoxContainerStyle = {
-  position: 'relative',  // num의 위치 기준점
-  width: '100%',
-};
-
 const addBoxStyle = {
   width: '100%',
   height: '100%',
@@ -89,7 +86,7 @@ const numStyle = {
   alignItems: 'center',
   width: '30px',
   height: '50px',
-  zIndex: 2, 
+  zIndex: 2,
   '@media (max-width: 600px)': {
     right: '75px',
   },

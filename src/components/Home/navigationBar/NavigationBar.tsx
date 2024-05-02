@@ -1,10 +1,17 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavigationButton from './NavigationButton';
 import { useUser } from '@/hook/useUser';
+import { useRouter } from 'next/router';
 
 const NavigationBar = () => {
+  const router = useRouter();
   const {navigationName} = useUser();
+  useEffect(()=>{
+    if(router.pathname !=='/home' && navigationName !== 'camera'){
+      router.push('/home');
+    }
+  },[navigationName]);
   return (
     <Box sx={navigationBarStyle}>
       <NavigationButton name={"camera"} active={navigationName === 'camera'}/>
