@@ -1,9 +1,9 @@
+import FoodDetail from '@/components/foodDetail/FoodDetail'
 import React from 'react'
-import Menu from '@/components/menu/Menu'
 
 const index = () => {
   return (
-    <Menu/>
+    <FoodDetail/>
   )
 }
 

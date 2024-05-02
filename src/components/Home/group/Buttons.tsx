@@ -23,4 +23,5 @@ const boxStyle = {
   },
   bgcolor: 'white',
   borderRadius: '20px',
+  zIndex: 3,
 }

@@ -3,28 +3,19 @@ import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 
-const EatTag = ({tag}:{tag: string}) => {
-  const [click, setClick] = useState<boolean>(false);
-  const {setMenuSort, menuSort} = useUser();
-  const handleClick = () => {
-    setMenuSort(tag);
-  }
-  useEffect(()=> {
-    if(menuSort === tag)setClick(true);
-    else setClick(false);
-  }, [menuSort])
+const Tag = ({tag}:{tag: string}) => {
   return (
     <Box sx={{
       ...tagStyle, 
-      bgcolor: click?setColor('sub'):'white',
-      color: click ? 'white': 'black',
-    }} onClick={handleClick}>
+      bgcolor: 'white',
+      color: 'black',
+    }} >
         {tag}
     </Box>
   )
 }
 
-export default EatTag;
+export default Tag;
 
 const tagStyle = {
   borderRadius: '1.875rem',

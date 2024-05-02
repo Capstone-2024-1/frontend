@@ -7,8 +7,7 @@ import Buttons from './Buttons';
 const GroupList = () => {
   const [click, setClick] = useState<boolean>(false);
   const handleAdd = () => {
-    if(click)return 'images/add2.png';
-    return 'images/add1.png';
+    return click ? 'images/add2.png' : 'images/add1.png';
   }
   const changeClick = () => {
     setClick(!click);
@@ -30,6 +29,8 @@ const GroupList = () => {
             sx={imageStyle}
             onClick={changeClick}
             />
+      {click && <Box sx={overlayStyle}/>}
+      
     </Box>
   )
 }
@@ -65,6 +66,17 @@ const imageStyle = {
   bottom: 110,
   right: '5%',
   '@media (min-width: 560px)': {
-    right: 'calc(50% - 230px)', // 화면 너비가 560px 이상일 때 오른쪽에서 30px 떨어진 위치에 고정
-  }
+    right: 'calc(50% - 230px)',
+  },
+  zIndex: 3,
+};
+
+const overlayStyle = {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+  bgcolor: 'rgba(0, 0, 0, 0.5)',
+  zIndex: 1,
 }
