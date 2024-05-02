@@ -2,8 +2,8 @@ import { Box, CardMedia } from '@mui/material'
 import React, { useState } from 'react'
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 
-const Food = ({name}:{name: string}) => {
-  const [num, setNum] = useState<number>(0);
+const Food = ({name, quantity}:{name: string, quantity: number}) => {
+  const [num, setNum] = useState<number>(quantity);
   
   const handlePlus = () => {
     setNum(num + 1);
