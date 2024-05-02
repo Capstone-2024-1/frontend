@@ -93,6 +93,9 @@ const addStyle = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  '@media (max-width: 560px)': {
+    left: '5%',
+  },
 };
 const imageStyle = {
   width: '40px',
@@ -127,16 +130,16 @@ const addBoxStyle = {
 const addImageStyle = {
   width: '50%',
   height: '100%',
+  cursor: 'pointer',
 };
 const numStyle = {
   position: 'absolute', // 절대 위치
   top: 40, // 상단 정렬
-  right: 5, // 오른쪽 정렬
+  right: '22%', // 오른쪽 정렬
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  width: '50%', // 너비 100%
+  width: '10%', // 너비 100%
   height: '30%', // 높이 100%
-  // bgcolor: 'yellow',
   zIndex: 2, // 다른 요소 위에 위치
 }
