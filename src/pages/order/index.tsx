@@ -1,8 +1,9 @@
+import OrderList from '@/components/order/OrderList'
 import React from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <OrderList/>
   )
 }
 

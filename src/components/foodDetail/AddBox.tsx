@@ -158,7 +158,6 @@ const textStyle = {
 const addBoxStyle = {
   width: '120px',
   height: '100%',
-  bgcolor: 'yellow',
   display: 'flex',
 };
 

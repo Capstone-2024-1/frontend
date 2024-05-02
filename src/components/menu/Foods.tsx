@@ -13,11 +13,21 @@ const Foods = ({sort}: {sort: string}) => {
   const handleClick = () => {
     router.push('/order');
   };
-  
+
   return (
-    <Box>
+    <Box sx={containerStyle}>
       {sort==='can eat' &&
       <>
+      <Food name={'Grilled Fish (생선구이)'}/>
+      <Food name = {'Stir-fried pork (제육볶음)'}/>
+      <Food name={'Grilled Fish (생선구이)'}/>
+      <Food name = {'Stir-fried pork (제육볶음)'}/>
+      <Food name={'Grilled Fish (생선구이)'}/>
+      <Food name = {'Stir-fried pork (제육볶음)'}/>
+      <Food name={'Grilled Fish (생선구이)'}/>
+      <Food name = {'Stir-fried pork (제육볶음)'}/>
+      <Food name={'Grilled Fish (생선구이)'}/>
+      <Food name = {'Stir-fried pork (제육볶음)'}/>
       <Food name={'Grilled Fish (생선구이)'}/>
       <Food name = {'Stir-fried pork (제육볶음)'}/>
       </>
@@ -73,3 +83,7 @@ const boxStyle = {
   cursor: 'pointer',
   zIndex: 3,
 };
+
+const containerStyle = {
+  overflow: 'scroll',
+}
