@@ -53,4 +53,3 @@ const boxStyle = {
   cursor: 'pointer',
   zIndex: 3,
 };
-
