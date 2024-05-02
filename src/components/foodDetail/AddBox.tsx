@@ -13,7 +13,7 @@ const AddBox = ({handleClick}:{handleClick:()=>void}) => {
   return (
     <Box>
       <Box sx={{...addStyle, right: '15%','@media (min-width: 500px)': {
-          right: 'calc(50% - 235px)',
+          right: 'calc(50% - 225px)',
         },}}>
             <CardMedia
             component="img"
@@ -48,7 +48,7 @@ const AddBox = ({handleClick}:{handleClick:()=>void}) => {
             </Box>
           </Box>
           <Box sx={{...boxStyle, right: '15%','@media (min-width: 560px)': {
-          right: 'calc(50% - 210px)',
+          right: 'calc(50% - 200px)',
         },}} onClick={handleClick}>
           ADD
           </Box>
@@ -66,7 +66,7 @@ const boxStyle = {
   '@media (max-width: 560px)': {
     left: '10%',
   },
-  bottom: '30px',
+  bottom: '70px',
   bgcolor: setColor('main'),
   display: 'flex',
   alignItems: 'center',
@@ -84,7 +84,7 @@ const addStyle = {
   maxWidth: '450px',
   height: '10rem',
   position: 'fixed',
-  bottom: '20px',
+  bottom: '60px',
   bgcolor: 'white',
   zIndex: 2,
   border: '1px solid #F5F5F5',

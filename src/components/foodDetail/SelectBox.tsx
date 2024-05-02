@@ -15,7 +15,7 @@ const SelectBox = () => {
       {
         !click &&
         <Box sx={{...boxStyle, right: '15%','@media (min-width: 560px)': {
-          right: 'calc(50% - 210px)',
+          right: 'calc(50% - 200px)',
         },}} onClick={handleClick}>
         SELECT
         </Box>
@@ -41,7 +41,7 @@ const boxStyle = {
   '@media (max-width: 560px)': {
     left: '10%',
   },
-  bottom: '30px',
+  bottom: '70px',
   bgcolor: setColor('main'),
   display: 'flex',
   alignItems: 'center',
