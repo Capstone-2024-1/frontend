@@ -1,14 +1,45 @@
+import { addMenu } from '@/utils/addMenu';
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material'
+import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 
+interface Menu {
+  name: string;
+  quantity: number;
+}
+
 const AddBox = ({handleClick}:{handleClick:()=>void}) => {
+  const router = useRouter();
+  const name = Array.isArray(router.query.name) ? router.query.name[0] : router.query.name;
+  const [menuList, setMenuList] = useState<Menu[]>([]);
+
   const [num, setNum] = useState<number>(0);
+  
   const handlePlus = () => {
     setNum(num + 1);
   }
   const handleMinus = () => {
     if(num>0)setNum(num - 1);
+  }
+  const handleAdd = () => {
+    if(name && num > 0){
+      setMenuList(prevMenuList => {
+        // 이미 있는 메뉴 찾기
+        const existingMenu = prevMenuList.find(item => item.name === name);
+        if (existingMenu) {
+          // 존재하는 메뉴의 수량 업데이트
+          return prevMenuList.map(item =>
+            item.name === name ? { ...item, quantity: item.quantity + num } : item
+          );
+        } else {
+          // 새 메뉴 추가
+          return [...prevMenuList, { name, quantity: num }];
+        }
+      });
+
+      setNum(0);
+    }
   }
   return (
     <Box>
@@ -49,7 +80,7 @@ const AddBox = ({handleClick}:{handleClick:()=>void}) => {
           </Box>
           <Box sx={{...boxStyle, right: '15%','@media (min-width: 560px)': {
           right: 'calc(50% - 200px)',
-        },}} onClick={handleClick}>
+        },}} onClick={handleAdd}>
           ADD
           </Box>
         </Box>
