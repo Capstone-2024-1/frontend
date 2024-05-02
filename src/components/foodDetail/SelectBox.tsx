@@ -1,6 +1,7 @@
 import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material';
 import React, { useState } from 'react'
+import AddBox from './AddBox';
 
 const SelectBox = () => {
   const [click, setClick] = useState<boolean>(false);
@@ -13,15 +14,15 @@ const SelectBox = () => {
       <Box>
       {
         !click &&
-        <Box sx={boxStyle} onClick={handleClick}>
+        <Box sx={{...boxStyle, right: '15%','@media (min-width: 560px)': {
+          right: 'calc(50% - 210px)',
+        },}} onClick={handleClick}>
         SELECT
         </Box>
       }
       {
-          click &&
-          <Box sx={boxStyle} onClick={handleClick}>
-        ADD
-        </Box>
+        click &&
+        <AddBox handleClick={handleClick}/>
       }
       
       </Box>
@@ -33,10 +34,13 @@ const SelectBox = () => {
 export default SelectBox;
 
 const boxStyle = {
-  width: '50%',
+  width: '70%',
+  maxWidth: '400px',
   height: '3.25rem',
   position: 'fixed',
-  left: '25%',
+  '@media (max-width: 560px)': {
+    left: '10%',
+  },
   bottom: '30px',
   bgcolor: setColor('main'),
   display: 'flex',
@@ -46,5 +50,7 @@ const boxStyle = {
   fontWeight: 'bold',
   fontSize: '1.6rem',
   borderRadius: '0.625rem',
-  
+  cursor: 'pointer',
+  zIndex: 3,
 };
+
