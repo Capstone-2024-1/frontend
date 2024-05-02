@@ -10,7 +10,7 @@ interface Menu{
 const Orders = () => {
   const {menuList} = useUser();
   return (
-    <Box>
+    <Box sx={boxStyle}>
       {menuList.map((menu, index)=>(
         <Food key={index} name={menu.name} quantity={menu.quantity}/>
       ))
@@ -19,4 +19,8 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default Orders;
+
+const boxStyle = {
+  width: '100%',
+}
