@@ -1,4 +1,9 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from "react";
+
+interface Menu {
+  name: string;
+  quantity: number;
+}
 
 export interface UserContextValues {
   user:{
@@ -17,6 +22,8 @@ export interface UserContextValues {
   setNavigationGroupName: (value: string) => void;
   menuSort: string;
   setMenuSort: (value: string) => void;
+  menuList: Menu[];
+  setMenuList: Dispatch<SetStateAction<Menu[]>>;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -36,6 +43,8 @@ const contextDefaultValue: UserContextValues = {
   setNavigationGroupName: () => {},
   menuSort: 'can eat',
   setMenuSort: () => {},
+  menuList: [],
+  setMenuList: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -48,6 +57,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [navigationName, setNavigationName] = useState(contextDefaultValue.navigationName);
   const [navigationGroupName, setNavigationGroupName] = useState(contextDefaultValue.navigationGroupName);
   const [menuSort, setMenuSort] = useState(contextDefaultValue.menuSort);
+  const [menuList, setMenuList] = useState(contextDefaultValue.menuList);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -66,7 +76,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort}}>
+    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList}}>
       {children}
     </UserContext.Provider>
   );
