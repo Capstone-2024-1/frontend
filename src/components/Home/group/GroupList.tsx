@@ -1,24 +1,53 @@
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GroupBox from './GroupBox';
 import Buttons from './Buttons';
+import { getGroupList } from '@/apis/group';
+interface Group {
+  id: number;
+  name: string;
+  imageUrl: string;
+  peopleCount: number;
+  creatorName: string;
+};
 
 const GroupList = () => {
   const [click, setClick] = useState<boolean>(false);
+  const [groups, setGroups] = useState<Group[]>();
   const handleAdd = () => {
+    getGroupList();
     return click ? 'images/add2.png' : 'images/add1.png';
   }
   const changeClick = () => {
     setClick(!click);
-  }
+  };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await getGroupList();
+  //     setGroups(data);
+  //   };
+  //   fetchData();
+  // },[]);
+
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
       <Box sx={textStyle}>
         My Group List
       </Box>
+      {/* {groups?.map(group=>(
+        <GroupBox
+          key={group.id}
+          profile={group.imageUrl}
+          name={group.name}
+          num={group.peopleCount}
+          creater={group.creatorName}/>
+      ))
+      } */}
       <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
       <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
+      
       {click &&
         <Buttons/>
       }
