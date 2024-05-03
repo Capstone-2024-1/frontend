@@ -1,3 +1,4 @@
+import { participateNewGroup } from '@/apis/group';
 import { setColor } from '@/utils/setColor';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
@@ -13,7 +14,7 @@ const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }
     setCode(event.target.value);
   };
   const participateGroup = () => {
-    //
+    participateNewGroup(code);
     handleClose();
   }
 
@@ -29,9 +30,6 @@ const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }
         </DialogContent>
         <DialogActions>
           <Button onClick={participateGroup}>participate</Button>
-          {/* <Button onClick={handleLogout} autoFocus>
-            Log Out
-          </Button> */}
         </DialogActions>
       </Dialog>
   )
