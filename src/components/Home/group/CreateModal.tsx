@@ -1,3 +1,4 @@
+import { createNewGroup } from '@/apis/group';
 import { setColor } from '@/utils/setColor';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
@@ -12,7 +13,10 @@ const CreateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }) => 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGroupname(event.target.value);
   };
-
+  const createGroup = () => {
+    createNewGroup(groupname);
+    handleClose();
+  }
 
   return (
     <Dialog open={modalOpen} onClose={handleClose}>
@@ -24,10 +28,7 @@ const CreateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }) => 
           <TextField sx={textFieldStyle} id='outlined-basic' label='Group Name' variant='outlined' onChange={handleNameChange}/>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Create</Button>
-          {/* <Button onClick={handleLogout} autoFocus>
-            Log Out
-          </Button> */}
+          <Button onClick={createGroup}>Create</Button>
         </DialogActions>
       </Dialog>
   )

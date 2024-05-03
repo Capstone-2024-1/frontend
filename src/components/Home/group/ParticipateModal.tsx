@@ -12,6 +12,10 @@ const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCode(event.target.value);
   };
+  const participateGroup = () => {
+    //
+    handleClose();
+  }
 
 
   return (
@@ -24,7 +28,7 @@ const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }
           <TextField sx={textFieldStyle} id='outlined-basic' label='Group Code' variant='outlined' onChange={handleNameChange}/>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>participate</Button>
+          <Button onClick={participateGroup}>participate</Button>
           {/* <Button onClick={handleLogout} autoFocus>
             Log Out
           </Button> */}

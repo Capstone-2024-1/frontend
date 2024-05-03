@@ -30,3 +30,19 @@ export const getGroupMembers = async (groupName:string) => {
     console.error(error);
   }
 };
+
+export const createNewGroup = async (groupName:string) => {
+  try{
+    const response = await axios.post(`${baseURL}/groups/create`,{
+      groupName: groupName
+    },  {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log(response);
+    
+  }catch(error){
+    console.error(error);
+  }
+};
