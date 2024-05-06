@@ -3,39 +3,45 @@ import React, { useEffect, useState } from 'react'
 import Member from './Member'
 import { useRouter } from 'next/router';
 import { getGroupMembers } from '@/apis/group';
+import { useUser } from '@/hook/useUser';
 interface Member {
   id: number;
   name: string;
 }
 const Home = () => {
   const router = useRouter();
+  const {currentGroup} = useUser();
   const [members, setMembers] = useState<Member[]>([]);
-  const groupName = Array.isArray(router.query.name) ? router.query.name[0] : router.query.name;
-  // useEffect(()=>{
-  //   const fetchData = async () => {
-  //     const response = await getGroupMembers(groupName ? groupName : '대박');
-  //     setMembers(response.data);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(()=>{
+    const fetchData = async () => {
+      const response = await getGroupMembers(currentGroup ? currentGroup : 1);
+      if(response){
+        
+        setMembers(response);
+        console.log(response);
+
+      }
+    };
+    fetchData();
+  }, [currentGroup]);
 
   return (
     <>
     <Box sx={centerAlignBoxStyle}>
       <Box sx={memberBoxStyle}>
-        {/* {members.map(member => (
+        {Array.isArray(members) && members.map(member => (
           <Member
             key={member.id}
-            profile={`/images/groupGrey.png`}
+            profile={`/images/myBlack.png`}
             name={member.name}
             />
         ))
-        } */}
+        }
+        {/* <Member profile={'/images/myBlack.png'} name={'전영은'}/>
         <Member profile={'/images/myBlack.png'} name={'전영은'}/>
         <Member profile={'/images/myBlack.png'} name={'전영은'}/>
         <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+        <Member profile={'/images/myBlack.png'} name={'전영은'}/> */}
       </Box>
     </Box>
     </> 

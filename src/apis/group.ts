@@ -17,9 +17,9 @@ export const getGroupList = async () => {
   }
 };
 
-export const getGroupMembers = async (groupName:string) => {
+export const getGroupMembers = async (currentGroup:number) => {
   try{
-    const response = await axios.get(`${baseURL}/groups/${groupName}/members`, {
+    const response = await axios.get(`${baseURL}/groups/${currentGroup}/members`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

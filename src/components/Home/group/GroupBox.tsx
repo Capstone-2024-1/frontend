@@ -1,17 +1,21 @@
+import { useUser } from '@/hook/useUser';
 import { Box, CardMedia } from '@mui/material'
 import { useRouter } from 'next/router';
 import React from 'react'
 
 interface GroupProps {
+  id: number,
   profile: string,
   name: string,
   num: number,
   creater: string,
 }
 
-const GroupBox: React.FC<GroupProps> = ({profile, name, num, creater}) => {
+const GroupBox: React.FC<GroupProps> = ({id, profile, name, num, creater}) => {
+  const {setCurrentGroup} = useUser();
   const router = useRouter();
   const handleClick= () => {
+    setCurrentGroup(id);
     router.push(`/group?name=${name}`);
   }
 

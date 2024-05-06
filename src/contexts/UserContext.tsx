@@ -24,6 +24,8 @@ export interface UserContextValues {
   setMenuSort: (value: string) => void;
   menuList: Menu[];
   setMenuList: Dispatch<SetStateAction<Menu[]>>;
+  currentGroup: number;
+  setCurrentGroup: (value: number) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -45,6 +47,8 @@ const contextDefaultValue: UserContextValues = {
   setMenuSort: () => {},
   menuList: [],
   setMenuList: () => {},
+  currentGroup: 1,
+  setCurrentGroup: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -58,6 +62,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [navigationGroupName, setNavigationGroupName] = useState(contextDefaultValue.navigationGroupName);
   const [menuSort, setMenuSort] = useState(contextDefaultValue.menuSort);
   const [menuList, setMenuList] = useState(contextDefaultValue.menuList);
+  const [currentGroup, setCurrentGroup] = useState(contextDefaultValue.currentGroup);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -76,7 +81,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList}}>
+    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup}}>
       {children}
     </UserContext.Provider>
   );
