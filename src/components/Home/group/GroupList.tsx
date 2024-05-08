@@ -6,6 +6,7 @@ import Buttons from './Buttons';
 import { getGroupList } from '@/apis/group';
 import CreateModal from './CreateModal';
 import ParticipateModal from './ParticipateModal';
+import { getTempGroupList } from '@/utils/tempData';
 interface Group {
   id: number;
   name: string;
@@ -41,14 +42,14 @@ const GroupList = () => {
       setGroups(data);
     };
     fetchData();
-  },[]);
+  },[openCreate]);
 
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
       <Box sx={textStyle}>
         My Group List
       </Box>
-      {groups?.map(group=>(
+      {groups ? groups?.map(group=>(
         <GroupBox
           key={group.id}
           id={group.id}
@@ -57,7 +58,15 @@ const GroupList = () => {
           num={group.peopleCount}
           creater={group.creatorName}/>
       ))
-      }
+      : (getTempGroupList).map(group=>(
+        <GroupBox
+          key={group.id}
+          id={group.id}
+          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
+          name={group.name}
+          num={group.peopleCount}
+          creater={group.creatorName}/>)
+      )}
       {/* <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>       */}
       {click &&
         <Buttons handleParticipate={handleParticipate} handleCreate={handleCreate}/>

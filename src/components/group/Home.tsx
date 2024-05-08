@@ -4,6 +4,7 @@ import Member from './Member'
 import { useRouter } from 'next/router';
 import { getGroupMembers } from '@/apis/group';
 import { useUser } from '@/hook/useUser';
+import { getTempMemberList } from '@/utils/tempData';
 interface Member {
   id: number;
   name: string;
@@ -16,10 +17,9 @@ const Home = () => {
     const fetchData = async () => {
       const response = await getGroupMembers(currentGroup ? currentGroup : 1);
       if(response){
-        
         setMembers(response);
-        console.log(response);
-
+      }else{
+        setMembers(getTempMemberList);
       }
     };
     fetchData();
@@ -37,11 +37,6 @@ const Home = () => {
             />
         ))
         }
-        {/* <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/> */}
       </Box>
     </Box>
     </> 

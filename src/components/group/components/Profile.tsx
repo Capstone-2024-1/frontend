@@ -1,28 +1,19 @@
 import { useUser } from '@/hook/useUser';
-import { getProfile } from '@/utils/tempData';
 import { Box, CardMedia } from '@mui/material'
+import { useRouter } from 'next/router';
 import React, { useEffect } from 'react'
 
 const Profile = () => {
   //그룹 사진으로 변경
   const {user, setName, setImage} = useUser();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if(user.image === ""){
-        const profile = await getProfile[0];
-        setName(profile.name);
-        setImage(profile.image);
-      }
-    };
-    fetchData();
-  }, [setName]);
+  const router = useRouter();
+  const groupName = router.query.name;
 
   return (
     <Box sx={profileStyle}>
       <CardMedia
         component="img"
-        image={user.image}
+        image={'/images/groupBlack.png'}
         title="profile"
         sx={{
           width: '140px',
@@ -32,7 +23,7 @@ const Profile = () => {
         }}
       />
       <Box sx={nameStyle}>
-        {user.name}
+        {groupName}
       </Box>
     </Box>
   )

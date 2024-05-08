@@ -4,19 +4,36 @@ import { useUser } from '@/hook/useUser'
 import { setColor } from '@/utils/setColor'
 import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import IngredientsList from './IngredientsList'
-import { getTempIngredientData, getTempIngredientData2 } from '@/utils/tempData'
+import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
+import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
+
+interface Category {
+  id: number;
+  englishName: string;
+  koreanName: string;
+  flatChildIds: number[];
+  childCategories: Category[];
+}
 
 const Ingredient = ({list}:{list?: boolean}) => {
   const {user} = useUser();
+  const [data, setData] = useState<Category[]>([]);
   const [step, setStep] = useState<number>(2);
   const router = useRouter();
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
   const handleClick = () => {
-    console.log(user.name);
     if(step<4){
+      if(step==2){
+        router.push('/register/ingredient?type=religions');
+      }else if(step==3){
+        router.push('/register/ingredient?type=allergy');
+      }else if(step==4){
+        router.push('/register/ingredient?type=Category');
+      };;
+      console.log(step);
       setStep(step+1);
     }
     else {
@@ -25,15 +42,32 @@ const Ingredient = ({list}:{list?: boolean}) => {
   };
 
   const handleIngredient = () => {
-    if(step == 2) return getTempIngredientData;
-    else if(step == 3) return getTempIngredientData2;
-    else return getTempIngredientData;
+    if(step == 2) return getVegetarian();
+    else if(step == 3) return getReligion();
+    else if(step == 4) return getAllergy();
+    else return getCategory();
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await handleIngredient();
+      if(response !==undefined){
+        setData(response);
+      }else{
+        if(step == 2)setData(getTempVegetarian);
+        else if(step == 3)setData(getTempReligion);
+        else if(step == 4)setData(getTempAllergy);
+      }
+      console.log(response);
+    };
+    fetchData();
+  },[step]);
+
   return (
     <>
     <Header title={type || "Ingredient"}/>
     <Box sx={container}>
-      <IngredientsList data={handleIngredient()}/>
+      <IngredientsList data={data !== null ? data : getTempVegetarian}/>
     </Box>
     <Progress num={list? -1 : step} onClick={handleClick}/>
     </>

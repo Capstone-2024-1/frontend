@@ -49,9 +49,40 @@ export const createNewGroup = async (groupName:string) => {
 
 export const participateNewGroup = async (code:string) => {
   try{
-    const response = await axios.post(`${baseURL}/groups/register`,{
-      code: code
-    },  {
+    const response = await axios.post(`${baseURL}/groups/${code}/register`, null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log(response);
+    
+  }catch(error){
+    console.error(error);
+  }
+};
+
+export const leaveGroup = async (code: number) => {
+  try{
+    const response = await axios.post(`${baseURL}/groups/${code}/unregister`, null,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    console.log(response);
+    
+  }catch(error){
+    console.error(error);
+  }
+};
+
+export const removeGroup = async (code: number) =>  {
+  try{
+    console.log(code);
+    console.log(`${baseURL}/groups/${code}/remove`);
+    const response = await axios.post(`${baseURL}/groups/${code}/remove`, null,
+    {
       headers: {
         Authorization: `Bearer ${token}`
       }
