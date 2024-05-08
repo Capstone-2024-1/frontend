@@ -5,8 +5,10 @@ interface Category {
   id: number;
   englishName: string;
   koreanName: string;
+  flatChildIds?: number[];
   childCategories: Category[];
 }
+
 
 interface IngredientsListProps{
   data: Category[];

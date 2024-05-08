@@ -10,10 +10,10 @@ const Cannot = () => {
       </Box>
       <Box sx={listStyle}>
         <Box sx={ingredientStyle}>
-          고구마구마
+          양고기
         </Box>
         <Box sx={ingredientStyle}>
-          호박고구마
+          새우
         </Box>
       </Box>
     </Box>

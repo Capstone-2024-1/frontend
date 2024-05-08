@@ -1,20 +1,42 @@
 import { Box, CardMedia } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Member from './Member'
 import { useRouter } from 'next/router';
-
+import { getGroupMembers } from '@/apis/group';
+import { useUser } from '@/hook/useUser';
+import { getTempMemberList } from '@/utils/tempData';
+interface Member {
+  id: number;
+  name: string;
+}
 const Home = () => {
   const router = useRouter();
+  const {currentGroup} = useUser();
+  const [members, setMembers] = useState<Member[]>([]);
+  useEffect(()=>{
+    const fetchData = async () => {
+      const response = await getGroupMembers(currentGroup ? currentGroup : 1);
+      if(response){
+        setMembers(response);
+      }else{
+        setMembers(getTempMemberList);
+      }
+    };
+    fetchData();
+  }, [currentGroup]);
 
   return (
     <>
     <Box sx={centerAlignBoxStyle}>
       <Box sx={memberBoxStyle}>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
-        <Member profile={'/images/myBlack.png'} name={'전영은'}/>
+        {Array.isArray(members) && members.map(member => (
+          <Member
+            key={member.id}
+            profile={`/images/myBlack.png`}
+            name={member.name}
+            />
+        ))
+        }
       </Box>
     </Box>
     </> 

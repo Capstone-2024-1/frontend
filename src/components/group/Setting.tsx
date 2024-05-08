@@ -4,28 +4,37 @@ import Profile from './components/Profile'
 import LeaveModal from './components/LeaveModal';
 import MyButton from './components/MyButton';
 import RemoveModal from './components/RemoveModal';
+import { useUser } from '@/hook/useUser';
+import { useRouter } from 'next/router';
+import { leaveGroup, removeGroup } from '@/apis/group';
 
 const Setting = () => {
+  const router = useRouter();
+  const {currentGroup} = useUser();
   const [leaveOpen, setLeaveOpen] = useState<boolean>(false);
   const [removeOpen, setRemoveOpen] = useState<boolean>(false);
   const handleLeaveClose = () => {
     setLeaveOpen(false);
   }
   const handleLeave = () => {
+    const data =  leaveGroup(currentGroup);
+    console.log(data);
     handleLeaveClose();
+    router.push('/home');
   }
   const handleRemoveClose = () => {
     setRemoveOpen(false);
   }
   const handleRemove = () => {
-
+    const response = removeGroup(currentGroup);
+    console.log(response);
   }
   
   return (
     <Box>
       <Profile/>
       <Box sx={numberStyle}>
-        030717
+        {currentGroup}
       </Box>
       <Box sx={buttonStyle}>
         <MyButton name={"Leave the Group"} click = {()=>setLeaveOpen(true)}/>

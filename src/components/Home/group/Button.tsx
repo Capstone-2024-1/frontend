@@ -2,9 +2,9 @@ import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
 import React from 'react'
 
-const Button = ({title}: {title: string}) => {
+const Button = ({title, onClick}: {title: string, onClick: ()=>void}) => {
   return (
-    <Box sx={boxStyle}>
+    <Box sx={boxStyle} onClick={onClick}>
       {title}
     </Box>
   )

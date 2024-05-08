@@ -1,26 +1,75 @@
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import GroupBox from './GroupBox';
 import Buttons from './Buttons';
+import { getGroupList } from '@/apis/group';
+import CreateModal from './CreateModal';
+import ParticipateModal from './ParticipateModal';
+import { getTempGroupList } from '@/utils/tempData';
+interface Group {
+  id: number;
+  name: string;
+  imageUrl: string;
+  peopleCount: number;
+  creatorName: string;
+};
 
 const GroupList = () => {
   const [click, setClick] = useState<boolean>(false);
+  const [openParticipate, setOpenParticipate] = useState<boolean>(false);
+  const [openCreate, setOpenCreate] = useState<boolean>(false);
+  const [groups, setGroups] = useState<Group[]>();
   const handleAdd = () => {
+    getGroupList();
     return click ? 'images/add2.png' : 'images/add1.png';
   }
   const changeClick = () => {
     setClick(!click);
+  };
+
+  const handleParticipate = () => {
+    setOpenParticipate(!openParticipate);
+  };
+
+  const handleCreate = () => {
+    setOpenCreate(!openCreate);
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getGroupList();
+      setGroups(data);
+    };
+    fetchData();
+  },[openCreate]);
+
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
       <Box sx={textStyle}>
         My Group List
       </Box>
-      <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
-      <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>
+      {groups ? groups?.map(group=>(
+        <GroupBox
+          key={group.id}
+          id={group.id}
+          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
+          name={group.name}
+          num={group.peopleCount}
+          creater={group.creatorName}/>
+      ))
+      : (getTempGroupList).map(group=>(
+        <GroupBox
+          key={group.id}
+          id={group.id}
+          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
+          name={group.name}
+          num={group.peopleCount}
+          creater={group.creatorName}/>)
+      )}
+      {/* <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>       */}
       {click &&
-        <Buttons/>
+        <Buttons handleParticipate={handleParticipate} handleCreate={handleCreate}/>
       }
       <CardMedia
             component="img"
@@ -30,6 +79,8 @@ const GroupList = () => {
             onClick={changeClick}
             />
       {click && <Box sx={overlayStyle}/>}
+      {openParticipate && <ParticipateModal modalOpen={openParticipate} handleClose={handleParticipate}/>}
+      {openCreate && <CreateModal modalOpen={openCreate} handleClose={handleCreate}/>}
       
     </Box>
   )

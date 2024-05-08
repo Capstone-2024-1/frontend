@@ -2,11 +2,11 @@ import React from 'react'
 import Button from './Button'
 import { Box } from '@mui/material'
 
-const Buttons = () => {
+const Buttons = ({handleParticipate, handleCreate}: {handleParticipate: ()=>void, handleCreate:()=>void}) => {
   return (
     <Box sx={boxStyle}>
-      <Button title={'Participate the Team'}/>
-      <Button title={'Create the Team'}/>
+      <Button title={'Participate the Team'} onClick={handleParticipate}/>
+      <Button title={'Create the Team'} onClick={handleCreate}/>
     </Box>
   )
 }

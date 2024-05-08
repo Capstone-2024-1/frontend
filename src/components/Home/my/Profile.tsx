@@ -9,7 +9,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       if(user.image === ""){
-        const profile = await getProfile[0];
+        const profile = await getProfile;
         setName(profile.name);
         setImage(profile.image);
       }
