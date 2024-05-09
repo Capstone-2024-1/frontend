@@ -20,19 +20,21 @@ interface Category {
 const Ingredient = ({list}:{list?: boolean}) => {
   const {user} = useUser();
   const [data, setData] = useState<Category[]>([]);
-  const [step, setStep] = useState<number>(2);
+  const [step, setStep] = useState<number>(1);
   const router = useRouter();
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
   const handleClick = () => {
     if(step<4){
-      if(step==2){
+      if(step==1){
         router.push('/register/ingredient?type=religions');
-      }else if(step==3){
+      }else if(step==2){
         router.push('/register/ingredient?type=allergy');
-      }else if(step==4){
+      }else if(step==3){
         router.push('/register/ingredient?type=Category');
-      };;
+      }else if(step==4){
+        router.push('/register/ingredient?type=categories')
+      };
       console.log(step);
       setStep(step+1);
     }
@@ -42,9 +44,9 @@ const Ingredient = ({list}:{list?: boolean}) => {
   };
 
   const handleIngredient = () => {
-    if(step == 2) return getVegetarian();
-    else if(step == 3) return getReligion();
-    else if(step == 4) return getAllergy();
+    if(step == 1) return getVegetarian();
+    else if(step == 2) return getReligion();
+    else if(step == 3) return getAllergy();
     else return getCategory();
   };
 
@@ -54,9 +56,9 @@ const Ingredient = ({list}:{list?: boolean}) => {
       if(response !==undefined){
         setData(response);
       }else{
-        if(step == 2)setData(getTempVegetarian);
-        else if(step == 3)setData(getTempReligion);
-        else if(step == 4)setData(getTempAllergy);
+        if(step == 1)setData(getTempVegetarian);
+        else if(step == 2)setData(getTempReligion);
+        else if(step == 3)setData(getTempAllergy);
       }
       console.log(response);
     };
@@ -69,7 +71,7 @@ const Ingredient = ({list}:{list?: boolean}) => {
     <Box sx={container}>
       <IngredientsList data={data !== null ? data : getTempVegetarian}/>
     </Box>
-    <Progress num={list? -1 : step} onClick={handleClick}/>
+    <Progress num={list? 0 : step} onClick={handleClick}/>
     </>
   )
 }

@@ -26,7 +26,7 @@ const Nickname = () => {
     <Box sx={container}>
     <TextField sx={textFieldStyle} id='outlined-basic' label='NickName' variant='outlined' onChange={handleNameChange}/>
     </Box>
-    <Progress num={1} onClick={handleClick}/>
+    <Progress num={0} onClick={handleClick}/>
     </>
   )
 }
