@@ -36,7 +36,7 @@ const Setting = () => {
       </Box>
       <Box sx={buttonStyle}>
         <MyButton name={"Leave the Group"} click = {()=>setLeaveOpen(true)}/>
-        <MyButton name={"Remove the Member"} click = {()=>setRemoveOpen(true)}/>
+        <MyButton name={"Remove the Group"} click = {()=>setRemoveOpen(true)}/>
         <Box>
           <LeaveModal leaveOpen={leaveOpen} handleClose={handleLeaveClose} handleLeave={handleLeave}/>
           <RemoveModal removeOpen={removeOpen} handleClose={handleRemoveClose} handleRemove={handleRemove}/>
