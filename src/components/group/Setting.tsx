@@ -10,14 +10,14 @@ import { leaveGroup, removeGroup } from '@/apis/group';
 
 const Setting = () => {
   const router = useRouter();
-  const {currentGroup} = useUser();
+  const {currentGroup, user} = useUser();
   const [leaveOpen, setLeaveOpen] = useState<boolean>(false);
   const [removeOpen, setRemoveOpen] = useState<boolean>(false);
   const handleLeaveClose = () => {
     setLeaveOpen(false);
   }
   const handleLeave = () => {
-    const data =  leaveGroup(currentGroup);
+    const data =  leaveGroup(currentGroup, user.accessToken);
     handleLeaveClose();
     router.push('/home');
   }
@@ -25,7 +25,7 @@ const Setting = () => {
     setRemoveOpen(false);
   }
   const handleRemove = () => {
-    const response = removeGroup(currentGroup);
+    const response = removeGroup(currentGroup, user.accessToken);
   }
   
   return (

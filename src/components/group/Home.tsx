@@ -11,11 +11,11 @@ interface Member {
 }
 const Home = () => {
   const router = useRouter();
-  const {currentGroup} = useUser();
+  const {currentGroup, user} = useUser();
   const [members, setMembers] = useState<Member[]>([]);
   useEffect(()=>{
     const fetchData = async () => {
-      const response = await getGroupMembers(currentGroup ? currentGroup : 1);
+      const response = await getGroupMembers((currentGroup ? currentGroup : 1), user.accessToken);
       if(response){
         setMembers(response);
       }else{
