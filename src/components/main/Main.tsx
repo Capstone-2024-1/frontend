@@ -1,14 +1,14 @@
 import { Box, CardMedia } from '@mui/material'
 import React, { useEffect } from 'react'
 import LoginButton from './LoginButton';
-import { postLogin } from '@/apis/login';
+import { postCategoriesIds, postLogin } from '@/apis/login';
 import { setColor } from '@/utils/setColor';
 import { useRouter } from 'next/router';
 import { useUser } from '@/hook/useUser';
 
 const Main = () => {
   const router = useRouter();
-  const {setAccessToken, setUserId} = useUser();
+  const {setAccessToken, setUserId, addBanIngredient} = useUser();
 
   useEffect(()=>{
     if(router.isReady){
@@ -22,6 +22,12 @@ const Main = () => {
             setAccessToken(response.accessToken);
             setUserId(response.id);
             if(response.isRegistered === true){
+              const data = await postCategoriesIds(response.accessToken);
+              if(data){
+                data.forEach(ingredientId => {
+                  addBanIngredient(ingredientId);
+                });
+              }
               router.push('/home');
             }
             else{

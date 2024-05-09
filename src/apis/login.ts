@@ -35,4 +35,18 @@ export const postRegister = async (nickName:string, categoryIds:number[], token:
   }catch(error){
     console.error(error);
   }
+};
+
+export const postCategoriesIds = async(accessToken:string):Promise<number[]|undefined> => {
+  try{
+    const response = await axios.get(`${baseURL}/members/my/categories/ids`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    console.log(response);
+    return response.data.categoryIds;
+  }catch(error){
+    console.error(error);
+  }
 }

@@ -1,3 +1,4 @@
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor'
 import { Box } from '@mui/material'
 import { useRouter } from 'next/router';
@@ -5,7 +6,9 @@ import React from 'react'
 
 const MyButton = ({name, click}:{name: string, click?:()=>void}) => {
   const router = useRouter();
+  const {user} = useUser();
   const handleClick = () => {
+    console.log(user.banIngredient);
     if(name === "My Ingredient List"){
       router.push('/my/list');
     }else if(name === "modify - Vegeterianism"){
