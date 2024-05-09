@@ -4,25 +4,36 @@ import LoginButton from './LoginButton';
 import { postLogin } from '@/apis/login';
 import { setColor } from '@/utils/setColor';
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
+
+// interface LoginResponse {
+//   id: number;
+//   accessToken: string;
+//   isRegistered: boolean;
+// }
 
 const Main = () => {
   const router = useRouter();
+
   useEffect(()=>{
-    const fetchCode = async () => {
-      const {code} = router.query;
-      if(code && typeof code === 'string'){
-        const response = await postLogin(code);
-        if(response){
-          if(response.isRegistered === true){
-            router.push('/home');
-          }
-          else{
-            router.push('/register');
+    if(router.isReady){
+      const fetchCode = async () => {
+        const {code} = router.query;
+        if(code && typeof code === 'string'){
+          const response = await postLogin(code);
+          console.log(response);
+          if(response){
+            if(response.isRegistered === true){
+              router.push('/home');
+            }
+            else{
+              router.push('/register/nickname');
+            }
           }
         }
       }
+      fetchCode();
     }
-    fetchCode();
   }, [router.query]);
 
   const tempMove = () => {
