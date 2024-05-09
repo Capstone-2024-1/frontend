@@ -9,7 +9,7 @@ interface IngredientContainerProps {
   children?: React.ReactNode;
   depth: number;
   id: number;
-  flatChildIds: number[]; // flatChildIds 추가
+  flatChildIds: number[];
 }
 
 const IngredientContainer: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, id, flatChildIds }) => {

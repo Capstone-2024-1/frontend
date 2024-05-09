@@ -1,7 +1,7 @@
-import Ingredient from '@/components/register/ingredient/Ingredients';
 import { Box } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react'
+import Ingredient from './components/Ingredients';
 
 const Modify = () => {
   const router = useRouter();
