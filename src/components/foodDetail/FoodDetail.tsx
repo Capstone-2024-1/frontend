@@ -13,8 +13,8 @@ const FoodDetail = () => {
     <Box sx={containerStyle}>
       <Title name = {foodName ? foodName : '김치찌개'}/>
 
-      <IngredientsBox tag={'cannot eat'}/>
-      <IngredientsBox tag={'can eat'}/>
+      <IngredientsBox tag={'cannot eat'} ingredients={[]}/>
+      <IngredientsBox tag={'can eat'} ingredients={[]}/>
       <SelectBox />
     </Box>
   )

@@ -10,7 +10,12 @@ interface Ingredient {
   "imageUrl": string;
 };
 
-const IngredientsBox = ({tag, ingredients}:{tag: string, ingredients: Ingredient[]|undefined}) => {
+interface IngredientsBoxProps {
+  tag: string;
+  ingredients?: Ingredient[]; // 여기서 '?'를 사용하여 ingredients를 선택적으로 만듭니다.
+}
+
+const IngredientsBox = ({tag, ingredients = []}:IngredientsBoxProps) => {
   return (
     <Box sx={containerStyle}>
       <Tag tag={tag}/>
