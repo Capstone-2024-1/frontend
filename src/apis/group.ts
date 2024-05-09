@@ -40,7 +40,6 @@ export const createNewGroup = async (groupName:string) => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log(response);
     
   }catch(error){
     console.error(error);
@@ -55,8 +54,6 @@ export const participateNewGroup = async (code:string) => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log(response);
-    
   }catch(error){
     console.error(error);
   }
@@ -70,7 +67,6 @@ export const leaveGroup = async (code: number) => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log(response);
     
   }catch(error){
     console.error(error);
@@ -79,16 +75,12 @@ export const leaveGroup = async (code: number) => {
 
 export const removeGroup = async (code: number) =>  {
   try{
-    console.log(code);
-    console.log(`${baseURL}/groups/${code}/remove`);
     const response = await axios.post(`${baseURL}/groups/${code}/remove`, null,
     {
       headers: {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log(response);
-    
   }catch(error){
     console.error(error);
   }

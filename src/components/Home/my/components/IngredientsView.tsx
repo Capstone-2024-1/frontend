@@ -7,6 +7,7 @@ import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/temp
 import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
 import IngredientsList from '@/components/register/ingredient/IngredientsList'
 import Header from './Header'
+import IngredientsBox from '@/components/common/ingredients/IngredientsBox'
 
 interface Category {
   id: number;
@@ -16,7 +17,7 @@ interface Category {
   childCategories: Category[];
 }
 
-const Ingredient = ({list}:{list?: boolean}) => {
+const IngredientsView = ({list}:{list?: boolean}) => {
   const {user} = useUser();
   const [data, setData] = useState<Category[]>([]);
   const [step, setStep] = useState<number>(1);
@@ -53,13 +54,13 @@ const Ingredient = ({list}:{list?: boolean}) => {
     <Header title={type || "Ingredient"} handleBack={handleBack}/>
     
     <Box sx={container}>
-      <IngredientsList data={data !== null ? data : getTempVegetarian}/>
+      <IngredientsBox tag={'cannot eat'}/>
     </Box>
     </>
   )
 }
 
-export default Ingredient;
+export default IngredientsView;
 
 const container = {
     display: 'flex',

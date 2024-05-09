@@ -1,5 +1,3 @@
-import { useUser } from '@/hook/useUser';
-import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 
@@ -17,17 +15,9 @@ interface IngredientContainerProps {
   flatChildIds: number[];
 }
 
-const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen, id, handleCheck, check, setCheck, flatChildIds }) => {
-  const {user} = useUser();
+const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen }) => {
   const handleToggle = () => {
     setOpen(!open);
-  }
-
-  
-
-  const handleColor = () => {
-    if(check)return setColor('main');
-    else return setColor('grey');
   }
 
   const handleArrow = () => {
@@ -35,19 +25,10 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
     else return `url(/images/arrow-left.png)`;
   };
 
-  useEffect(() => {
-    if(user.banIngredient.includes(id)){
-      setCheck(true);
-    }
-    else {
-      setCheck(false);
-    }
-  }, [user.banIngredient, id]);
-
   return (
     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       <Box sx={{display: 'flex', alignItems: 'center', paddingRight: '10px'}}>
-      <Box sx={{width: '10px', height: '10px', bgcolor: handleColor(),marginRight: '10px', borderRadius: '10px'}} onClick={() => handleCheck(id, flatChildIds)}></Box>
+      <Box sx={{width: '10px', height: '10px',marginRight: '10px', borderRadius: '10px'}} ></Box>
         {english} ({korean}) 
       </Box>
       {
@@ -57,9 +38,8 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
           width: '30px', height: '30px', backgroundPosition: 'center'}}
           onClick={handleToggle}/>
         }
-        
       </Box>
   )
 }
 
-export default IngredientItem
+export default IngredientItem;

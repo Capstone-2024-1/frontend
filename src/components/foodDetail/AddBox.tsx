@@ -42,7 +42,6 @@ const AddBox = ({handleClick}:{handleClick:()=>void}) => {
   
       setNum(0);
     }
-    console.log(menuList);
   };
 
   return (

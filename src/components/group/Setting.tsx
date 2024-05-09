@@ -18,7 +18,6 @@ const Setting = () => {
   }
   const handleLeave = () => {
     const data =  leaveGroup(currentGroup);
-    console.log(data);
     handleLeaveClose();
     router.push('/home');
   }
@@ -27,7 +26,6 @@ const Setting = () => {
   }
   const handleRemove = () => {
     const response = removeGroup(currentGroup);
-    console.log(response);
   }
   
   return (

@@ -35,7 +35,6 @@ const Ingredient = ({list}:{list?: boolean}) => {
       }else if(step==4){
         router.push('/register/ingredient?type=categories')
       };
-      console.log(step);
       setStep(step+1);
     }
     else {
@@ -60,7 +59,6 @@ const Ingredient = ({list}:{list?: boolean}) => {
         else if(step == 2)setData(getTempReligion);
         else if(step == 3)setData(getTempAllergy);
       }
-      console.log(response);
     };
     fetchData();
   },[step]);
