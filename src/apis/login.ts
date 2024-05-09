@@ -1,5 +1,4 @@
 import axios from "axios";
-import { requestAPIWithoutToken } from "./api-helper"
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -15,7 +14,6 @@ export const postLogin = async (code: string): Promise<LoginResponse|undefined> 
     const response = await axios.post(`${baseURL}/login/oauth/google`, {
       code: code,
     });
-    console.log(response);
     return response.data;
   }catch(error){
     console.error(error);

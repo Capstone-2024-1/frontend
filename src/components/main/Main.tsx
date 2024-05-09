@@ -5,6 +5,7 @@ import { postLogin } from '@/apis/login';
 import { setColor } from '@/utils/setColor';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
+import { useUser } from '@/hook/useUser';
 
 // interface LoginResponse {
 //   id: number;
@@ -14,6 +15,7 @@ import { useSearchParams } from 'next/navigation';
 
 const Main = () => {
   const router = useRouter();
+  const {setAccessToken, setUserId} = useUser();
 
   useEffect(()=>{
     if(router.isReady){
@@ -23,6 +25,9 @@ const Main = () => {
           const response = await postLogin(code);
           console.log(response);
           if(response){
+            console.log(response.accessToken);
+            setAccessToken(response.accessToken);
+            setUserId(response.id);
             if(response.isRegistered === true){
               router.push('/home');
             }
