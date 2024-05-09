@@ -31,14 +31,13 @@ const Main = () => {
   return (
     <Box sx={container}>
 
-      <Box sx={{ //logo
-        width: '200px',
-        height: '200px', 
-        bgcolor: '#EFDCD4', 
-        borderRadius: '100px',
-        margin: '50px'}}
-        onClick={tempMove}
-        />
+        <CardMedia
+            component="img"
+            image={'/images/logo.png'}
+            title="profile"
+            sx={logoStyle}
+            onClick={tempMove}
+         />
       
       <CardMedia
         component="img"
@@ -65,3 +64,11 @@ const container = {
     justifyContent: 'center', 
     alignItems: 'center',
 };
+
+const logoStyle = {
+  width: '200px',
+  height: '200px', 
+  bgcolor: '#EFDCD4', 
+  borderRadius: '100px',
+  margin: '50px'
+}
