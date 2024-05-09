@@ -21,12 +21,18 @@ export const postLogin = async (code: string): Promise<LoginResponse|undefined> 
   }
 };
 
-// export const postRegister = async (nickName:string, categoryIds:number[]) => {
-//   try{
-//     const response = await axios.post(`${baseURL}/members/register`, {
-//       nickName: nickName,
-//       categoryIds: categoryIds,
-//     });
-
-//   }
-// }
+export const postRegister = async (nickName:string, categoryIds:number[], token: string) => {
+  try{
+    const response = await axios.post(`${baseURL}/members/register`, {
+      nickName: nickName,
+      categoryIds: categoryIds,
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  }catch(error){
+    console.error(error);
+  }
+}

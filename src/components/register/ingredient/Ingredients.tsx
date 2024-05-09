@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 import IngredientsList from './IngredientsList'
 import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
 import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
+import { postRegister } from '@/apis/login'
 
 interface Category {
   id: number;
@@ -24,7 +25,7 @@ const Ingredient = ({list}:{list?: boolean}) => {
   const router = useRouter();
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if(step<4){
       if(step==1){
         router.push('/register/ingredient?type=religions');
@@ -38,6 +39,8 @@ const Ingredient = ({list}:{list?: boolean}) => {
       setStep(step+1);
     }
     else {
+      const response = await postRegister(user.name, user.banIngredient, user.accessToken);
+      console.log(response);
       router.push('/home');
     }
   };

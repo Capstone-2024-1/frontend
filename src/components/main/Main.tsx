@@ -4,14 +4,7 @@ import LoginButton from './LoginButton';
 import { postLogin } from '@/apis/login';
 import { setColor } from '@/utils/setColor';
 import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
 import { useUser } from '@/hook/useUser';
-
-// interface LoginResponse {
-//   id: number;
-//   accessToken: string;
-//   isRegistered: boolean;
-// }
 
 const Main = () => {
   const router = useRouter();
