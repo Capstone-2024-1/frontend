@@ -2,25 +2,40 @@ import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material'
 import React from 'react'
 
-const IngredientCard = ({name, type}: {name: string, type: string}) => {
-  const handleType = () => {
-    if(type === 'seafood')return '/images/seafood.png';
-    else if(type === 'meal')return '/images/meal.png';
-    else return '/images/seafood.png';
-  }
+interface Ingredient {
+  "id": number;
+  "englishName": string;
+  "koreanName": string;
+  "imageUrl": string;
+};
+interface IngredientCardProps {
+  ingredient: Ingredient;
+}
+
+const IngredientCard = ({ingredient}: IngredientCardProps) => {
+  // const handleType = () => {
+  //   if(type === 'seafood')return '/images/seafood.png';
+  //   else if(type === 'meal')return '/images/meal.png';
+  //   else return '/images/seafood.png';
+  // }
 
   return (
     <Box sx={cardStyle}>
       <Box sx={typeStyle}>
         <CardMedia
             component="img"
-            image={handleType()}
-            title="profile"
+            image={ingredient.imageUrl!==""?ingredient.imageUrl : '/images/seafood.png'}
+            title="type"
             sx={imageStyle}
             />
       </Box>
       <Box sx={nameStyle}>
-        {name}
+        <Box>
+        {ingredient.englishName}
+        </Box>
+        <Box>
+        {ingredient.koreanName}
+        </Box>
       </Box>
 
     </Box>
@@ -55,8 +70,11 @@ const imageStyle = {
 
 const nameStyle = {
   fontFamily: 'Inter',
-  fontSize: '1.375rem',
+  fontSize: '1.1rem',
   fontStyle: 'normal',
   fontWeight: '400',
   lineHeight: 'normal',
+  display: 'flex',
+  flexDirection: 'column',
+  textAlign: 'center',
 };

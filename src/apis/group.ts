@@ -3,6 +3,13 @@ import axios from "axios";
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
 // const token = process.env.NEXT_PUBLIC_TOKEN;
 
+interface Ingredient {
+  "id": number;
+  "englishName": string;
+  "koreanName": string;
+  "imageUrl": string;
+};
+
 export const getGroupList = async (accessToken: string) => {
   try{
     const response = await axios.get(`${baseURL}/groups`, {
@@ -81,6 +88,19 @@ export const removeGroup = async (code: number, accessToken: string) =>  {
         Authorization: `Bearer ${accessToken}`
       }
     });
+  }catch(error){
+    console.error(error);
+  }
+};
+
+export const postGroupIngredients = async (groupId: number, accessToken: string):Promise<Ingredient[]|undefined> => {
+  try{
+    const response = await axios.post(`${baseURL}/groups/${groupId}/categories`, null, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
   }catch(error){
     console.error(error);
   }

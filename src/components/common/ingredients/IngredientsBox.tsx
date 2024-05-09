@@ -3,15 +3,25 @@ import React from 'react'
 import Tag from './Tag'
 import IngredientCard from './IngredientCard'
 
-const IngredientsBox = ({tag}:{tag: string}) => {
+interface Ingredient {
+  "id": number;
+  "englishName": string;
+  "koreanName": string;
+  "imageUrl": string;
+};
+
+const IngredientsBox = ({tag, ingredients}:{tag: string, ingredients: Ingredient[]|undefined}) => {
   return (
     <Box sx={containerStyle}>
       <Tag tag={tag}/>
       <Box sx={ingredientStyle}>
+        {ingredients ? ingredients.map(ingredient => (
+            <IngredientCard key={ingredient.id} ingredient={ingredient} />
+          )) : <p>No ingredients found</p>}
+        {/* <IngredientCard name={'shrimp'} type={'seafood'}/>
         <IngredientCard name={'shrimp'} type={'seafood'}/>
         <IngredientCard name={'shrimp'} type={'seafood'}/>
-        <IngredientCard name={'shrimp'} type={'seafood'}/>
-        <IngredientCard name={'shrimp'} type={'seafood'}/>
+        <IngredientCard name={'shrimp'} type={'seafood'}/> */}
       </Box>
     </Box>
   )

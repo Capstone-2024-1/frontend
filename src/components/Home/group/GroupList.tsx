@@ -44,7 +44,7 @@ const GroupList = () => {
       setGroups(data);
     };
     fetchData();
-  },[openCreate]);
+  },[openCreate, openParticipate]);
 
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>

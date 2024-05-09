@@ -6,7 +6,7 @@ interface LoginResponse {
   id: number;
   accessToken: string;
   isRegistered: boolean;
-}
+};
 
 export const postLogin = async (code: string): Promise<LoginResponse|undefined> => {
   try{
