@@ -1,4 +1,5 @@
 import { createNewGroup } from '@/apis/group';
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
@@ -9,12 +10,13 @@ interface LogoutModalProps {
 }
 
 const CreateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }) => {
+  const {user} = useUser();
   const [groupname, setGroupname] = useState('');
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGroupname(event.target.value);
   };
   const createGroup = () => {
-    createNewGroup(groupname);
+    createNewGroup(groupname, user.accessToken);
     handleClose();
   }
 

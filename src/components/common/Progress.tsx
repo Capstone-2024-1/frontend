@@ -1,9 +1,9 @@
-import { Box } from '@mui/material'
+import { Box, CardMedia } from '@mui/material'
 import React from 'react'
 
 const Progress = ({num, onClick} : {num: number, onClick: ()=>void}) => {
   return (
-    <Box sx={{
+    <CardMedia sx={{
       backgroundImage: num>=0 ? `url(/images/progress${num}.png)` : '',
       width: '103px', height: '103px',
       position: 'fixed',

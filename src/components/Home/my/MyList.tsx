@@ -1,9 +1,9 @@
-import Ingredient from '@/components/register/ingredient/Ingredients';
 import React from 'react'
+import IngredientsView from './components/IngredientsView';
 
 const MyList = () => {
   return (
-    <Ingredient list={true}/>
+    <IngredientsView list={true}/>
   )
 }
 

@@ -1,13 +1,20 @@
 import axios from "axios";
 
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL;
-const token = process.env.NEXT_PUBLIC_TOKEN;
+// const token = process.env.NEXT_PUBLIC_TOKEN;
 
-export const getGroupList = async () => {
+interface Ingredient {
+  "id": number;
+  "englishName": string;
+  "koreanName": string;
+  "imageUrl": string;
+};
+
+export const getGroupList = async (accessToken: string) => {
   try{
     const response = await axios.get(`${baseURL}/groups`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
     return response.data;
@@ -17,11 +24,11 @@ export const getGroupList = async () => {
   }
 };
 
-export const getGroupMembers = async (currentGroup:number) => {
+export const getGroupMembers = async (currentGroup: number, accessToken: string) => {
   try{
     const response = await axios.get(`${baseURL}/groups/${currentGroup}/members`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
     return response.data;
@@ -31,64 +38,69 @@ export const getGroupMembers = async (currentGroup:number) => {
   }
 };
 
-export const createNewGroup = async (groupName:string) => {
+export const createNewGroup = async (groupName: string, accessToken: string) => {
   try{
     const response = await axios.post(`${baseURL}/groups/create`,{
       groupName: groupName
     },  {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log(response);
     
   }catch(error){
     console.error(error);
   }
 };
 
-export const participateNewGroup = async (code:string) => {
+export const participateNewGroup = async (code: string, accessToken: string) => {
   try{
     const response = await axios.post(`${baseURL}/groups/${code}/register`, null,
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log(response);
-    
   }catch(error){
     console.error(error);
   }
 };
 
-export const leaveGroup = async (code: number) => {
+export const leaveGroup = async (code: number, accessToken: string) => {
   try{
     const response = await axios.post(`${baseURL}/groups/${code}/unregister`, null,
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log(response);
     
   }catch(error){
     console.error(error);
   }
 };
 
-export const removeGroup = async (code: number) =>  {
+export const removeGroup = async (code: number, accessToken: string) =>  {
   try{
-    console.log(code);
-    console.log(`${baseURL}/groups/${code}/remove`);
     const response = await axios.post(`${baseURL}/groups/${code}/remove`, null,
     {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log(response);
-    
+  }catch(error){
+    console.error(error);
+  }
+};
+
+export const postGroupIngredients = async (groupId: number, accessToken: string):Promise<Ingredient[]|undefined> => {
+  try{
+    const response = await axios.post(`${baseURL}/groups/${groupId}/categories`, null, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
   }catch(error){
     console.error(error);
   }

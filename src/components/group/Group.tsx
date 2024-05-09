@@ -85,20 +85,6 @@ const groupNameStyle = {
   marginBottom: '2rem',
 };
 
-// const memberBoxStyle = {
-//   display: 'flex',
-//   flexDirection: 'row',
-//   flexWrap: 'wrap',
-//   justifyContent: 'flex-start',
-//   width: '85%',
-// };
-
-// const centerAlignBoxStyle = {
-//   display: 'flex',
-//   justifyContent: 'center',
-//   alignItems: 'center',
-// };
-
 const contentStyle = {
   bgcolor: setColor('lightGrey'),
   width: '100%',

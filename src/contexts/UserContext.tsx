@@ -11,6 +11,8 @@ export interface UserContextValues {
     image: string;
     isVegeterian: boolean;
     banIngredient: Array<number>;
+    accessToken: string;
+    userId: number;
   };
   setName: (value: string) => void;
   setImage: (value: string) => void;
@@ -26,6 +28,8 @@ export interface UserContextValues {
   setMenuList: Dispatch<SetStateAction<Menu[]>>;
   currentGroup: number;
   setCurrentGroup: (value: number) => void;
+  setAccessToken: (value: string) => void;
+  setUserId: (value: number) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -34,6 +38,8 @@ const contextDefaultValue: UserContextValues = {
     image: '',
     isVegeterian: false,
     banIngredient: [],
+    accessToken: '',
+    userId: -1,
   },
   setName: () => {},
   setImage: () => {},
@@ -49,6 +55,8 @@ const contextDefaultValue: UserContextValues = {
   setMenuList: () => {},
   currentGroup: 1,
   setCurrentGroup: () => {},
+  setAccessToken: () => {},
+  setUserId: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -63,6 +71,8 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [menuSort, setMenuSort] = useState(contextDefaultValue.menuSort);
   const [menuList, setMenuList] = useState(contextDefaultValue.menuList);
   const [currentGroup, setCurrentGroup] = useState(contextDefaultValue.currentGroup);
+  const [accessToken, setAccessToken] = useState(contextDefaultValue.user.accessToken);
+  const [userId, setUserId] = useState(contextDefaultValue.user.userId);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -81,7 +91,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup}}>
+    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId}}>
       {children}
     </UserContext.Provider>
   );

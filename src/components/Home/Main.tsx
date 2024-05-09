@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, CardMedia } from '@mui/material'
 import { useRouter } from 'next/router'
 import React from 'react'
 
@@ -8,14 +8,29 @@ const Main = () => {
     router.push('/menu');
   }
   return (
-    <Box onClick={handleButton} sx={boxStyle}></Box>
+    <Box sx={boxStyle}>
+      <CardMedia
+        component="img"
+        image={'/images/cameraButton.png'}
+        title="profile"
+        sx={cameraStyle}
+        onClick={handleButton}
+      />
+    </Box>
   )
 }
 
 export default Main;
 
 const boxStyle = {
-  width: '100px',
-  height: '100px',
-  bgcolor: 'black',
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
+
+const cameraStyle = {
+  width: '200px',
+  height: '200px',
 }

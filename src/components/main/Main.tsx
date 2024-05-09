@@ -1,28 +1,43 @@
 import { Box, CardMedia } from '@mui/material'
 import React, { useEffect } from 'react'
 import LoginButton from './LoginButton';
-import { postLogin } from '@/apis/login';
+import { postCategoriesIds, postLogin } from '@/apis/login';
 import { setColor } from '@/utils/setColor';
 import { useRouter } from 'next/router';
+import { useUser } from '@/hook/useUser';
 
 const Main = () => {
   const router = useRouter();
+  const {setAccessToken, setUserId, addBanIngredient} = useUser();
+
   useEffect(()=>{
-    const fetchCode = async () => {
-      const {code} = router.query;
-      if(code && typeof code === 'string'){
-        const response = await postLogin(code);
-        if(response){
-          if(response.isRegistered === true){
-            router.push('/home');
-          }
-          else{
-            router.push('/register');
+    if(router.isReady){
+      const fetchCode = async () => {
+        const {code} = router.query;
+        if(code && typeof code === 'string'){
+          const response = await postLogin(code);
+          console.log(response);
+          if(response){
+            console.log(response.accessToken);
+            setAccessToken(response.accessToken);
+            setUserId(response.id);
+            if(response.isRegistered === true){
+              const data = await postCategoriesIds(response.accessToken);
+              if(data){
+                data.forEach(ingredientId => {
+                  addBanIngredient(ingredientId);
+                });
+              }
+              router.push('/home');
+            }
+            else{
+              router.push('/register/nickname');
+            }
           }
         }
       }
+      fetchCode();
     }
-    fetchCode();
   }, [router.query]);
 
   const tempMove = () => {
@@ -31,14 +46,13 @@ const Main = () => {
   return (
     <Box sx={container}>
 
-      <Box sx={{ //logo
-        width: '200px',
-        height: '200px', 
-        bgcolor: '#EFDCD4', 
-        borderRadius: '100px',
-        margin: '50px'}}
-        onClick={tempMove}
-        />
+        <CardMedia
+            component="img"
+            image={'/images/logo.png'}
+            title="profile"
+            sx={logoStyle}
+            onClick={tempMove}
+         />
       
       <CardMedia
         component="img"
@@ -65,3 +79,11 @@ const container = {
     justifyContent: 'center', 
     alignItems: 'center',
 };
+
+const logoStyle = {
+  width: '200px',
+  height: '200px', 
+  bgcolor: '#EFDCD4', 
+  borderRadius: '100px',
+  margin: '50px'
+}

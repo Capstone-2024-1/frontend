@@ -7,6 +7,7 @@ import { getGroupList } from '@/apis/group';
 import CreateModal from './CreateModal';
 import ParticipateModal from './ParticipateModal';
 import { getTempGroupList } from '@/utils/tempData';
+import { useUser } from '@/hook/useUser';
 interface Group {
   id: number;
   name: string;
@@ -16,12 +17,13 @@ interface Group {
 };
 
 const GroupList = () => {
+  const {user} = useUser();
   const [click, setClick] = useState<boolean>(false);
   const [openParticipate, setOpenParticipate] = useState<boolean>(false);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [groups, setGroups] = useState<Group[]>();
   const handleAdd = () => {
-    getGroupList();
+    getGroupList(user.accessToken);
     return click ? 'images/add2.png' : 'images/add1.png';
   }
   const changeClick = () => {
@@ -38,11 +40,11 @@ const GroupList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getGroupList();
+      const data = await getGroupList(user.accessToken);
       setGroups(data);
     };
     fetchData();
-  },[openCreate]);
+  },[openCreate, openParticipate]);
 
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>

@@ -1,14 +1,13 @@
-import Header from '@/components/common/Header'
-import Progress from '@/components/common/Progress'
 import { useUser } from '@/hook/useUser'
 import { setColor } from '@/utils/setColor'
-import { Box } from '@mui/material'
+import { Box, CardMedia } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import IngredientsList from './IngredientsList'
 import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
 import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
-import { postRegister } from '@/apis/login'
+import IngredientsList from '@/components/register/ingredient/IngredientsList'
+import Header from './Header'
+import IngredientsBox from '@/components/common/ingredients/IngredientsBox'
 
 interface Category {
   id: number;
@@ -18,31 +17,15 @@ interface Category {
   childCategories: Category[];
 }
 
-const Ingredient = ({list}:{list?: boolean}) => {
+const IngredientsView = ({list}:{list?: boolean}) => {
   const {user} = useUser();
   const [data, setData] = useState<Category[]>([]);
   const [step, setStep] = useState<number>(1);
   const router = useRouter();
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
-  const handleClick = async () => {
-    if(step<4){
-      if(step==1){
-        router.push('/register/ingredient?type=religions');
-      }else if(step==2){
-        router.push('/register/ingredient?type=allergy');
-      }else if(step==3){
-        router.push('/register/ingredient?type=Category');
-      }else if(step==4){
-        router.push('/register/ingredient?type=categories')
-      };
-      setStep(step+1);
-    }
-    else {
-      const response = await postRegister(user.name, user.banIngredient, user.accessToken);
-      console.log(response);
-      router.push('/home');
-    }
+  const handleBack = () => {
+    router.push('/home');
   };
 
   const handleIngredient = () => {
@@ -68,16 +51,16 @@ const Ingredient = ({list}:{list?: boolean}) => {
 
   return (
     <>
-    <Header title={type || "Ingredient"}/>
+    <Header title={type || "Ingredient"} handleBack={handleBack}/>
+    
     <Box sx={container}>
-      <IngredientsList data={data !== null ? data : getTempVegetarian}/>
+      <IngredientsBox tag={'cannot eat'}/>
     </Box>
-    <Progress num={list? 0 : step} onClick={handleClick}/>
     </>
   )
 }
 
-export default Ingredient;
+export default IngredientsView;
 
 const container = {
     display: 'flex',
@@ -86,4 +69,5 @@ const container = {
     width: '100%',
     height: '100%',
     bgcolor: setColor('lightGrey') || 'grey',
-}
+};
+

@@ -9,10 +9,10 @@ interface LogoutModalProps {
 const RemoveModal: React.FC<LogoutModalProps> = ({ removeOpen, handleClose, handleRemove }) => {
   return (
     <Dialog open={removeOpen} onClose={handleClose}>
-      <DialogTitle>{"Leave the Group"}</DialogTitle>
+      <DialogTitle>{"Remove the Group"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to remove the Member?
+            Are you sure you want to remove the group?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
