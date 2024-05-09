@@ -1,7 +1,7 @@
 import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Box } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface IngredientContainerProps {
   english: string;
@@ -11,25 +11,19 @@ interface IngredientContainerProps {
   open: boolean;
   setOpen: (value: boolean) => void;
   id: number;
+  handleCheck: (id: number, flatChildIds: number[]) => void;
+  check: boolean;
+  setCheck: (value: boolean) => void;
+  flatChildIds: number[];
 }
 
-const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen, id }) => {
-  const {user, addBanIngredient, removeBanIngredient} = useUser();
-  const [check, setCheck] = useState<boolean>(false);
+const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen, id, handleCheck, check, setCheck, flatChildIds }) => {
+  const {user} = useUser();
   const handleToggle = () => {
-    console.log(open);
     setOpen(!open);
   }
 
-  const handleCheck = () => {
-    if(check){
-      //체크 제거
-      removeBanIngredient(id);
-    }else{
-      addBanIngredient(id);
-    }
-    setCheck(!check);
-  }
+  
 
   const handleColor = () => {
     if(check)return setColor('main');
@@ -41,10 +35,19 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
     else return `url(/images/arrow-left.png)`;
   };
 
+  useEffect(() => {
+    if(user.banIngredient.includes(id)){
+      setCheck(true);
+    }
+    else {
+      setCheck(false);
+    }
+  }, [user.banIngredient, id]);
+
   return (
     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       <Box sx={{display: 'flex', alignItems: 'center', paddingRight: '10px'}}>
-      <Box sx={{width: '10px', height: '10px', bgcolor: handleColor(),marginRight: '10px', borderRadius: '10px'}} onClick={handleCheck}></Box>
+      <Box sx={{width: '10px', height: '10px', bgcolor: handleColor(),marginRight: '10px', borderRadius: '10px'}} onClick={() => handleCheck(id, flatChildIds)}></Box>
         {english} ({korean}) 
       </Box>
       {
