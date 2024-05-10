@@ -12,7 +12,7 @@ const MyButton = ({name, click}:{name: string, click?:()=>void}) => {
       if(click){
         click();
       }
-    }else if(name === "Remove the Member"){
+    }else if(name === "Remove the Group"){
       if(click){
         click();
       }
