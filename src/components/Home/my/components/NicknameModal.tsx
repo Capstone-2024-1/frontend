@@ -9,16 +9,15 @@ interface LogoutModalProps {
 }
 
 const NicknameModal: React.FC<LogoutModalProps> = ({ nicknameOpen, handleNicknameClose }) => {
-  const {setName} = useUser();
+  const {setName, user} = useUser();
   const [nickname, setNickname] = useState<string>('');
   const [reporter, setReporter] = useState<string>('');
-  const accessToken = "123";
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(event.target.value);
   };
 
   const handleCreate = async() => {
-    await postNicknameModify(nickname, accessToken);
+    await postNicknameModify(nickname, user.accessToken);
     setName(nickname);
     handleNicknameClose();
   }
