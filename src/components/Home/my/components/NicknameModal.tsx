@@ -1,4 +1,6 @@
 // import { postProject } from '@/apis/project';
+import { postNicknameModify } from '@/apis/my';
+import { useUser } from '@/hook/useUser';
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
 import React, { useState } from 'react'
 interface LogoutModalProps {
@@ -7,6 +9,7 @@ interface LogoutModalProps {
 }
 
 const NicknameModal: React.FC<LogoutModalProps> = ({ nicknameOpen, handleNicknameClose }) => {
+  const {setName} = useUser();
   const [nickname, setNickname] = useState<string>('');
   const [reporter, setReporter] = useState<string>('');
   const accessToken = "123";
@@ -15,7 +18,8 @@ const NicknameModal: React.FC<LogoutModalProps> = ({ nicknameOpen, handleNicknam
   };
 
   const handleCreate = async() => {
-    // await postProject({title, reporter, accessToken});
+    await postNicknameModify(nickname, accessToken);
+    setName(nickname);
     handleNicknameClose();
   }
   

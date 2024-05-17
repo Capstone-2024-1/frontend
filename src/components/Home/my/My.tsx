@@ -11,7 +11,7 @@ import NicknameModal from './components/NicknameModal';
 const My = () => {
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
   const [contactOpen, setContactOpen] = useState<boolean>(false);
-  const [nicknameOpen, setNicknameOpen] = useState<boolean>(true);
+  const [nicknameOpen, setNicknameOpen] = useState<boolean>(false);
   const handleLogoutOpen = () => {
     setLogoutOpen(true);
   }
