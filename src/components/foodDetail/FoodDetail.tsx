@@ -7,6 +7,7 @@ import IngredientsBox from '../common/ingredients/IngredientsBox';
 import SelectBox from './SelectBox';
 import { useUser } from '@/hook/useUser';
 import { postGroupIngredients } from '@/apis/group';
+import { getFoodFiltering } from '@/apis/ingredients';
 
 interface Ingredient {
   "id": number;
@@ -19,13 +20,17 @@ const FoodDetail = () => {
   const router = useRouter();
   const foodName = Array.isArray(router.query.name) ? router.query.name[0] : router.query.name;
 
-  const [ingredients, setIngredients] = useState<Ingredient[]>();
+  // const [ingredients, setIngredients] = useState<Ingredient[]>();
+  const [caneats, setCaneats] = useState<Ingredient[]>([]);
+  const [cannoteats, setCannoteats] = useState<Ingredient[]>([]);
   const {user} = useUser();
   useEffect(()=>{
     const fetchData = async() => {
-      const data = await postGroupIngredients(11, user.accessToken);
+      const data = await getFoodFiltering(foodName ? foodName : "김치볶음밥", user.accessToken);
       if(data){
-        setIngredients(data);
+        console.log(data);
+        setCaneats(data.canEatCategories);
+        setCannoteats(data.cannotEatCategories);
       }
     }
     fetchData();
@@ -35,8 +40,8 @@ const FoodDetail = () => {
     <Box sx={containerStyle}>
       <Title name = {foodName ? foodName : '김치찌개'}/>
 
-      <IngredientsBox tag={'cannot eat'} ingredients={ingredients}/>
-      <IngredientsBox tag={'can eat'} ingredients={ingredients}/>
+      <IngredientsBox tag={'cannot eat'} ingredients={caneats}/>
+      <IngredientsBox tag={'can eat'} ingredients={cannoteats}/>
       <SelectBox />
     </Box>
   )
