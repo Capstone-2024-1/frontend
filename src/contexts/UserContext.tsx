@@ -32,6 +32,8 @@ export interface UserContextValues {
   setUserId: (value: number) => void;
   creater: string,
   setCreater: (value: string) => void;
+  groupImage: string,
+  setGroupImage: (value: string) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -61,6 +63,8 @@ const contextDefaultValue: UserContextValues = {
   setUserId: () => {},
   creater: '',
   setCreater: () => {},
+  groupImage: '',
+  setGroupImage: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -78,6 +82,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [accessToken, setAccessToken] = useState(contextDefaultValue.user.accessToken);
   const [userId, setUserId] = useState(contextDefaultValue.user.userId);
   const [creater, setCreater] = useState(contextDefaultValue.creater);
+  const [groupImage, setGroupImage] = useState(contextDefaultValue.groupImage);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -96,7 +101,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId, creater, setCreater}}>
+    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId, creater, setCreater, groupImage, setGroupImage}}>
       {children}
     </UserContext.Provider>
   );

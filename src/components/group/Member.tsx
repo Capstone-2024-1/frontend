@@ -57,6 +57,7 @@ const profileStyle = {
 width: '60px',
 height: '60px',
 margin: '10px',
+borderRadius: '100px',
 };
 
 const expelStyle = {

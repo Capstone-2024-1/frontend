@@ -8,6 +8,7 @@ import { getTempMemberList } from '@/utils/tempData';
 interface Member {
   id: number;
   name: string;
+  profileImageUrl: string;
 }
 const Home = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const Home = () => {
           <Member
             key={member.id}
             id={member.id}
-            profile={`/images/myBlack.png`}
+            profile={member.profileImageUrl}
             name={member.name}
             />
         ))

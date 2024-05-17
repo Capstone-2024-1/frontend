@@ -12,11 +12,12 @@ interface GroupProps {
 }
 
 const GroupBox: React.FC<GroupProps> = ({id, profile, name, num, creater}) => {
-  const {setCurrentGroup, setCreater} = useUser();
+  const {setCurrentGroup, setCreater, setGroupImage} = useUser();
   const router = useRouter();
   const handleClick= () => {
     setCurrentGroup(id);
     setCreater(creater);
+    setGroupImage(profile);
     router.push(`/group?name=${name}`);
   }
 

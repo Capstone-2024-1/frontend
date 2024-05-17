@@ -30,4 +30,17 @@ export const getMyIngredients = async (token: string) => {
   }catch(error){
     console.error(error);
   }
-}
+};
+
+export const getMyProfile = async (accessToken: string) => {
+  try{
+    const response = await axios.get(`${baseURL}/members/my`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
+  }catch(error){
+    console.error(error);
+  };
+};
