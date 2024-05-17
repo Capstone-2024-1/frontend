@@ -42,3 +42,16 @@ export const getCategory = async () => {
   }
 };
 
+export const putModifiedIngredients = async (categoryIds:number[], accessToken: string) => {
+  try{
+    const response = await axios.put(`${baseURL}/members/my/categories`, {
+      categoryIds: categoryIds,
+    },{
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+  }catch(error){
+    console.error(error);
+  }
+}

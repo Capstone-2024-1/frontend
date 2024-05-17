@@ -4,7 +4,7 @@ import { Box, CardMedia } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
-import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
+import { getAllergy, getCategory, getReligion, getVegetarian, putModifiedIngredients } from '@/apis/ingredients'
 import IngredientsList from '@/components/register/ingredient/IngredientsList'
 import Header from './Header'
 
@@ -23,11 +23,27 @@ const Ingredient = ({list}:{list?: boolean}) => {
   const router = useRouter();
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
-  const handleBack = () => {
+  const handleBack = async () => {
+    await putModifiedIngredients(user.banIngredient, user.accessToken);
     router.push('/home');
   };
 
+  const setStepBasedOnType = () => {
+    switch (type) {
+      case 'vegetarian':
+          return 1;
+      case 'religion':
+          return 2;
+      case 'allergy':
+          return 3;
+      default:
+          return 1;
+    }
+  }
+
   const handleIngredient = () => {
+    const step = setStepBasedOnType();
+    console.log(step);
     if(step == 1) return getVegetarian();
     else if(step == 2) return getReligion();
     else if(step == 3) return getAllergy();

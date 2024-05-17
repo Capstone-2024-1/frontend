@@ -6,10 +6,12 @@ import MyInformation from './MyInformation';
 import Service from './Service';
 import LogoutModal from './components/LogoutModal';
 import ContactModal from './components/ContactModal';
+import NicknameModal from './components/NicknameModal';
 
 const My = () => {
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
   const [contactOpen, setContactOpen] = useState<boolean>(false);
+  const [nicknameOpen, setNicknameOpen] = useState<boolean>(false);
   const handleLogoutOpen = () => {
     setLogoutOpen(true);
   }
@@ -27,14 +29,19 @@ const My = () => {
     handleContactClose();
   }
 
+  const handleNicknameOpen = () => {
+    setNicknameOpen(!nicknameOpen);
+  }
+
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
-      <Profile/>
+      <Profile handleNicknameOpen={handleNicknameOpen}/>
       <MyInformation/>
       <Service setLogoutOpen={setLogoutOpen} setContactOpen={setContactOpen}/>
 
       <LogoutModal logoutOpen={logoutOpen} handleClose={handleLogoutClose} handleLogout={handleLogout}/>
       <ContactModal contactOpen={contactOpen} handleClose={handleContactClose} handleContact={handleContact}/>
+      <NicknameModal nicknameOpen={nicknameOpen} handleNicknameClose={handleNicknameOpen}/>
 
     </Box>
   )
