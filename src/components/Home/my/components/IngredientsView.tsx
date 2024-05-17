@@ -8,6 +8,7 @@ import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingr
 import IngredientsList from '@/components/register/ingredient/IngredientsList'
 import Header from './Header'
 import IngredientsBox from '@/components/common/ingredients/IngredientsBox'
+import { postGroupIngredients } from '@/apis/group'
 
 interface Category {
   id: number;
@@ -15,7 +16,15 @@ interface Category {
   koreanName: string;
   flatChildIds: number[];
   childCategories: Category[];
-}
+};
+
+interface Ingredient {
+  "id": number;
+  "englishName": string;
+  "koreanName": string;
+  "imageUrl": string;
+};
+
 
 const IngredientsView = ({list}:{list?: boolean}) => {
   const {user} = useUser();
@@ -36,6 +45,7 @@ const IngredientsView = ({list}:{list?: boolean}) => {
   };
 
   useEffect(() => {
+
     const fetchData = async () => {
       const response = await handleIngredient();
       if(response !==undefined){
@@ -49,12 +59,24 @@ const IngredientsView = ({list}:{list?: boolean}) => {
     fetchData();
   },[step]);
 
+  //임시
+  const [ingredients, setIngredients] = useState<Ingredient[]>();
+  useEffect(()=>{
+    const fetchData = async() => {
+      const data = await postGroupIngredients(11, user.accessToken);
+      if(data){
+        setIngredients(data);
+      }
+    }
+    fetchData();
+  }, [user.accessToken]);
+
   return (
     <>
     <Header title={type || "Ingredient"} handleBack={handleBack}/>
     
     <Box sx={container}>
-      <IngredientsBox tag={'cannot eat'}/>
+      <IngredientsBox tag={'cannot eat'} ingredients={ingredients}/>
     </Box>
     </>
   )
