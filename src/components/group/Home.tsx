@@ -23,7 +23,7 @@ const Home = () => {
       }
     };
     fetchData();
-  }, [currentGroup]);
+  }, [currentGroup, members]);
 
   return (
     <>
@@ -32,6 +32,7 @@ const Home = () => {
         {Array.isArray(members) && members.map(member => (
           <Member
             key={member.id}
+            id={member.id}
             profile={`/images/myBlack.png`}
             name={member.name}
             />
