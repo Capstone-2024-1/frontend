@@ -3,7 +3,7 @@ import { getProfile } from '@/utils/tempData';
 import { Box, CardMedia } from '@mui/material'
 import React, { useEffect } from 'react'
 
-const Profile = () => {
+const Profile = ({handleNicknameOpen}: {handleNicknameOpen: () => void}) => {
   const {user, setName, setImage} = useUser();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Profile = () => {
           borderRadius: '50%',
         }}
       />
-      <Box sx={nameStyle}>
+      <Box sx={nameStyle} onClick={handleNicknameOpen}>
         {user.name}
       </Box>
     </Box>
@@ -58,4 +58,5 @@ const nameStyle = {
   fontSize: '20px',
   whiteSpace: 'normal',
   wordBreak: 'break-all',
+  cursor: 'pointer',
 }
