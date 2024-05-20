@@ -1,11 +1,14 @@
+import { useUser } from '@/hook/useUser';
 import { Box, CardMedia, TextField } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
 const Main = () => {
   const router = useRouter();
+  const {setIsExistedMenuList} = useUser();
   const [menu, setMenu] = useState<string>('');
   const handleButton = () => {
+    setIsExistedMenuList(true);
     router.push('/menu');
   };
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,6 +16,7 @@ const Main = () => {
   };
 
   const handleMenu = () => {
+    setIsExistedMenuList(false);
     router.push(`http://localhost:3000/menu/detail?name=${menu}`);
   }
   return (

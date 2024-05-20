@@ -58,6 +58,7 @@ export const putModifiedIngredients = async (categoryIds:number[], accessToken: 
 
 export const getFoodFiltering = async (foodName:string, accessToken: string) => {
   try {
+    console.log(foodName);
     const response = await axios.post(`${baseURL}/filter`, {
       foodName: foodName,
     }, {
