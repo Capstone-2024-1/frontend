@@ -1,5 +1,5 @@
-import { Box, Button } from '@mui/material'
-import React, { useEffect, useRef } from 'react'
+import { Box, Button } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 import getWebcam from '@/utils/camera';
 import { setColor } from '@/utils/setColor';
@@ -8,7 +8,7 @@ import { sendImageToBackend } from '@/apis/camera';
 const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const captureImage = () => {
     if (videoRef.current && canvasRef.current) {
@@ -20,19 +20,22 @@ const Camera = () => {
         canvas.toBlob((blob) => {
           if (blob) {
             sendImageToBackend(blob);
+            const url = URL.createObjectURL(blob);
+            setImageUrl(url);
           }
         }, 'image/jpeg');
       }
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getWebcam((stream) => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     });
-  })
+  }, []);
+
   return (
     <Box sx={containerStyle}>
       <Box sx={{ width: '100%', height: 'calc(100vh - 90px)' }}>
@@ -41,11 +44,12 @@ const Camera = () => {
           Capture Image
         </Button>
         <canvas ref={canvasRef} style={canvasStyle}></canvas>
+        {imageUrl && <img src={imageUrl} alt="Captured" />}
       </Box>
-      <NavigationBar/>
+      <NavigationBar />
     </Box>
-  )
-}
+  );
+};
 
 export default Camera;
 
@@ -73,4 +77,11 @@ const canvasStyle = {
 
 const captureButtonStyle = {
   marginTop: '20px',
+};
+
+const imageStyle = {
+  marginTop: '20px',
+  width: '500px',
+  height: '500px',
+  objectFit: 'cover',
 };
