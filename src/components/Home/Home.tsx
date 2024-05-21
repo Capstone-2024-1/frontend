@@ -1,13 +1,25 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import NavigationBar from './navigationBar/NavigationBar';
 import { useUser } from '@/hook/useUser';
 import Main from './Main';
 import Group from './Group';
 import My from './my/My';
+import { getMyProfile } from '@/apis/my';
 
 const home = () => {
-  const { navigationName } = useUser();
+  const { navigationName, user, setName, setImage } = useUser();
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      const data = await getMyProfile(user.accessToken);
+      if(data){
+        setName(data.nickName);
+        setImage(data.profileImageUrl);
+      };
+    }
+    fetchData();
+  }, []);
 
   const renderContent = () => {
     switch (navigationName) {

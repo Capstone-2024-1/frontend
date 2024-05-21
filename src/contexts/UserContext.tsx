@@ -30,6 +30,12 @@ export interface UserContextValues {
   setCurrentGroup: (value: number) => void;
   setAccessToken: (value: string) => void;
   setUserId: (value: number) => void;
+  creater: string,
+  setCreater: (value: string) => void;
+  groupImage: string,
+  setGroupImage: (value: string) => void;
+  isExistedMenuList: boolean;
+  setIsExistedMenuList: (value: boolean) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -57,6 +63,12 @@ const contextDefaultValue: UserContextValues = {
   setCurrentGroup: () => {},
   setAccessToken: () => {},
   setUserId: () => {},
+  creater: '',
+  setCreater: () => {},
+  groupImage: '',
+  setGroupImage: () => {},
+  isExistedMenuList: false,
+  setIsExistedMenuList: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -73,6 +85,9 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [currentGroup, setCurrentGroup] = useState(contextDefaultValue.currentGroup);
   const [accessToken, setAccessToken] = useState(contextDefaultValue.user.accessToken);
   const [userId, setUserId] = useState(contextDefaultValue.user.userId);
+  const [creater, setCreater] = useState(contextDefaultValue.creater);
+  const [groupImage, setGroupImage] = useState(contextDefaultValue.groupImage);
+  const [isExistedMenuList, setIsExistedMenuList] = useState(contextDefaultValue.isExistedMenuList);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -91,7 +106,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId}}>
+    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId, creater, setCreater, groupImage, setGroupImage, isExistedMenuList, setIsExistedMenuList}}>
       {children}
     </UserContext.Provider>
   );

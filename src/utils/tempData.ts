@@ -21,15 +21,18 @@ export const getTempGroupList = [ {
   } ];
 
 export const getTempMemberList = [ {
-    "id" : 20,
-    "name" : "홍혁준"
-  }, {
-    "id" : 22,
-    "name" : "김동우"
-  }, {
-    "id" : 21,
-    "name" : "전영은"
-  } ];
+  "id" : 20,
+  "name" : "홍혁준",
+  "profileImageUrl" : "프로필 이미지"
+}, {
+  "id" : 22,
+  "name" : "김동우",
+  "profileImageUrl" : "프로필 이미지"
+}, {
+  "id" : 21,
+  "name" : "전영은",
+  "profileImageUrl" : "프로필 이미지"
+} ];
 
 export const getProfile = {
     'id': 22,

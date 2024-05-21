@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 
 const Profile = () => {
   //그룹 사진으로 변경
-  const {user, setName, setImage} = useUser();
+  const {groupImage} = useUser();
   const router = useRouter();
   const groupName = router.query.name;
 
@@ -13,7 +13,7 @@ const Profile = () => {
     <Box sx={profileStyle}>
       <CardMedia
         component="img"
-        image={'/images/groupBlack.png'}
+        image={groupImage}
         title="profile"
         sx={{
           width: '140px',

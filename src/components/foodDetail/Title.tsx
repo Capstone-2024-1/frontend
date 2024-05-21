@@ -1,3 +1,4 @@
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor'
 import { Box, CardMedia } from '@mui/material'
 import { useRouter } from 'next/router';
@@ -5,8 +6,13 @@ import React from 'react'
 
 const Title = ({name}:{name: string}) => {
   const router = useRouter();
+  const {isExistedMenuList} = useUser();
   const handleBack = () => {
-    router.push('/menu');
+    if(isExistedMenuList) {
+      router.push('/menu');
+    }else{
+      router.push('/home');
+    }
   }
   return (
     <Box sx={containerStyle}>

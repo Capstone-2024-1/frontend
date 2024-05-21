@@ -44,7 +44,6 @@ export const postCategoriesIds = async(accessToken:string):Promise<number[]|unde
         Authorization: `Bearer ${accessToken}`
       }
     });
-    console.log(response);
     return response.data.categoryIds;
   }catch(error){
     console.error(error);

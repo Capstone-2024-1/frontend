@@ -105,3 +105,18 @@ export const postGroupIngredients = async (groupId: number, accessToken: string)
     console.error(error);
   }
 };
+
+export const postExpelMember = async (groupId: number, memberId: number, accessToken: string) => {
+  try{
+    const response = await axios.post(`${baseURL}/groups/${groupId}/expel`, {
+      memberId: memberId,
+    }, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
+  }catch(error){
+    console.error(error);
+  };
+};
