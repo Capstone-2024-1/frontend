@@ -32,19 +32,20 @@ const Camera = () => {
     getWebcam((stream) => {
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.setAttribute('playsinline', 'true'); // For iOS Safari
+        videoRef.current.setAttribute('webkit-playsinline', 'true'); // Older iOS versions
       }
     });
   }, []);
 
   return (
     <Box sx={containerStyle}>
-      <Box sx={{ width: '100%', height: 'calc(100vh - 90px)' }}>
-        <video ref={videoRef} autoPlay style={videoStyle}></video>
+      <Box sx={videoContainerStyle}>
+        <video ref={videoRef} autoPlay playsInline style={videoStyle}></video>
         <Button onClick={captureImage} variant="contained" color="primary" sx={captureButtonStyle}>
           Capture Image
         </Button>
         <canvas ref={canvasRef} style={canvasStyle}></canvas>
-        {imageUrl && <img src={imageUrl} alt="Captured" />}
       </Box>
       <NavigationBar />
     </Box>
@@ -63,9 +64,19 @@ const containerStyle = {
   overflow: 'scroll',
 };
 
+const videoContainerStyle = {
+  position: 'relative',
+  width: '100%',
+  height: 'auto',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+};
+
 const videoStyle = {
-  width: '500px',
-  height: '500px',
+  width: '100%',
+  maxWidth: '500px',
+  height: 'auto',
   background: 'rgba(0, 0, 0, 0.5)',
 };
 
@@ -77,11 +88,16 @@ const canvasStyle = {
 
 const captureButtonStyle = {
   marginTop: '20px',
+  position: 'absolute',
+  bottom: '10px',
+  left: '50%',
+  transform: 'translateX(-50%)',
 };
 
 const imageStyle = {
   marginTop: '20px',
-  width: '500px',
-  height: '500px',
+  width: '100%',
+  maxWidth: '500px',
+  height: 'auto',
   objectFit: 'cover',
 };
