@@ -1,16 +1,19 @@
 import { useUser } from '@/hook/useUser';
-import { Box, CardMedia, TextField } from '@mui/material'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import getWebcam from '@/utils/camera';
+import { Box, CardMedia, TextField, Button } from '@mui/material';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 const Main = () => {
   const router = useRouter();
-  const {setIsExistedMenuList} = useUser();
+  const { setIsExistedMenuList } = useUser();
   const [menu, setMenu] = useState<string>('');
+
   const handleButton = () => {
     setIsExistedMenuList(true);
-    router.push('/menu');
+    router.push('/camera');
   };
+
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setMenu(event.target.value);
   };
@@ -18,19 +21,25 @@ const Main = () => {
   const handleMenu = () => {
     setIsExistedMenuList(false);
     router.push(`http://localhost:3000/menu/detail?name=${menu}`);
-  }
+  };
+
   return (
     <Box sx={boxStyle}>
       <Box sx={searchStyle}>
-
-      <TextField sx={textFieldStyle} id='outlined-basic' label='food name' variant='outlined' onChange={handleNicknameChange}/>
-      <CardMedia
-        component="img"
-        image={'/images/search.png'}
-        title="profile"
-        sx={searchButtonStyle}
-        onClick={handleMenu}
-      />
+        <TextField
+          sx={textFieldStyle}
+          id='outlined-basic'
+          label='food name'
+          variant='outlined'
+          onChange={handleNicknameChange}
+        />
+        <CardMedia
+          component="img"
+          image={'/images/search.png'}
+          title="profile"
+          sx={searchButtonStyle}
+          onClick={handleMenu}
+        />
       </Box>
       <CardMedia
         component="img"
@@ -40,8 +49,8 @@ const Main = () => {
         onClick={handleButton}
       />
     </Box>
-  )
-}
+  );
+};
 
 export default Main;
 
@@ -52,11 +61,12 @@ const boxStyle = {
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'column',
-}
+};
 
 const cameraStyle = {
   width: '200px',
   height: '200px',
+  cursor: 'pointer',
 };
 
 const searchStyle = {
@@ -71,7 +81,8 @@ const searchButtonStyle = {
   width: '30px',
   height: '30px',
   marginLeft: '10px',
-}
+  cursor: 'pointer',
+};
 
 const textFieldStyle = {
   width: '90%',
@@ -88,7 +99,6 @@ const textFieldStyle = {
   },
   '& .MuiInputBase-input': {
     padding: '10px',
-
   },
   '& .MuiInputLabel-root': {
     transform: 'translate(14px, 14px) scale(1)',
