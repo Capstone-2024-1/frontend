@@ -4,11 +4,13 @@ import NavigationBar from '../Home/navigationBar/NavigationBar';
 import getWebcam from '@/utils/camera';
 import { setColor } from '@/utils/setColor';
 import { sendImageToBackend } from '@/apis/camera';
+import { useUser } from '@/hook/useUser';
 
 const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const {user} = useUser();
 
   const captureImage = () => {
     if (videoRef.current && canvasRef.current) {
@@ -19,11 +21,11 @@ const Camera = () => {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         canvas.toBlob((blob) => {
           if (blob) {
-            sendImageToBackend(blob);
+            sendImageToBackend(blob, user.accessToken);
             const url = URL.createObjectURL(blob);
             setImageUrl(url);
           }
-        }, 'image/jpeg');
+        }, 'image/png');
       }
     }
   };
@@ -48,6 +50,7 @@ const Camera = () => {
         <canvas ref={canvasRef} style={canvasStyle}></canvas>
       </Box>
       <NavigationBar />
+      {imageUrl && <img src={imageUrl} alt="Captured" />}
     </Box>
   );
 };
