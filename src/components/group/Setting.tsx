@@ -78,4 +78,3 @@ flexDirection: 'column',
 alignItems: 'center',
 
 };
-

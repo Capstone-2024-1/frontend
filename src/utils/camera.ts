@@ -1,9 +1,10 @@
-// 웹캠 스트림을 가져오는 함수
 export const getWebcam = (callback: (stream: MediaStream) => void): void => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const constraints = {
-    video: { facingMode: { exact: "environment" } },
+    video: { facingMode: isMobile ? { exact: "environment" } : "user" },
     audio: false
   };
+
   navigator.mediaDevices.getUserMedia(constraints)
     .then(callback)
     .catch((err) => {
