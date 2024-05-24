@@ -1,65 +1,56 @@
-import { Box } from '@mui/material'
-import React from 'react'
-import Food from './Food'
+import { Box } from '@mui/material';
+import React from 'react';
+import Food from './Food';
 import { setColor } from '@/utils/setColor';
 import { useRouter } from 'next/router';
+import { useUser } from '@/hook/useUser';
+
+interface Ingredient {
+  id: number;
+  englishName: string;
+  koreanName: string;
+  imageUrl: string;
+}
+
+interface FoodProp {
+  koreanName: string;
+  englishName: string;
+  isFood: boolean;
+  isAmbiguous: boolean;
+  canEatCategories: Ingredient[];
+  cannotEatCategories: Ingredient[];
+  canEat: boolean;
+}
 
 const Foods = ({sort}: {sort: string}) => {
   const router = useRouter();
-  const handleContents = () => {
-
-  };
+  const {canEatList, cannotEatList, ambiguousList} = useUser();
 
   const handleClick = () => {
     router.push('/order');
   };
 
+  const renderFoodList = (list: FoodProp[]) => {
+    return list.map((food, index) => <Food key={index} food={food} />);
+  };
+
   return (
     <Box sx={containerStyle}>
-      {sort==='can eat' &&
-      <>
-      <Food name={'Grilled Fish (생선구이)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name={'Grilled Fish (생선구이)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name={'Grilled Fish (생선구이)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name={'Grilled Fish (생선구이)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name={'Grilled Fish (생선구이)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name={'Grilled Fish (생선구이)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      </>
-      }
-      {sort === 'ambiguous' &&
-      <>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      <Food name = {'Stir-fried pork (제육볶음)'}/>
-      </>
-      }
-      {sort === 'cannot eat' &&
-      <>
-      <Food name = {'Altang (알탕)'}/>
-      <Food name = {'Altang (알탕)'}/>
-      <Food name = {'Altang (알탕)'}/>
-      <Food name = {'Altang (알탕)'}/>
-      <Food name = {'Altang (알탕)'}/>
-      <Food name = {'Altang (알탕)'}/>
-      </>
-      }
-      <Box sx={{...boxStyle, right: '15%','@media (min-width: 560px)': {
+      {sort === 'can eat' && renderFoodList(canEatList)}
+      {sort === 'ambiguous' && renderFoodList(ambiguousList)}
+      {sort === 'cannot eat' && renderFoodList(cannotEatList)}
+      <Box sx={{
+        ...boxStyle, 
+        right: '15%',
+        '@media (min-width: 560px)': {
           right: 'calc(50% - 200px)',
-        },}} onClick={handleClick}>
+        },
+      }} onClick={handleClick}>
         Go To Order List
-        </Box>
+      </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default Foods;
 
@@ -86,4 +77,4 @@ const boxStyle = {
 
 const containerStyle = {
   overflow: 'scroll',
-}
+};

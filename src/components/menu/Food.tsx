@@ -3,14 +3,31 @@ import { Box } from '@mui/material'
 import { useRouter } from 'next/router';
 import React from 'react'
 
-const Food = ({name}:{name: string}) => {
+interface Ingredient {
+  id: number;
+  englishName: string;
+  koreanName: string;
+  imageUrl: string;
+}
+
+interface FoodProp {
+  koreanName: string;
+  englishName: string;
+  isFood: boolean;
+  isAmbiguous: boolean;
+  canEatCategories: Ingredient[];
+  cannotEatCategories: Ingredient[];
+  canEat: boolean;
+}
+
+const Food = ({food}:{food: FoodProp}) => {
   const router = useRouter();
   const handleClick = () => {
     router.push(`/menu/detail?name=${name}`)
   }
   return (
     <Box sx={containerStyle} onClick = {handleClick}>
-      {name}
+      {food.koreanName}
     </Box>
   )
 }
