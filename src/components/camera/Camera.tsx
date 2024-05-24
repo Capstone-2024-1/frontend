@@ -3,29 +3,42 @@ import React, { useEffect, useRef, useState } from 'react';
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 import getWebcam from '@/utils/camera';
 import { setColor } from '@/utils/setColor';
-import { sendImageToBackend } from '@/apis/camera';
+import { sendImageToBackend, sendImageToBackendTest } from '@/apis/camera';
 import { useUser } from '@/hook/useUser';
+import { useRouter } from 'next/router';
 
 const Camera = () => {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const {user} = useUser();
+  const { user, categorizeItems } = useUser();
 
-  const captureImage = () => {
+  const captureImage = async () => {
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
       if (context) {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob((blob) => {
-          if (blob) {
-            sendImageToBackend(blob, user.accessToken);
-            const url = URL.createObjectURL(blob);
-            setImageUrl(url);
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob((blob) => {
+            resolve(blob);
+          }, 'image/png');
+        });
+        if (blob) {
+          if (user.accessToken === '') {
+            const data = await sendImageToBackendTest(blob);
+            // console.log(data);
+            categorizeItems(data);
+            router.push('/menu');
+            
+          } else {
+            await sendImageToBackend(blob, user.accessToken);
           }
-        }, 'image/png');
+          const url = URL.createObjectURL(blob);
+          setImageUrl(url);
+        }
       }
     }
   };

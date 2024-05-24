@@ -5,6 +5,23 @@ interface Menu {
   quantity: number;
 }
 
+interface Ingredient {
+  id: number;
+  englishName: string;
+  koreanName: string;
+  imageUrl: string;
+}
+
+interface Food {
+  koreanName: string;
+  englishName: string;
+  isFood: boolean;
+  isAmbiguous: boolean;
+  canEatCategories: Ingredient[];
+  cannotEatCategories: Ingredient[];
+  canEat: boolean;
+}
+
 export interface UserContextValues {
   user:{
     name: string;
@@ -36,6 +53,10 @@ export interface UserContextValues {
   setGroupImage: (value: string) => void;
   isExistedMenuList: boolean;
   setIsExistedMenuList: (value: boolean) => void;
+  canEatList: Food[];
+  cannotEatList: Food[];
+  ambiguousList: Food[];
+  categorizeItems: (items: Food[]) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -69,6 +90,10 @@ const contextDefaultValue: UserContextValues = {
   setGroupImage: () => {},
   isExistedMenuList: false,
   setIsExistedMenuList: () => {},
+  canEatList: [],
+  cannotEatList: [],
+  ambiguousList: [],
+  categorizeItems: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -89,6 +114,10 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [groupImage, setGroupImage] = useState(contextDefaultValue.groupImage);
   const [isExistedMenuList, setIsExistedMenuList] = useState(contextDefaultValue.isExistedMenuList);
 
+  const [canEatList, setCanEatList] = useState<Food[]>(contextDefaultValue.canEatList);
+  const [cannotEatList, setCannotEatList] = useState<Food[]>(contextDefaultValue.cannotEatList);
+  const [ambiguousList, setAmbiguousList] = useState<Food[]>(contextDefaultValue.ambiguousList);
+
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
   };
@@ -99,6 +128,26 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
     );
   };
 
+  const categorizeItems = (items: Food[]) => {
+    const canEat: Food[] = [];
+    const cannotEat: Food[] = [];
+    const ambiguous: Food[] = [];
+
+    items.forEach(item => {
+      if (item.canEat === true && item.isAmbiguous !== false) {
+        canEat.push(item);
+      } else if (item.canEat === true && item.isAmbiguous === true) {
+        ambiguous.push(item);
+      } else {
+        cannotEat.push(item);
+      }
+    });
+
+    setCanEatList(canEat);
+    setCannotEatList(cannotEat);
+    setAmbiguousList(ambiguous);
+  };
+
   useEffect(() => {
     contextDefaultValue.user.name = name;
     contextDefaultValue.user.isVegeterian = isVegeterian;
@@ -106,7 +155,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   }, [name, isVegeterian, banIngredient]);
 
   return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId, creater, setCreater, groupImage, setGroupImage, isExistedMenuList, setIsExistedMenuList}}>
+    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId, creater, setCreater, groupImage, setGroupImage, isExistedMenuList, setIsExistedMenuList, canEatList, cannotEatList, ambiguousList, categorizeItems}}>
       {children}
     </UserContext.Provider>
   );
