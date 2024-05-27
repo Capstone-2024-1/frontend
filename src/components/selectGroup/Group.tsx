@@ -1,16 +1,32 @@
+import { useUser } from '@/hook/useUser';
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { setColor } from '@/utils/setColor';
 
-const Group = ({id, profile, name}: {id: number, profile: string, name: string}) => {
+const Group = ({ id, profile, name }: { id: number, profile: string, name: string }) => {
+  const { setCurrentGroup, currentGroup } = useUser();
+  const handleClick = () => {
+    setCurrentGroup(id);
+  };
+
+  const isSelected = currentGroup === id;
+
   return (
-    <Box sx={containerStyle}>
+    <Box
+      sx={{
+        ...containerStyle,
+        backgroundColor: isSelected ? setColor('main') : 'transparent',
+        color: isSelected ? '#fff' : '#000',
+      }}
+      onClick={handleClick}
+    >
       <Box
         component="img"
         src={profile}
         alt={`${name}'s profile`}
         sx={profileStyle}
       />
-      <Typography sx={nameStyle}>{name}</Typography>
+      <Typography sx={{ ...nameStyle, color: isSelected ? '#fff' : '#000' }}>{name}</Typography>
     </Box>
   );
 }
@@ -20,12 +36,12 @@ export default Group;
 const containerStyle = {
   minWidth: '70px',
   height: '100px',
-  bgcolor: 'yellow',
   margin: '5px',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
+  cursor: 'pointer',
 };
 
 const profileStyle = {

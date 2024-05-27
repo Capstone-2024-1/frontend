@@ -29,9 +29,7 @@ const Setting = () => {
   };
 
   useEffect(() =>{
-    console.log(creater);
-    console.log(user.name);
-    console.log(creater === user.name)
+    console.log(user.accessToken);
   }, []);
   
   return (
