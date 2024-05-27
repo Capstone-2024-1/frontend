@@ -11,7 +11,8 @@ const Main = () => {
 
   const handleButton = () => {
     setIsExistedMenuList(true);
-    router.push('/camera');
+    // router.push('/camera');
+    router.push('/selectGroup');
   };
 
   const handleNicknameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
