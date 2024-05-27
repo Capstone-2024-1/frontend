@@ -22,9 +22,9 @@ interface FoodProp {
   canEat: boolean;
 }
 
-const Foods = ({sort}: {sort: string}) => {
+const Foods = ({ sort }: { sort: string }) => {
   const router = useRouter();
-  const {canEatList, cannotEatList, ambiguousList} = useUser();
+  const { canEatList, cannotEatList, ambiguousList } = useUser();
 
   const handleClick = () => {
     router.push('/order');
@@ -39,13 +39,16 @@ const Foods = ({sort}: {sort: string}) => {
       {sort === 'can eat' && renderFoodList(canEatList)}
       {sort === 'ambiguous' && renderFoodList(ambiguousList)}
       {sort === 'cannot eat' && renderFoodList(cannotEatList)}
-      <Box sx={{
-        ...boxStyle, 
-        right: '15%',
-        '@media (min-width: 560px)': {
-          right: 'calc(50% - 200px)',
-        },
-      }} onClick={handleClick}>
+      <Box
+        sx={{
+          ...boxStyle,
+          right: '15%',
+          '@media (min-width: 560px)': {
+            right: 'calc(50% - 200px)',
+          },
+        }}
+        onClick={handleClick}
+      >
         Go To Order List
       </Box>
     </Box>
