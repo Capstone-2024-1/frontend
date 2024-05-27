@@ -25,17 +25,19 @@ const Members = () => {
       }
     };
     fetchData();
-  }, [currentGroup, members]);
+  }, [currentGroup, user.accessToken]);
 
   return (
     <Box sx={containerStyle}>
-      {Array.isArray(members) && members.map(member => (
-          <Member
-            key={member.id}
-            profile={member.profileImageUrl}
-            name={member.name}
-            />
-        ))
+      {
+        currentGroup !== -1 &&
+        Array.isArray(members) && members.map(member => (
+            <Member
+              key={member.id}
+              profile={member.profileImageUrl}
+              name={member.name}
+              />
+          ))
       }
     </Box>
   )
