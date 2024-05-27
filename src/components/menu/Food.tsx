@@ -1,4 +1,6 @@
+import { useUser } from '@/hook/useUser';
 import { Box, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface FoodProp {
@@ -21,8 +23,15 @@ interface Ingredient {
 }
 
 const Food = ({ food }: FoodProp) => {
+  const router = useRouter();
+  const {setCanEatCategories, setCannotEatCategories} = useUser();
+  const handleClick = () => {
+    setCanEatCategories(food.canEatCategories);
+    setCannotEatCategories(food.cannotEatCategories);
+    router.push(`/menu/detail?name=${food.koreanName}`);
+  }
   return (
-    <Box sx={foodContainerStyle}>
+    <Box sx={foodContainerStyle} onClick = {handleClick}>
       <Typography variant="h6">{food.koreanName}</Typography>
       <Typography variant="body2">{food.englishName}</Typography>
     </Box>
@@ -34,4 +43,5 @@ export default Food;
 const foodContainerStyle = {
   padding: '1rem',
   borderBottom: '1px solid #ccc',
+  cursor: 'pointer',
 };
