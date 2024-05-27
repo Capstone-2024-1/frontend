@@ -23,7 +23,7 @@ interface Food {
 }
 
 export interface UserContextValues {
-  user:{
+  user: {
     name: string;
     image: string;
     isVegeterian: boolean;
@@ -47,9 +47,9 @@ export interface UserContextValues {
   setCurrentGroup: (value: number) => void;
   setAccessToken: (value: string) => void;
   setUserId: (value: number) => void;
-  creater: string,
+  creater: string;
   setCreater: (value: string) => void;
-  groupImage: string,
+  groupImage: string;
   setGroupImage: (value: string) => void;
   isExistedMenuList: boolean;
   setIsExistedMenuList: (value: boolean) => void;
@@ -57,10 +57,14 @@ export interface UserContextValues {
   cannotEatList: Food[];
   ambiguousList: Food[];
   categorizeItems: (items: Food[]) => void;
+  canEatCategories: Ingredient[];
+  cannotEatCategories: Ingredient[];
+  setCanEatCategories: Dispatch<SetStateAction<Ingredient[]>>;
+  setCannotEatCategories: Dispatch<SetStateAction<Ingredient[]>>;
 }
 
 const contextDefaultValue: UserContextValues = {
-  user:{
+  user: {
     name: '',
     image: '',
     isVegeterian: false,
@@ -94,11 +98,15 @@ const contextDefaultValue: UserContextValues = {
   cannotEatList: [],
   ambiguousList: [],
   categorizeItems: () => {},
+  canEatCategories: [],
+  cannotEatCategories: [],
+  setCanEatCategories: () => {},
+  setCannotEatCategories: () => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
 
-export const UserProvider = ({children} : {children: ReactNode}) => {
+export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [name, setName] = useState(contextDefaultValue.user.name);
   const [image, setImage] = useState(contextDefaultValue.user.image);
   const [isVegeterian, setIsVegeterian] = useState(contextDefaultValue.user.isVegeterian);
@@ -118,14 +126,15 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
   const [cannotEatList, setCannotEatList] = useState<Food[]>(contextDefaultValue.cannotEatList);
   const [ambiguousList, setAmbiguousList] = useState<Food[]>(contextDefaultValue.ambiguousList);
 
+  const [canEatCategories, setCanEatCategories] = useState<Ingredient[]>(contextDefaultValue.canEatCategories);
+  const [cannotEatCategories, setCannotEatCategories] = useState<Ingredient[]>(contextDefaultValue.cannotEatCategories);
+
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
   };
 
   const removeBanIngredient = (ingredientId: number) => {
-    setBanIngredient((prevBanIngredient) =>
-      prevBanIngredient.filter((id) => id !== ingredientId)
-    );
+    setBanIngredient((prevBanIngredient) => prevBanIngredient.filter((id) => id !== ingredientId));
   };
 
   const categorizeItems = (items: Food[]) => {
@@ -133,7 +142,7 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
     const cannotEat: Food[] = [];
     const ambiguous: Food[] = [];
 
-    items.forEach(item => {
+    items.forEach((item) => {
       if (item.canEat === true && item.isAmbiguous !== false) {
         canEat.push(item);
       } else if (item.canEat === true && item.isAmbiguous === true) {
@@ -154,8 +163,42 @@ export const UserProvider = ({children} : {children: ReactNode}) => {
     contextDefaultValue.user.banIngredient = banIngredient;
   }, [name, isVegeterian, banIngredient]);
 
-  return(
-    <UserContext.Provider value={{user: {name, image, isVegeterian, banIngredient, accessToken, userId}, setName, setImage, addBanIngredient, removeBanIngredient, navigationName, navigationGroupName, setNavigationName, setNavigationGroupName, menuSort, setMenuSort, menuList, setMenuList, currentGroup, setCurrentGroup, setAccessToken, setUserId, creater, setCreater, groupImage, setGroupImage, isExistedMenuList, setIsExistedMenuList, canEatList, cannotEatList, ambiguousList, categorizeItems}}>
+  return (
+    <UserContext.Provider
+      value={{
+        user: { name, image, isVegeterian, banIngredient, accessToken, userId },
+        setName,
+        setImage,
+        addBanIngredient,
+        removeBanIngredient,
+        navigationName,
+        navigationGroupName,
+        setNavigationName,
+        setNavigationGroupName,
+        menuSort,
+        setMenuSort,
+        menuList,
+        setMenuList,
+        currentGroup,
+        setCurrentGroup,
+        setAccessToken,
+        setUserId,
+        creater,
+        setCreater,
+        groupImage,
+        setGroupImage,
+        isExistedMenuList,
+        setIsExistedMenuList,
+        canEatList,
+        cannotEatList,
+        ambiguousList,
+        categorizeItems,
+        canEatCategories,
+        cannotEatCategories,
+        setCanEatCategories,
+        setCannotEatCategories,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

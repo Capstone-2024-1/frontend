@@ -7,14 +7,15 @@ export const sendImageToBackend = async (blob: Blob, token: string) => {
     const response = await fetch(`${baseURL}/menu`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${token}` //
+        'Authorization': `Bearer ${token}`
       },
       body: formData,
     });
-    console.log(response);
+
     if (response.ok) {
       const result = await response.json();
-      console.log('Image uploaded successfully:', result);
+      // console.log('Image uploaded successfully:', result);
+      return result;  // 반환값 추가
     } else {
       console.error('Failed to upload image');
     }
@@ -31,6 +32,7 @@ export const sendImageToBackendTest = async (blob: Blob) => {
       method: 'POST',
       body: formData,
     });
+
     if (response.ok) {
       const result = await response.json();
       // console.log('Image uploaded successfully:', result);
