@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 import getWebcam from '@/utils/camera';
 import { setColor } from '@/utils/setColor';
-import { sendImageToBackend, sendImageToBackendTest } from '@/apis/camera';
+import { sendImageToBackend, sendImageToBackendGroup, sendImageToBackendTest } from '@/apis/camera';
 import { useUser } from '@/hook/useUser';
 import { useRouter } from 'next/router';
 
@@ -12,7 +12,7 @@ const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const { user, categorizeItems, canEatList } = useUser();
+  const { user, categorizeItems, currentGroup } = useUser();
 
   const captureImage = async () => {
     if (videoRef.current && canvasRef.current) {
@@ -31,7 +31,11 @@ const Camera = () => {
           if (user.accessToken === '') {
             data = await sendImageToBackendTest(blob);
           } else {
-            data = await sendImageToBackend(blob, user.accessToken);
+            if(currentGroup === -1){
+              data = await sendImageToBackend(blob, user.accessToken);
+            }else{
+              data = await sendImageToBackendGroup(blob, user.accessToken, currentGroup);
+            }
           }
           if (data) {
             console.log('Data received from backend:', data);

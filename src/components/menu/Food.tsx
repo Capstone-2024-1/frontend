@@ -24,8 +24,9 @@ interface Ingredient {
 
 const Food = ({ food }: FoodProp) => {
   const router = useRouter();
-  const {setCanEatCategories, setCannotEatCategories} = useUser();
+  const {setCanEatCategories, setCannotEatCategories, setIsExistedMenuList} = useUser();
   const handleClick = () => {
+    setIsExistedMenuList(true);
     setCanEatCategories(food.canEatCategories);
     setCannotEatCategories(food.cannotEatCategories);
     router.push(`/menu/detail?name=${food.koreanName}`);
