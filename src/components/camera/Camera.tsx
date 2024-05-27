@@ -12,7 +12,7 @@ const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const { user, categorizeItems } = useUser();
+  const { user, categorizeItems, canEatList } = useUser();
 
   const captureImage = async () => {
     if (videoRef.current && canvasRef.current) {
@@ -27,14 +27,16 @@ const Camera = () => {
           }, 'image/png');
         });
         if (blob) {
+          let data;
           if (user.accessToken === '') {
-            const data = await sendImageToBackendTest(blob);
-            // console.log(data);
-            categorizeItems(data);
-            router.push('/menu');
-            
+            data = await sendImageToBackendTest(blob);
           } else {
-            await sendImageToBackend(blob, user.accessToken);
+            data = await sendImageToBackend(blob, user.accessToken);
+          }
+          if (data) {
+            console.log('Data received from backend:', data);
+            categorizeItems(data);  // 결과 사용
+            router.push('/menu');
           }
           const url = URL.createObjectURL(blob);
           setImageUrl(url);
@@ -42,6 +44,7 @@ const Camera = () => {
       }
     }
   };
+  
 
   useEffect(() => {
     getWebcam((stream) => {
