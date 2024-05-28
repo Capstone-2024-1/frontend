@@ -5,8 +5,7 @@ import NextButton from './NextButton'
 import GroupList from './GroupList'
 import Members from './Members'
 
-const SelectGroup = () => {
- 
+const SelectGroup = () => { 
   return (
     <Box sx={containerStyle}>
       <GroupList/>

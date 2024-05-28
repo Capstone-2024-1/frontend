@@ -99,6 +99,7 @@ const myStyle = {
   
   overflowY: 'scroll',
   overflowX: 'hidden',
+  color: 'black',
 };
 
 const textStyle = {

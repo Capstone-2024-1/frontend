@@ -34,7 +34,7 @@ export const getAllergy = async () => {
 
 export const getCategory = async () => {
   try{
-    const response = await axios.get(`${baseURL}/categories/vegetarian`);
+    const response = await axios.get(`${baseURL}/categories`);
     return response.data;
       
   }catch(error){
@@ -60,6 +60,22 @@ export const getFoodFiltering = async (foodName:string, accessToken: string) => 
   try {
     console.log(foodName);
     const response = await axios.post(`${baseURL}/filter`, {
+      foodName: foodName,
+    }, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
+  }catch(error){
+    console.error(error);
+  }
+};
+
+export const getFoodGenerating = async (foodName:string, accessToken: string) => {
+  try {
+    console.log(foodName);
+    const response = await axios.post(`${baseURL}/menu/generate`, {
       foodName: foodName,
     }, {
       headers: {

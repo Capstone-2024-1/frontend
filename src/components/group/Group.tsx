@@ -60,6 +60,7 @@ export default Group;
 const containerStyle = {
   width: '100%',
   height: '100%',
+  color: 'black',
 };
 
 const backBoxStyle = {

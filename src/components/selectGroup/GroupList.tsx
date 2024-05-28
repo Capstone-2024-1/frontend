@@ -32,7 +32,7 @@ const GroupList = () => {
       setMe(myData);
     };
     fetchData();
-  }, []);
+  }, [user.accessToken]);
   return (
     <Box sx={containerStyle}>
       {

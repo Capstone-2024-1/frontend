@@ -80,4 +80,5 @@ const boxStyle = {
 
 const containerStyle = {
   overflow: 'scroll',
+  color: 'black',
 };

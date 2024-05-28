@@ -45,6 +45,7 @@ const profileStyle = {
   margin: '10px',
   display: 'flex',
   justifyContent: 'space-evenly',
+  color: 'black',
 };
 
 const nameStyle = {

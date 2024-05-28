@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 import getWebcam from '@/utils/camera';
 import { setColor } from '@/utils/setColor';
-import { sendImageToBackend, sendImageToBackendTest } from '@/apis/camera';
+import { sendImageToBackend, sendImageToBackendGroup, sendImageToBackendTest } from '@/apis/camera';
 import { useUser } from '@/hook/useUser';
 import { useRouter } from 'next/router';
 
@@ -12,9 +12,11 @@ const Camera = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const { user, categorizeItems, canEatList } = useUser();
+  const { user, categorizeItems, currentGroup } = useUser();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const captureImage = async () => {
+    setLoading(true);
     if (videoRef.current && canvasRef.current) {
       const video = videoRef.current;
       const canvas = canvasRef.current;
@@ -31,7 +33,11 @@ const Camera = () => {
           if (user.accessToken === '') {
             data = await sendImageToBackendTest(blob);
           } else {
-            data = await sendImageToBackend(blob, user.accessToken);
+            if(currentGroup === -1){
+              data = await sendImageToBackend(blob, user.accessToken);
+            }else{
+              data = await sendImageToBackendGroup(blob, user.accessToken, currentGroup);
+            }
           }
           if (data) {
             console.log('Data received from backend:', data);
@@ -43,8 +49,8 @@ const Camera = () => {
         }
       }
     }
+    setLoading(false);
   };
-  
 
   useEffect(() => {
     getWebcam((stream) => {
@@ -58,6 +64,7 @@ const Camera = () => {
 
   return (
     <Box sx={containerStyle}>
+      {loading && <Box sx={loadingStyle}>Loading...</Box>}
       <Box sx={videoContainerStyle}>
         <video ref={videoRef} autoPlay playsInline style={videoStyle}></video>
         <Button onClick={captureImage} variant="contained" color="primary" sx={captureButtonStyle}>
@@ -66,7 +73,7 @@ const Camera = () => {
         <canvas ref={canvasRef} style={canvasStyle}></canvas>
       </Box>
       <NavigationBar />
-      {imageUrl && <img src={imageUrl} alt="Captured" />}
+      {/* {imageUrl && <img src={imageUrl} alt="Captured" style={imageStyle} />} */}
     </Box>
   );
 };
@@ -81,6 +88,7 @@ const containerStyle = {
   height: '100%',
   bgcolor: setColor('lightGrey') || 'grey',
   overflow: 'scroll',
+  position: 'relative', // 로딩 오버레이를 올바르게 배치하기 위해 부모 요소를 상대 위치로 설정
 };
 
 const videoContainerStyle = {
@@ -119,4 +127,19 @@ const imageStyle = {
   maxWidth: '500px',
   height: 'auto',
   objectFit: 'cover',
+};
+
+const loadingStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'rgba(255, 255, 255, 0.8)', // 배경을 살짝 투명하게 설정하여 배경 내용이 보이도록 함
+  fontSize: '24px',
+  color: 'gray',
+  zIndex: 10, // 로딩 오버레이가 다른 요소들 위에 오도록 설정
 };

@@ -1,31 +1,60 @@
+import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
-import { Box } from '@mui/material'
-import React from 'react'
+import { postGroupIngredients } from '@/apis/group';
+import { getMyIngredients } from '@/apis/my';
+
+interface Ingredient {
+  id: number;
+  englishName: string;
+  koreanName: string;
+  imageUrl: string;
+};
 
 const Cannot = () => {
+  const { user, currentGroup } = useUser();
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      if (currentGroup !== -1 && user.accessToken) {
+        const data = await postGroupIngredients(currentGroup, user.accessToken);
+        console.log(data);
+        if (data) {
+          setIngredients(data);
+        }
+      }else if(currentGroup === -1 && user.accessToken){
+        const data = await getMyIngredients(user.accessToken);
+        if (data) {
+          setIngredients(data);
+        }
+      }
+    };
+    fetchIngredients();
+  }, [currentGroup, user.accessToken]);
+
   return (
     <Box sx={boxStyle}>
       <Box sx={titleStyle}>
         Cannot Eat
       </Box>
       <Box sx={listStyle}>
-        <Box sx={ingredientStyle}>
-          양고기
-        </Box>
-        <Box sx={ingredientStyle}>
-          새우
-        </Box>
+        {ingredients.map((ingredient) => (
+          <Box sx={ingredientStyle} key={ingredient.id}>
+            {ingredient.koreanName} ({ingredient.englishName})
+          </Box>
+        ))}
       </Box>
     </Box>
-  )
-}
+  );
+};
 
 export default Cannot;
 
 const boxStyle = {
   marginTop: '50px',
   width: '100%',
-  // bgcolor: '#FFFFFF',
   bgcolor: setColor('lightGrey'),
   display: 'flex',
   flexDirection: 'column',
@@ -47,7 +76,7 @@ const titleStyle = {
 };
 
 const listStyle = {
-  width: '80%',
+  width: '90%',
   bgcolor: 'white',
   borderRadius: '30px',
   display: 'flex',
@@ -61,4 +90,4 @@ const listStyle = {
 const ingredientStyle = {
   fontWeight: 'bold',
   fontSize: '20px',
-}
+};
