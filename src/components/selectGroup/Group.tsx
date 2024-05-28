@@ -1,6 +1,6 @@
 import { useUser } from '@/hook/useUser';
 import { Box, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { setColor } from '@/utils/setColor';
 
 const Group = ({ id, profile, name }: { id: number, profile: string, name: string }) => {
@@ -8,7 +8,9 @@ const Group = ({ id, profile, name }: { id: number, profile: string, name: strin
   const handleClick = () => {
     setCurrentGroup(id);
   };
-
+  useEffect(()=>{
+    setCurrentGroup(-1);
+  }, []);
   const isSelected = currentGroup === id;
 
   return (
