@@ -150,6 +150,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       } else {
         cannotEat.push(item);
       }
+      // ambiguous.push(item);
     });
 
     setCanEatList(canEat);

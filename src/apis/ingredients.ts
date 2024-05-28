@@ -70,4 +70,20 @@ export const getFoodFiltering = async (foodName:string, accessToken: string) => 
   }catch(error){
     console.error(error);
   }
+};
+
+export const getFoodGenerating = async (foodName:string, accessToken: string) => {
+  try {
+    console.log(foodName);
+    const response = await axios.post(`${baseURL}/menu/generate`, {
+      foodName: foodName,
+    }, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.data;
+  }catch(error){
+    console.error(error);
+  }
 }
