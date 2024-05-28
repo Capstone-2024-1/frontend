@@ -65,8 +65,10 @@ const FoodDetail = () => {
       fetchData();
     } else if (menuSort === "ambiguous") {
       fetchDataAmbiguous();
+    } else {
+      setLoading(false); // 추가: 데이터 로딩이 필요하지 않으면 로딩 상태를 false로 설정
     }
-  }, [user.accessToken, foodName]);
+  }, [user.accessToken, foodName, isExistedMenuList, menuSort]);
 
   return (
     <Box sx={containerStyle}>
@@ -89,6 +91,7 @@ const containerStyle = {
   height: '100%',
   bgcolor: setColor('lightGrey'),
   overflow: 'scroll',
+  color: 'black',
 };
 
 const loadingStyle = {
@@ -100,7 +103,7 @@ const loadingStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)', // 배경을 살짝 투명하게 설정하여 배경 내용이 보이도록 함
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
   fontSize: '24px',
   color: 'gray',
 };

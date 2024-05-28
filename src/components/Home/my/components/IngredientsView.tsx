@@ -57,5 +57,6 @@ const container = {
     height: '100%',
     bgcolor: setColor('lightGrey') || 'grey',
     overflow: 'scroll',
+    color: 'black',
 };
 

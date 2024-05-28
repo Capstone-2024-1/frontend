@@ -58,4 +58,5 @@ const myStyle = {
   overflowY: 'scroll',
   overflowX: 'hidden',
   gap: '35px',
+  color: 'black',
 };

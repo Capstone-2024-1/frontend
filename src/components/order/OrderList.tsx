@@ -25,4 +25,5 @@ const boxStyle = {
   alignItems: 'center',
   width: '100%',
   height: 'calc(100% - 90px)',
+  color: 'black',
 }
