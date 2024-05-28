@@ -34,7 +34,7 @@ export const getAllergy = async () => {
 
 export const getCategory = async () => {
   try{
-    const response = await axios.get(`${baseURL}/categories/vegetarian`);
+    const response = await axios.get(`${baseURL}/categories`);
     return response.data;
       
   }catch(error){

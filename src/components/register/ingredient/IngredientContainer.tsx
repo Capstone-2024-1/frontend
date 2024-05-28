@@ -55,4 +55,5 @@ const containerStyle = {
   fontSize: '1.125rem',
   fontWeight: '600',
   lineHeight: 'normal',
+  color: 'black',
 }
