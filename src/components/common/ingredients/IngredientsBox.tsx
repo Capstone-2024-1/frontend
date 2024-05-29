@@ -23,10 +23,6 @@ const IngredientsBox = ({tag, ingredients = []}:IngredientsBoxProps) => {
         {ingredients ? ingredients.map(ingredient => (
             <IngredientCard key={ingredient.id} ingredient={ingredient} />
           )) : <p>No ingredients found</p>}
-        {/* <IngredientCard name={'shrimp'} type={'seafood'}/>
-        <IngredientCard name={'shrimp'} type={'seafood'}/>
-        <IngredientCard name={'shrimp'} type={'seafood'}/>
-        <IngredientCard name={'shrimp'} type={'seafood'}/> */}
       </Box>
     </Box>
   )
@@ -38,7 +34,8 @@ const ingredientStyle = {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  justifyContent: 'flex-start',
+  // justifyContent: 'flex-start',
+  justifyContent: 'space-evenly',
 };
 
 const containerStyle = {
