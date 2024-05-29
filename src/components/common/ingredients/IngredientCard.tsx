@@ -13,12 +13,6 @@ interface IngredientCardProps {
 }
 
 const IngredientCard = ({ingredient}: IngredientCardProps) => {
-  // const handleType = () => {
-  //   if(type === 'seafood')return '/images/seafood.png';
-  //   else if(type === 'meal')return '/images/meal.png';
-  //   else return '/images/seafood.png';
-  // }
-
   return (
     <Box sx={cardStyle}>
       <Box sx={typeStyle}>
@@ -45,8 +39,8 @@ const IngredientCard = ({ingredient}: IngredientCardProps) => {
 export default IngredientCard;
 
 const cardStyle = {
-  width: '33.3%',
-  height: '8.125rem',
+  width: '99px',
+  height: '9rem',
 
   display: 'flex',
   flexDirection: 'column',
@@ -70,9 +64,9 @@ const imageStyle = {
 
 const nameStyle = {
   fontFamily: 'Inter',
-  fontSize: '1.1rem',
+  fontSize: '0.8rem',
   fontStyle: 'normal',
-  fontWeight: '400',
+  fontWeight: 'bold',
   lineHeight: 'normal',
   display: 'flex',
   flexDirection: 'column',
