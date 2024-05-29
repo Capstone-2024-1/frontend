@@ -21,7 +21,7 @@ const Main = () => {
 
   const handleMenu = () => {
     setIsExistedMenuList(false);
-    router.push(`http://localhost:3000/menu/detail?name=${menu}`);
+    router.push(`/menu/detail?name=${menu}`);
   };
 
   return (
