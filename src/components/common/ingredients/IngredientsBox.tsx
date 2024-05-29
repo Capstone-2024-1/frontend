@@ -34,8 +34,8 @@ const ingredientStyle = {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  // justifyContent: 'flex-start',
-  justifyContent: 'space-evenly',
+  justifyContent: 'flex-start',
+  // justifyContent: 'space-evenly',
 };
 
 const containerStyle = {

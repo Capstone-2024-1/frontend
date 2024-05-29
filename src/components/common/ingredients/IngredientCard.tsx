@@ -39,7 +39,8 @@ const IngredientCard = ({ingredient}: IngredientCardProps) => {
 export default IngredientCard;
 
 const cardStyle = {
-  width: '99px',
+  minWidth: '99px',
+  width: '33.3%',
   height: '9rem',
 
   display: 'flex',
