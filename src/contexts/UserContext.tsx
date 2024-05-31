@@ -143,7 +143,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const ambiguous: Food[] = [];
 
     items.forEach((item) => {
-      if (item.canEat === true && item.isAmbiguous !== false) {
+      if (item.canEat === true && item.isAmbiguous === false) {
         canEat.push(item);
       } else if (item.canEat === true && item.isAmbiguous === true) {
         ambiguous.push(item);

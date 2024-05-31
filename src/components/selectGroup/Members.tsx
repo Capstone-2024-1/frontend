@@ -50,4 +50,5 @@ const containerStyle = {
   height: 'calc(100% - 100px)',
   bgcolor: '#FFFFFF',
   overflowY: 'scroll',
+  color: 'black',
 }
