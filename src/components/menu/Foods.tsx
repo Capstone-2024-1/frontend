@@ -79,6 +79,9 @@ const boxStyle = {
 };
 
 const containerStyle = {
+  display: 'flex',
+  flexDirection: 'column',
   overflow: 'scroll',
   color: 'black',
+  height: 'calc(100vh - 90px)',
 };
