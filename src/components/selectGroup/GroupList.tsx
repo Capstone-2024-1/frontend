@@ -16,7 +16,7 @@ interface Group {
 
 interface My{
   name: string;
-  imageUrl: string;
+  image: string;
 }
 
 const GroupList = () => {
@@ -37,7 +37,7 @@ const GroupList = () => {
     <Box sx={containerStyle}>
       {
       me ?
-      <Group id={-1} profile={me.imageUrl} name={me.name}/>
+      <Group id={-1} profile={me.image} name={me.name}/>
       :
       <Group id={-1} profile={`/images/groupGrey.png`} name={'junyewdd'}/>
       }
