@@ -28,7 +28,9 @@ export default EatTag;
 
 const tagStyle = {
   borderRadius: '1.875rem',
-  width: '9.6875rem',
+  minWidth: '150px',
+  width: '300px',
+  marginRight: '20px',
   height: '3.125rem',
   border: '1px solid #D9D9D9',
   padding: '10px',

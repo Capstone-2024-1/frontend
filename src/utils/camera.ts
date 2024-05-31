@@ -1,7 +1,11 @@
 export const getWebcam = (callback: (stream: MediaStream) => void): void => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const constraints = {
-    video: { facingMode: isMobile ? { exact: "environment" } : "user" },
+    video: {
+      facingMode: isMobile ? { exact: "environment" } : "user",
+      width: { ideal: 1280 },
+      height: { ideal: 720 },
+    },
     audio: false
   };
 

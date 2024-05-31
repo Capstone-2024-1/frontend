@@ -15,8 +15,8 @@ interface Group {
 };
 
 interface My{
-  name: string;
-  image: string;
+  nickName: string;
+  profileImageUrl: string;
 }
 
 const GroupList = () => {
@@ -29,6 +29,7 @@ const GroupList = () => {
       setGroups(data);
 
       const myData = await getMyProfile(user.accessToken);
+      console.log(myData);
       setMe(myData);
     };
     fetchData();
@@ -37,7 +38,7 @@ const GroupList = () => {
     <Box sx={containerStyle}>
       {
       me ?
-      <Group id={-1} profile={me.image} name={me.name}/>
+      <Group id={-1} profile={me.profileImageUrl} name={me.nickName}/>
       :
       <Group id={-1} profile={`/images/groupGrey.png`} name={'junyewdd'}/>
       }
