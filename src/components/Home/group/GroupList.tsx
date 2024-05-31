@@ -51,7 +51,7 @@ const GroupList = () => {
       <Box sx={textStyle}>
         My Group List
       </Box>
-      {groups ? groups?.map(group=>(
+      {/* {groups ? groups?.map(group=>(
         <GroupBox
           key={group.id}
           id={group.id}
@@ -68,8 +68,19 @@ const GroupList = () => {
           name={group.name}
           num={group.peopleCount}
           creater={group.creatorName}/>)
-      )}
-      {/* <GroupBox profile={`/images/groupGrey.png`} name={'대박'} num={3} creater={'전영은'}/>       */}
+      )} */}
+
+      {groups && groups?.map(group=>(
+        <GroupBox
+          key={group.id}
+          id={group.id}
+          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
+          name={group.name}
+          num={group.peopleCount}
+          creater={group.creatorName}/>
+      ))}
+
+
       {click &&
         <Buttons handleParticipate={handleParticipate} handleCreate={handleCreate}/>
       }
