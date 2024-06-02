@@ -75,13 +75,17 @@ export const processImage = async (
       });
       if (blob) {
         let data;
-        if (user.accessToken === '') {
+        let token = user.accessToken;
+        if (token === "" || !token) {
+          token = localStorage.getItem('accessToken') || "";
+        }
+        if (token === '') {
           data = await sendImageToBackendTest(blob);
         } else {
           if (currentGroup === -1) {
-            data = await sendImageToBackend(blob, user.accessToken);
+            data = await sendImageToBackend(blob, token);
           } else {
-            data = await sendImageToBackendGroup(blob, user.accessToken, currentGroup);
+            data = await sendImageToBackendGroup(blob, token, currentGroup);
           }
         }
         if (data) {

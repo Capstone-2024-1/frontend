@@ -25,10 +25,14 @@ const GroupList = () => {
   const [me, setMe] = useState<My>();
   useEffect(()=> {
     const fetchData = async () => {
-      const data = await getGroupList(user.accessToken);
+      let token = user.accessToken;
+      if (token === "" || !token) {
+        token = localStorage.getItem('accessToken') || "";
+      }
+      const data = await getGroupList(token);
       setGroups(data);
 
-      const myData = await getMyProfile(user.accessToken);
+      const myData = await getMyProfile(token);
       console.log(myData);
       setMe(myData);
     };

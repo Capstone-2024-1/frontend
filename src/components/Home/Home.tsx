@@ -7,30 +7,40 @@ import Group from './Group';
 import My from './my/My';
 import { getMyProfile } from '@/apis/my';
 
-const home = () => {
-  const { navigationName, user, setName, setImage } = useUser();
+const Home = () => {
+  const { navigationName, user, setName, setImage, setAccessToken } = useUser();
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (user.accessToken === "") {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        setAccessToken(token);
+      }
+    }
+
     const fetchData = async () => {
-      const data = await getMyProfile(user.accessToken);
-      if(data){
-        setName(data.nickName);
-        setImage(data.profileImageUrl);
-      };
+      const token = user.accessToken || localStorage.getItem('accessToken');
+      if (token) {
+        const data = await getMyProfile(token);
+        if (data) {
+          setName(data.nickName);
+          setImage(data.profileImageUrl);
+        }
+      }
     }
     fetchData();
-  }, []);
+  }, [user.accessToken, setAccessToken, setName, setImage]);
 
   const renderContent = () => {
     switch (navigationName) {
       case 'camera':
-        return <Main/>
+        return <Main />;
       case 'group':
-        return <Group/>
+        return <Group />;
       case 'my':
-        return <My/>
+        return <My />;
       default:
-        return <Main/>
+        return <Main />;
     }
   }
 
@@ -39,9 +49,9 @@ const home = () => {
       <Box sx={{ width: '100%', height: 'calc(100vh - 90px)' }}>
         {renderContent()}
       </Box>
-      <NavigationBar/>
+      <NavigationBar />
     </Box>
   )
 };
 
-export default home;
+export default Home;

@@ -1,6 +1,6 @@
-import { Box } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import Profile from './components/Profile'
+import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import Profile from './components/Profile';
 import LeaveModal from './components/LeaveModal';
 import MyButton from './components/MyButton';
 import RemoveModal from './components/RemoveModal';
@@ -10,50 +10,62 @@ import { leaveGroup, removeGroup } from '@/apis/group';
 
 const Setting = () => {
   const router = useRouter();
-  const {currentGroup, user, creater} = useUser();
+  const { currentGroup, user, creater, setAccessToken } = useUser();
   const [leaveOpen, setLeaveOpen] = useState<boolean>(false);
   const [removeOpen, setRemoveOpen] = useState<boolean>(false);
+
   const handleLeaveClose = () => {
     setLeaveOpen(false);
-  }
-  const handleLeave = () => {
-    const data =  leaveGroup(currentGroup, user.accessToken);
-    handleLeaveClose();
-    router.push('/home');
-  }
-  const handleRemoveClose = () => {
-    setRemoveOpen(false);
-  }
-  const handleRemove = () => {
-    const response = removeGroup(currentGroup, user.accessToken);
   };
 
-  useEffect(() =>{
+  const handleLeave = async () => {
+    const data = await leaveGroup(currentGroup, user.accessToken);
+    handleLeaveClose();
+    router.push('/home');
+  };
+
+  const handleRemoveClose = () => {
+    setRemoveOpen(false);
+  };
+
+  const handleRemove = async () => {
+    const response = await removeGroup(currentGroup, user.accessToken);
+    console.log(response);
+    setRemoveOpen(false);
+  };
+
+  useEffect(() => {
+    if (user.accessToken === "") {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        setAccessToken(token);
+      }
+    }
     console.log(user.accessToken);
-  }, []);
-  
+  }, [user.accessToken, setAccessToken]);
+
   return (
     <Box>
-      <Profile/>
+      <Profile />
       <Box sx={numberStyle}>
         {currentGroup}
       </Box>
       <Box sx={buttonStyle}>
-        <MyButton name={"Leave the Group"} click = {()=>setLeaveOpen(true)}/>
+        <MyButton name={"Leave the Group"} click={() => setLeaveOpen(true)} />
         {
-        creater === user.name &&
-          <MyButton name={"Remove the Group"} click = {()=>setRemoveOpen(true)}/>
+          creater === user.name &&
+          <MyButton name={"Remove the Group"} click={() => setRemoveOpen(true)} />
         }
         <Box>
-          <LeaveModal leaveOpen={leaveOpen} handleClose={handleLeaveClose} handleLeave={handleLeave}/>
+          <LeaveModal leaveOpen={leaveOpen} handleClose={handleLeaveClose} handleLeave={handleLeave} />
           {
-          creater === user.name &&
-            <RemoveModal removeOpen={removeOpen} handleClose={handleRemoveClose} handleRemove={handleRemove}/>
+            creater === user.name &&
+            <RemoveModal removeOpen={removeOpen} handleClose={handleRemoveClose} handleRemove={handleRemove} />
           }
         </Box>
       </Box>
     </Box>
-  )
+  );
 }
 
 export default Setting;
@@ -71,8 +83,7 @@ const numberStyle = {
 };
 
 const buttonStyle = {
-display: 'flex',
-flexDirection: 'column',
-alignItems: 'center',
-
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 };

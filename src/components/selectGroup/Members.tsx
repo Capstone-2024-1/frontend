@@ -16,7 +16,11 @@ const Members = () => {
 
   useEffect(()=>{
     const fetchData = async () => {
-      const response = await getGroupMembers((currentGroup ? currentGroup : 1), user.accessToken);
+      let token = user.accessToken;
+      if (token === "" || !token) {
+        token = localStorage.getItem('accessToken') || "";
+      }
+      const response = await getGroupMembers((currentGroup ? currentGroup : 1), token);
       if(response){
         setMembers(response);
       }

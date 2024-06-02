@@ -17,11 +17,21 @@ interface Group {
 };
 
 const GroupList = () => {
-  const {user} = useUser();
+  const {user, setAccessToken} = useUser();
   const [click, setClick] = useState<boolean>(false);
   const [openParticipate, setOpenParticipate] = useState<boolean>(false);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [groups, setGroups] = useState<Group[]>();
+
+  useEffect(() => {
+    if (user.accessToken === "") {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        setAccessToken(token);
+      }
+    }
+  }, [user.accessToken, setAccessToken]);
+
   const handleAdd = () => {
     getGroupList(user.accessToken);
     return click ? 'images/add2.png' : 'images/add1.png';

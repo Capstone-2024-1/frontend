@@ -16,11 +16,11 @@ const Main = () => {
         const {code} = router.query;
         if(code && typeof code === 'string'){
           const response = await postLogin(code);
-          console.log(response);
           if(response){
             console.log(response.accessToken);
             setAccessToken(response.accessToken);
             setUserId(response.id);
+            localStorage.setItem('accessToken', response.accessToken);
             if(response.isRegistered === true){
               const data = await postCategoriesIds(response.accessToken);
               if(data){

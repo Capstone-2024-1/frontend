@@ -17,7 +17,7 @@ interface Ingredient {
 
 const FoodDetail = () => {
   const router = useRouter();
-  const { user, isExistedMenuList, canEatCategories, cannotEatCategories, setCanEatCategories, setCannotEatCategories, menuSort } = useUser();
+  const { user, setAccessToken, isExistedMenuList, canEatCategories, cannotEatCategories, setCanEatCategories, setCannotEatCategories, menuSort } = useUser();
   const foodName = Array.isArray(router.query.name) ? router.query.name[0] : router.query.name;
 
   const [caneats, setCaneats] = useState<Ingredient[]>(canEatCategories);
@@ -25,10 +25,15 @@ const FoodDetail = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    const token = user.accessToken || localStorage.getItem('accessToken');
+    if (user.accessToken ==="" && token) {
+      setAccessToken(token);
+    }
+
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await getFoodFiltering(foodName ? foodName : "김치볶음밥", user.accessToken);
+        const data = await getFoodFiltering(foodName ? foodName : "김치볶음밥", token as string);
         if (data) {
           console.log(data);
           setCaneats(data.canEatCategories);
@@ -46,7 +51,7 @@ const FoodDetail = () => {
     const fetchDataAmbiguous = async () => {
       setLoading(true);
       try {
-        const data = await getFoodGenerating(foodName ? foodName : "김치볶음밥", user.accessToken);
+        const data = await getFoodGenerating(foodName ? foodName : "김치볶음밥", token as string);
         if (data) {
           console.log(data);
           setCaneats(data.canEatCategories);
@@ -61,14 +66,18 @@ const FoodDetail = () => {
       }
     }
 
-    if (!isExistedMenuList) {
-      fetchData();
-    } else if (menuSort === "ambiguous") {
-      fetchDataAmbiguous();
+    if (token) {
+      if (!isExistedMenuList) {
+        fetchData();
+      } else if (menuSort === "ambiguous") {
+        fetchDataAmbiguous();
+      } else {
+        setLoading(false); // 추가: 데이터 로딩이 필요하지 않으면 로딩 상태를 false로 설정
+      }
     } else {
-      setLoading(false); // 추가: 데이터 로딩이 필요하지 않으면 로딩 상태를 false로 설정
+      setLoading(false); // 추가: 토큰이 없으면 로딩 상태를 false로 설정
     }
-  }, [user.accessToken, foodName, isExistedMenuList, menuSort]);
+  }, [user.accessToken, foodName, isExistedMenuList, menuSort, setAccessToken]);
 
   return (
     <Box sx={containerStyle}>

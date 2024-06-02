@@ -18,14 +18,19 @@ const Cannot = () => {
   
   useEffect(() => {
     const fetchIngredients = async () => {
-      if (currentGroup !== -1 && user.accessToken) {
-        const data = await postGroupIngredients(currentGroup, user.accessToken);
+      let token = user.accessToken;
+      if (token === "" || !token) {
+        token = localStorage.getItem('accessToken') || "";
+      }
+
+      if (currentGroup !== -1 && token) {
+        const data = await postGroupIngredients(currentGroup, token);
         console.log(data);
         if (data) {
           setIngredients(data);
         }
-      }else if(currentGroup === -1 && user.accessToken){
-        const data = await getMyIngredients(user.accessToken);
+      }else if(currentGroup === -1 && token){
+        const data = await getMyIngredients(token);
         if (data) {
           setIngredients(data);
         }

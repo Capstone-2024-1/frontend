@@ -39,7 +39,11 @@ const Ingredient = ({list}:{list?: boolean}) => {
       setStep(step+1);
     }
     else {
-      const response = await postRegister(user.name, user.banIngredient, user.accessToken);
+      let token = user.accessToken;
+      if (token === "" || !token) {
+        token = localStorage.getItem('accessToken') || "";
+      }
+      const response = await postRegister(user.name, user.banIngredient, token);
       console.log(response);
       router.push('/home');
     }

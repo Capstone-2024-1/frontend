@@ -1,6 +1,6 @@
 import { useUser } from '@/hook/useUser'
 import { setColor } from '@/utils/setColor'
-import { Box, CardMedia } from '@mui/material'
+import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
@@ -16,61 +16,72 @@ interface Category {
   childCategories: Category[];
 }
 
-const Ingredient = ({list}:{list?: boolean}) => {
-  const {user} = useUser();
+const Ingredient = ({ list }: { list?: boolean }) => {
+  const { user, setAccessToken } = useUser();
   const [data, setData] = useState<Category[]>([]);
   const [step, setStep] = useState<number>(1);
   const router = useRouter();
   const type = Array.isArray(router.query.type) ? router.query.type[0] : router.query.type;
 
+  useEffect(() => {
+    if (user.accessToken === "") {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        setAccessToken(token);
+      }
+    }
+  }, [user.accessToken, setAccessToken]);
+
   const handleBack = async () => {
-    await putModifiedIngredients(user.banIngredient, user.accessToken);
+    const token = user.accessToken || localStorage.getItem('accessToken');
+    if (token) {
+      await putModifiedIngredients(user.banIngredient, token);
+    }
     router.push('/home');
   };
 
   const setStepBasedOnType = () => {
     switch (type) {
       case 'vegetarian':
-          return 1;
+        return 1;
       case 'religion':
-          return 2;
+        return 2;
       case 'allergy':
-          return 3;
+        return 3;
       default:
-          return 1;
+        return 1;
     }
   }
 
   const handleIngredient = () => {
     const step = setStepBasedOnType();
     console.log(step);
-    if(step == 1) return getVegetarian();
-    else if(step == 2) return getReligion();
-    else if(step == 3) return getAllergy();
+    if (step === 1) return getVegetarian();
+    else if (step === 2) return getReligion();
+    else if (step === 3) return getAllergy();
     else return getCategory();
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await handleIngredient();
-      if(response !==undefined){
+      if (response !== undefined) {
         setData(response);
-      }else{
-        if(step == 1)setData(getTempVegetarian);
-        else if(step == 2)setData(getTempReligion);
-        else if(step == 3)setData(getTempAllergy);
+      } else {
+        if (step === 1) setData(getTempVegetarian);
+        else if (step === 2) setData(getTempReligion);
+        else if (step === 3) setData(getTempAllergy);
       }
     };
     fetchData();
-  },[step]);
+  }, [step]);
 
   return (
     <>
-    <Header title={type || "Ingredient"} handleBack={handleBack}/>
-    
-    <Box sx={container}>
-      <IngredientsList data={data !== null ? data : getTempVegetarian}/>
-    </Box>
+      <Header title={type || "Ingredient"} handleBack={handleBack} />
+      <Box sx={container}>
+        <IngredientsList data={data !== null ? data : getTempVegetarian} />
+      </Box>
     </>
   )
 }
@@ -78,12 +89,11 @@ const Ingredient = ({list}:{list?: boolean}) => {
 export default Ingredient;
 
 const container = {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '1rem',
-    width: '100%',
-    height: '100%',
-    bgcolor: setColor('lightGrey') || 'grey',
-    color: 'black',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '1rem',
+  width: '100%',
+  height: '100%',
+  bgcolor: setColor('lightGrey') || 'grey',
+  color: 'black',
 };
-

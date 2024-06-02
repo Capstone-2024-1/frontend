@@ -1,12 +1,21 @@
 import { postExpelMember } from '@/apis/group';
 import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
-import { Box, CardMedia } from '@mui/material'
-import React from 'react'
+import { Box, CardMedia } from '@mui/material';
+import React, { useEffect } from 'react';
 
-const Member = ({id, profile, name}: {id: number, profile:string, name: string}) => {
-  const {creater, user, currentGroup} = useUser();
-  
+const Member = ({ id, profile, name }: { id: number, profile: string, name: string }) => {
+  const { creater, user, currentGroup, setAccessToken } = useUser();
+
+  useEffect(() => {
+    if (user.accessToken === "") {
+      const token = localStorage.getItem('accessToken');
+      if (token) {
+        setAccessToken(token);
+      }
+    }
+  }, [user.accessToken, setAccessToken]);
+
   const handleExpel = async () => {
     const response = await postExpelMember(currentGroup, id, user.accessToken);
     console.log(response);
@@ -15,20 +24,20 @@ const Member = ({id, profile, name}: {id: number, profile:string, name: string})
   return (
     <Box sx={memberContainer}>
       <CardMedia
-          component="img"
-          image={profile}
-          title="profile"
-          sx={profileStyle}
-          />
+        component="img"
+        image={profile}
+        title="profile"
+        sx={profileStyle}
+      />
       {name}
       {
-      creater === user.name && name !== user.name &&
+        creater === user.name && name !== user.name &&
         <Box sx={expelStyle} onClick={handleExpel}>
           expel
         </Box>
       }
     </Box>
-  )
+  );
 }
 
 export default Member;
@@ -51,13 +60,13 @@ const memberContainer = {
   fontStyle: 'normal',
   fontWeight: '400',
   lineHeight: 'normal',
-}
+};
 
 const profileStyle = {
-width: '60px',
-height: '60px',
-margin: '10px',
-borderRadius: '100px',
+  width: '60px',
+  height: '60px',
+  margin: '10px',
+  borderRadius: '100px',
 };
 
 const expelStyle = {
@@ -72,4 +81,4 @@ const expelStyle = {
   alignItems: 'center',
   margin: '3px',
   cursor: 'pointer',
-}
+};
