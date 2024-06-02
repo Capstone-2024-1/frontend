@@ -144,21 +144,19 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const ambiguous: Food[] = [];
 
     items.forEach((item) => {
-      // if(item.isAmbiguous === true){
-      //   ambiguous.push(item);
-      // }else if(item.canEat === true){
-      //   canEat.push(item);
-      // }else {
-      //   cannotEat.push(item);
-      // }
+      if(item.isAmbiguous === true){
+        ambiguous.push(item);
+      }else if(item.canEat === true){
+        canEat.push(item);
+      }else {
+        cannotEat.push(item);
+      }
 
       // if(item.canEat === true){
       //   canEat.push(item);
       // }else{
       //   cannotEat.push(item);
       // }
-
-      ambiguous.push(item);
     });
 
     setCanEatList(canEat);
