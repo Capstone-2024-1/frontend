@@ -63,8 +63,8 @@ const profileStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  bgcolor: 'grey',
-  borderRadius: '40%',
+  borderRadius: '60%',
+  bgcolor: '#FFFFFF',
 };
 
 const groupStyle = {
