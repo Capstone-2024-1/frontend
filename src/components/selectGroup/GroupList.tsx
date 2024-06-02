@@ -47,20 +47,13 @@ const GroupList = () => {
       :
       <Group id={-1} profile={`/images/groupGrey.png`} name={'junyewdd'}/>
       }
-      {groups ? groups?.map(group=>(
+      {groups && groups?.map(group=>(
         <Group
           key={group.id}
           id={group.id}
           profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
           name={group.name}/>
-      ))
-      : (getTempGroupList).map(group=>(
-        <Group
-          key={group.id}
-          id={group.id}
-          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
-          name={group.name}/>)
-      )}
+      ))}
     </Box>
   );
 };

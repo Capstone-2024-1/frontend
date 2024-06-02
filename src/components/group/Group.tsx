@@ -1,7 +1,7 @@
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
-import React from 'react'
+import React, { useEffect } from 'react'
 import Member from './Member';
 import { useRouter } from 'next/router';
 import NavigationBar from './navigationBar/NavigationBar';
@@ -11,10 +11,17 @@ import Food from './Food';
 import Setting from './Setting';
 
 const Group = () => {
-  const {navigationGroupName} = useUser();
+  const {navigationGroupName, user, setAccessToken} = useUser();
   const router = useRouter();
   const params = useSearchParams();
   const groupName = params.get('name');
+
+  useEffect(()=>{
+    const token = user.accessToken || localStorage.getItem('accessToken');
+    if (user.accessToken === "" && token) {
+      setAccessToken(token);
+    }
+  }, [user.accessToken])
 
   const renderContent = () => {
     switch (navigationGroupName) {
