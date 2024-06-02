@@ -4,7 +4,6 @@ import Member from './Member'
 import { useRouter } from 'next/router';
 import { getGroupMembers } from '@/apis/group';
 import { useUser } from '@/hook/useUser';
-import { getTempMemberList } from '@/utils/tempData';
 interface Member {
   id: number;
   name: string;
@@ -19,8 +18,6 @@ const Home = () => {
       const response = await getGroupMembers((currentGroup ? currentGroup : 1), user.accessToken);
       if(response){
         setMembers(response);
-      }else{
-        setMembers(getTempMemberList);
       }
     };
     fetchData();
