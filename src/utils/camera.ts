@@ -52,7 +52,6 @@ interface Router {
   push: (path: string) => void;
 }
 
-
 export const processImage = async (
   file: File,
   user: User,
@@ -79,13 +78,17 @@ export const processImage = async (
         if (token === "" || !token) {
           token = localStorage.getItem('accessToken') || "";
         }
+
+        const selectGroup = localStorage.getItem('selectGroup');
+        const groupId = selectGroup ? parseInt(selectGroup, 10) : currentGroup;
+
         if (token === '') {
           data = await sendImageToBackendTest(blob);
         } else {
-          if (currentGroup === -1) {
+          if (groupId === -1) {
             data = await sendImageToBackend(blob, token);
           } else {
-            data = await sendImageToBackendGroup(blob, token, currentGroup);
+            data = await sendImageToBackendGroup(blob, token, groupId);
           }
         }
         if (data) {
