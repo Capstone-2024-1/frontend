@@ -7,10 +7,13 @@ const Group = ({ id, profile, name }: { id: number, profile: string, name: strin
   const { setCurrentGroup, currentGroup } = useUser();
   const handleClick = () => {
     setCurrentGroup(id);
+    localStorage.setItem('selectGroup', id.toString());
   };
   useEffect(()=>{
-    setCurrentGroup(-1);
-  }, []);
+    let tempId = localStorage.getItem('selectGroup');
+    if(tempId)setCurrentGroup(Number(tempId));
+    else setCurrentGroup(1);
+  }, [id]);
   const isSelected = currentGroup === id;
 
   return (
