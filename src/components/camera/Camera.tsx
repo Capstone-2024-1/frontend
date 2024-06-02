@@ -22,6 +22,9 @@ const Camera = () => {
       const canvas = canvasRef.current;
       const context = canvas.getContext('2d');
       if (context) {
+        // 비디오 요소의 크기를 캔버스에 맞춥니다.
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
         const blob = await new Promise<Blob | null>((resolve) => {
           canvas.toBlob((blob) => {
@@ -88,7 +91,7 @@ const containerStyle = {
   height: '100%',
   bgcolor: setColor('lightGrey') || 'grey',
   overflow: 'scroll',
-  position: 'relative', // 로딩 오버레이를 올바르게 배치하기 위해 부모 요소를 상대 위치로 설정
+  position: 'relative',
 };
 
 const videoContainerStyle = {
@@ -138,8 +141,8 @@ const loadingStyle = {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)', // 배경을 살짝 투명하게 설정하여 배경 내용이 보이도록 함
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
   fontSize: '24px',
   color: 'gray',
-  zIndex: 10, // 로딩 오버레이가 다른 요소들 위에 오도록 설정
+  zIndex: 10,
 };

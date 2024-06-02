@@ -75,6 +75,32 @@
 
 
 //4
+// export const getWebcam = (callback: (stream: MediaStream) => void): void => {
+//   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+//   const constraints = {
+//     video: { 
+//       facingMode: isMobile ? { exact: "environment" } : "user",
+//       width: { ideal: 1920 },  // 해상도 설정 (가로)
+//       height: { ideal: 1080 }, // 해상도 설정 (세로)
+//       frameRate: { ideal: 30 } // 프레임률 설정
+//     },
+//     audio: false
+//   };
+
+//   navigator.mediaDevices.getUserMedia(constraints)
+//     .then(callback)
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// }
+
+// const Styles = {
+//   Video: { width: "100%", height: "90%", background: 'rgba(245, 240, 215, 0.5)' },
+//   None: { display: 'none' },
+// };
+
+// export default getWebcam;
+
 export const getWebcam = (callback: (stream: MediaStream) => void): void => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const constraints = {
@@ -94,8 +120,23 @@ export const getWebcam = (callback: (stream: MediaStream) => void): void => {
     });
 }
 
+export const captureImage = (video: HTMLVideoElement): string | null => {
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  const context = canvas.getContext('2d');
+  
+  if (context) {
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL('image/png');
+  } else {
+    console.error('Failed to get canvas context');
+    return null;
+  }
+}
+
 const Styles = {
-  Video: { width: "100%", height: "100%", background: 'rgba(245, 240, 215, 0.5)' },
+  Video: { width: "100%", height: "90%", background: 'rgba(245, 240, 215, 0.5)' },
   None: { display: 'none' },
 };
 
