@@ -1,5 +1,4 @@
 import { useUser } from '@/hook/useUser';
-import getWebcam from '@/utils/camera';
 import { Box, CardMedia, TextField, Button } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
