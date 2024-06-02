@@ -11,7 +11,7 @@ interface Member {
 }
 
 const Members = () => {
-  const {currentGroup, user} = useUser();
+  const {currentGroup, user, setAccessToken} = useUser();
   const [members, setMembers] = useState<Member[]>([]);
 
   useEffect(()=>{
@@ -19,6 +19,7 @@ const Members = () => {
       let token = user.accessToken;
       if (token === "" || !token) {
         token = localStorage.getItem('accessToken') || "";
+        setAccessToken(token);
       }
       const response = await getGroupMembers((currentGroup ? currentGroup : 1), token);
       if(response){

@@ -20,7 +20,7 @@ interface My{
 }
 
 const GroupList = () => {
-  const {user} = useUser();
+  const {user, setAccessToken} = useUser();
   const [groups, setGroups] = useState<Group[]>();
   const [me, setMe] = useState<My>();
   useEffect(()=> {
@@ -28,6 +28,7 @@ const GroupList = () => {
       let token = user.accessToken;
       if (token === "" || !token) {
         token = localStorage.getItem('accessToken') || "";
+        setAccessToken(token);
       }
       const data = await getGroupList(token);
       setGroups(data);

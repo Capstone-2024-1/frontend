@@ -19,7 +19,7 @@ interface Category {
 }
 
 const Ingredient = ({list}:{list?: boolean}) => {
-  const {user} = useUser();
+  const {user, setAccessToken} = useUser();
   const [data, setData] = useState<Category[]>([]);
   const [step, setStep] = useState<number>(1);
   const router = useRouter();
@@ -42,6 +42,7 @@ const Ingredient = ({list}:{list?: boolean}) => {
       let token = user.accessToken;
       if (token === "" || !token) {
         token = localStorage.getItem('accessToken') || "";
+        setAccessToken(token);
       }
       const response = await postRegister(user.name, user.banIngredient, token);
       console.log(response);

@@ -20,6 +20,9 @@ const Home = () => {
 
     const fetchData = async () => {
       const token = user.accessToken || localStorage.getItem('accessToken');
+      if(token){
+        setAccessToken(token);
+      }
       if (token) {
         const data = await getMyProfile(token);
         if (data) {

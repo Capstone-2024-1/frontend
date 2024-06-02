@@ -13,7 +13,7 @@ interface Ingredient {
 };
 
 const Cannot = () => {
-  const { user, currentGroup } = useUser();
+  const { user, currentGroup, setAccessToken } = useUser();
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   
   useEffect(() => {
@@ -21,6 +21,7 @@ const Cannot = () => {
       let token = user.accessToken;
       if (token === "" || !token) {
         token = localStorage.getItem('accessToken') || "";
+        setAccessToken(token);
       }
 
       if (currentGroup !== -1 && token) {
