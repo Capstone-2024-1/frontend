@@ -1,10 +1,9 @@
+// next.config.js
 const withPWA = require('next-pwa')({
   dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
 });
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // 기존 Next.js 설정
-};
-
-module.exports = withPWA(nextConfig);
+module.exports = withPWA({
+  // 추가적인 Next.js 설정
+});
