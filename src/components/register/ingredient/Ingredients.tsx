@@ -6,7 +6,7 @@ import { Box } from '@mui/material'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import IngredientsList from './IngredientsList'
-import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
+import { getTempAllergy, getTempCategories, getTempReligion, getTempVegetarian } from '@/utils/tempData'
 import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
 import { postRegister } from '@/apis/login'
 import { Category } from '@/utils/type'
@@ -47,6 +47,7 @@ const Ingredient = ({list}:{list?: boolean}) => {
     if(step == 1) return getVegetarian();
     else if(step == 2) return getReligion();
     else if(step == 3) return getAllergy();
+    else if(step == 4)return getCategory();
     else return getCategory();
   };
 
@@ -59,6 +60,7 @@ const Ingredient = ({list}:{list?: boolean}) => {
         if(step == 1)setData(getTempVegetarian);
         else if(step == 2)setData(getTempReligion);
         else if(step == 3)setData(getTempAllergy);
+        else if(step == 4)setData(getTempCategories);
       }
     };
     fetchData();

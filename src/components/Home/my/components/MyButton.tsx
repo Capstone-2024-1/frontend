@@ -17,7 +17,10 @@ const MyButton = ({name, click}:{name: string, click?:()=>void}) => {
       router.push('/my/modify?type=allergy');
     }else if(name === "modify - religion"){
       router.push('/my/modify?type=religion');
-    }else if(name === "Contact To Us"){
+    }else if(name === "modify - category"){
+      router.push('/my/modify?type=Category');
+    }
+    else if(name === "Contact To Us"){
       if(click){
         click();
       }

@@ -48,6 +48,8 @@ const Ingredient = ({ list }: { list?: boolean }) => {
         return 2;
       case 'allergy':
         return 3;
+      case 'Category':
+        return 4;
       default:
         return 1;
     }
@@ -59,6 +61,7 @@ const Ingredient = ({ list }: { list?: boolean }) => {
     if (step === 1) return getVegetarian();
     else if (step === 2) return getReligion();
     else if (step === 3) return getAllergy();
+    else if(step === 4)return getCategory();
     else return getCategory();
   };
 
@@ -96,4 +99,5 @@ const container = {
   height: '100%',
   bgcolor: setColor('lightGrey') || 'grey',
   color: 'black',
+  overflow: 'scroll',
 };

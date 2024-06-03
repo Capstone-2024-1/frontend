@@ -9,6 +9,7 @@ const MyInformation = () => {
     <MyButton name={"modify - Vegeterianism"}/>
     <MyButton name={"modify - Allergy"}/>
     <MyButton name={"modify - religion"}/>
+    <MyButton name={"modify - category"}/>
     </Box>
   )
 }
