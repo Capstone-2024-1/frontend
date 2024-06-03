@@ -30,7 +30,7 @@ const Setting = () => {
 
   const handleRemove = async () => {
     const response = await removeGroup(currentGroup, user.accessToken);
-    console.log(response);
+    // console.log(response);
     setRemoveOpen(false);
   };
 

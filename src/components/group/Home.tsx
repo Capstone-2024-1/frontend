@@ -1,3 +1,4 @@
+// Home.tsx
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import Member from './Member';
@@ -33,6 +34,10 @@ const Home = () => {
     fetchData();
   }, [currentGroup, setAccessToken, user.accessToken]);
 
+  const handleExpelMember = (id: number) => {
+    setMembers(prevMembers => prevMembers.filter(member => member.id !== id));
+  };
+
   return (
     <Box sx={centerAlignBoxStyle}>
       <Box sx={memberBoxStyle}>
@@ -42,6 +47,7 @@ const Home = () => {
             id={member.id}
             profile={member.profileImageUrl}
             name={member.name}
+            onExpel={handleExpelMember}
           />
         ))}
       </Box>

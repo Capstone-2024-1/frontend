@@ -1,10 +1,11 @@
+// Member.tsx
 import { postExpelMember } from '@/apis/group';
 import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
 import { Box, CardMedia } from '@mui/material';
 import React, { useEffect } from 'react';
 
-const Member = ({ id, profile, name }: { id: number, profile: string, name: string }) => {
+const Member = ({ id, profile, name, onExpel }: { id: number, profile: string, name: string, onExpel: (id: number) => void }) => {
   const { creater, user, currentGroup, setAccessToken } = useUser();
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const Member = ({ id, profile, name }: { id: number, profile: string, name: stri
 
   const handleExpel = async () => {
     const response = await postExpelMember(currentGroup, id, user.accessToken);
-    console.log(response);
+    onExpel(id);
   };
 
   return (
