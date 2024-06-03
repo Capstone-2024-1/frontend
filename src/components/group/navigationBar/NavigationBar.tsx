@@ -25,11 +25,11 @@ const navigationBarStyle = {
 
   width: '100%',
   '@media (min-width: 560px)': {
-    width: '550px',
+    width: '500px',
   },
-  height: '10px',
+  height: '90px',
+  bgcolor: 'white',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  paddingBottom: '45px',
 }

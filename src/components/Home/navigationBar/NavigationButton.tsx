@@ -48,6 +48,5 @@ const buttonStyle = (active: boolean) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-
   cursor: 'pointer',
 });

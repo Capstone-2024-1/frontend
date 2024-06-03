@@ -31,12 +31,12 @@ const navigationBarStyle = {
   zIndex: 3,
 
   width: '100%',
+  bgcolor: 'white',
   '@media (min-width: 560px)': {
-    width: '550px',
+    width: '500px',
   },
-  height: '10px',
+  height: '90px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
-  paddingBottom: '45px',
 }
