@@ -4,6 +4,7 @@ import NavigationBar from '../Home/navigationBar/NavigationBar';
 import { processImage } from '@/utils/camera';
 import { useUser } from '@/hook/useUser';
 import { useRouter } from 'next/router';
+import { setColor } from '@/utils/setColor';
 
 const Camera = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const Camera = () => {
       try {
         await processImage(file, user, categorizeItems, currentGroup, router);
       } finally {
-
+        setLoading(false);
       }
     }
   };
@@ -69,15 +70,26 @@ const containerStyle = {
 const videoContainerStyle = {
   position: 'relative',
   width: '100%',
-  height: 'auto',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'center',
   alignItems: 'center',
 };
 
 const captureButtonStyle = {
   marginTop: '20px',
   position: 'relative',
+  borderRadius: '50px',
+  padding: '17px 30px',
+  backgroundColor: setColor('main'),
+  color: '#fff',
+  fontSize: '16px',
+  fontWeight: 'bold',
+  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+  '&:hover': {
+    backgroundColor: setColor('sub'),
+  },
 };
 
 const loadingStyle = {
