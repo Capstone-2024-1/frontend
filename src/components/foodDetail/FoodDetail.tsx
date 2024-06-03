@@ -17,7 +17,7 @@ interface Ingredient {
 
 const FoodDetail = () => {
   const router = useRouter();
-  const { user, setAccessToken, isExistedMenuList, canEatCategories, cannotEatCategories, setCanEatCategories, setCannotEatCategories, menuSort } = useUser();
+  const { user, setAccessToken, isExistedMenuList, canEatCategories, cannotEatCategories, setCanEatCategories, setCannotEatCategories, menuSort, } = useUser();
   const foodName = Array.isArray(router.query.name) ? router.query.name[0] : router.query.name;
 
   const [caneats, setCaneats] = useState<Ingredient[]>(canEatCategories);
@@ -85,7 +85,10 @@ const FoodDetail = () => {
         <Title name={foodName ? foodName : '김치찌개'} />
         <IngredientsBox tag={'cannot eat'} ingredients={cannoteats} />
         <IngredientsBox tag={'can eat'} ingredients={caneats} />
-        <SelectBox />
+        {
+          isExistedMenuList &&
+          <SelectBox />
+        }
         {loading && <Box sx={loadingStyle}>Loading...</Box>}
       </>
     </Box>
