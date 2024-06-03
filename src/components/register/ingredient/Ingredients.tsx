@@ -9,14 +9,7 @@ import IngredientsList from './IngredientsList'
 import { getTempAllergy, getTempReligion, getTempVegetarian } from '@/utils/tempData'
 import { getAllergy, getCategory, getReligion, getVegetarian } from '@/apis/ingredients'
 import { postRegister } from '@/apis/login'
-
-interface Category {
-  id: number;
-  englishName: string;
-  koreanName: string;
-  flatChildIds: number[];
-  childCategories: Category[];
-}
+import { Category } from '@/utils/type'
 
 const Ingredient = ({list}:{list?: boolean}) => {
   const {user, setAccessToken} = useUser();

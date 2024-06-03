@@ -17,10 +17,10 @@ const IngredientsList: React.FC<IngredientsListProps> = ({data}) => {
 
   const renderCategory = (category: Category, depth: number): JSX.Element => (
   <IngredientContainer key={category.id}
-  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"} depth={depth} id={category.id} flatChildIds={category.flatChildIds || [1, 2, 3]}>
+  english={category.englishName || "ingredient"} korean={category.koreanName || "재료"} depth={depth} id={category.id} flatChildIds={category.flatChildIds || [1, 2, 3, 4]}>
     {category.childCategories.length > 0 &&
       <>
-      {category.childCategories.map(childCategory => renderCategory(childCategory, depth + 1))}
+      {category.childCategories.map(childCategory => renderCategory(childCategory, depth))}
       </>
     }
   </IngredientContainer>

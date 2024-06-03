@@ -1,21 +1,8 @@
 import { useUser } from '@/hook/useUser';
 import { setColor } from '@/utils/setColor';
+import { IngredientContainerProps } from '@/utils/type';
 import { Box } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-
-interface IngredientContainerProps {
-  english: string;
-  korean: string;
-  children?: React.ReactNode;
-  depth: number;
-  open: boolean;
-  setOpen: (value: boolean) => void;
-  id: number;
-  handleCheck: (id: number, flatChildIds: number[]) => void;
-  check: boolean;
-  setCheck: (value: boolean) => void;
-  flatChildIds: number[];
-}
 
 const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, children, depth, open, setOpen, check, handleCheck, id, flatChildIds, setCheck }) => {
   const {user} = useUser();
@@ -49,7 +36,7 @@ const IngredientItem: React.FC<IngredientContainerProps> = ({ english, korean, c
         {english} ({korean}) 
       </Box>
       {
-        (depth === 0 || depth === 1 && children) && 
+        ( children) && 
         <Box sx={{
           backgroundImage: handleArrow(),
           width: '30px', height: '30px', backgroundPosition: 'center'}}
