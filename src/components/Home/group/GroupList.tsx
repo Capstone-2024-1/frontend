@@ -61,34 +61,17 @@ const GroupList = () => {
       <Box sx={textStyle}>
         My Group List
       </Box>
-      {/* {groups ? groups?.map(group=>(
-        <GroupBox
-          key={group.id}
-          id={group.id}
-          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
-          name={group.name}
-          num={group.peopleCount}
-          creater={group.creatorName}/>
-      ))
-      : (getTempGroupList).map(group=>(
-        <GroupBox
-          key={group.id}
-          id={group.id}
-          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
-          name={group.name}
-          num={group.peopleCount}
-          creater={group.creatorName}/>)
-      )} */}
-
-      {groups && groups?.map(group=>(
-        <GroupBox
-          key={group.id}
-          id={group.id}
-          profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
-          name={group.name}
-          num={group.peopleCount}
-          creater={group.creatorName}/>
-      ))}
+      <Box sx={containerStyle}>
+        {groups && groups?.map(group=>(
+          <GroupBox
+            key={group.id}
+            id={group.id}
+            profile={group.imageUrl!=="" ? group.imageUrl : `/images/groupGrey.png`}
+            name={group.name}
+            num={group.peopleCount}
+            creater={group.creatorName}/>
+        ))}
+      </Box>
 
 
       {click &&
@@ -112,13 +95,7 @@ const GroupList = () => {
 export default GroupList;
 
 const myStyle = {
-  width: '100%',
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
   
-  overflowY: 'scroll',
   overflowX: 'hidden',
   color: 'black',
 };
@@ -154,4 +131,13 @@ const overlayStyle = {
   left: 0,
   bgcolor: 'rgba(0, 0, 0, 0.5)',
   zIndex: 1,
+};
+
+const containerStyle = {
+  width: '100%',
+  height: 'calc(100vh - 200px)',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  overflowY: 'scroll',
 }
