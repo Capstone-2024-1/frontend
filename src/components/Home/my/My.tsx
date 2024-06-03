@@ -7,8 +7,12 @@ import Service from './Service';
 import LogoutModal from './components/LogoutModal';
 import ContactModal from './components/ContactModal';
 import NicknameModal from './components/NicknameModal';
+import { useUser } from '@/hook/useUser';
+import { useRouter } from 'next/router';
 
 const My = () => {
+  const router = useRouter();
+  const {setAccessToken} = useUser();
   const [logoutOpen, setLogoutOpen] = useState<boolean>(false);
   const [contactOpen, setContactOpen] = useState<boolean>(false);
   const [nicknameOpen, setNicknameOpen] = useState<boolean>(false);
@@ -19,7 +23,10 @@ const My = () => {
     setLogoutOpen(false);
   }
   const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    setAccessToken("");
     handleLogoutClose();
+    router.push('/');
   }
   const handleContactClose = () => {
     setContactOpen(false);
