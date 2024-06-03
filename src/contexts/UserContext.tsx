@@ -2,6 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState
 
 interface Menu {
   name: string;
+  englishName: string;
   quantity: number;
 }
 
@@ -61,6 +62,8 @@ export interface UserContextValues {
   cannotEatCategories: Ingredient[];
   setCanEatCategories: Dispatch<SetStateAction<Ingredient[]>>;
   setCannotEatCategories: Dispatch<SetStateAction<Ingredient[]>>;
+  foodEnglishName: string;
+  setFoodEnglishName: (name: string) => void;
 }
 
 const contextDefaultValue: UserContextValues = {
@@ -69,8 +72,8 @@ const contextDefaultValue: UserContextValues = {
     image: '',
     isVegeterian: false,
     banIngredient: [],
-    // accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzYWZlYXQiLCJpYXQiOjE3MTY4MDY3NTIsImV4cCI6MTcyNDU4Mjc1MiwibWVtYmVySWQiOjF9.vzzMJ2ozwg9nlfsHbO9A9lVOnIU0IttraP7mgMo6qHE',
-    accessToken: '',
+    accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzYWZlYXQiLCJpYXQiOjE3MTY4MDY3NTIsImV4cCI6MTcyNDU4Mjc1MiwibWVtYmVySWQiOjF9.vzzMJ2ozwg9nlfsHbO9A9lVOnIU0IttraP7mgMo6qHE',
+    // accessToken: '',
     userId: -1,
   },
   setName: () => {},
@@ -103,6 +106,8 @@ const contextDefaultValue: UserContextValues = {
   cannotEatCategories: [],
   setCanEatCategories: () => {},
   setCannotEatCategories: () => {},
+  foodEnglishName: '',
+  setFoodEnglishName: ()  => {},
 };
 
 export const UserContext = createContext(contextDefaultValue);
@@ -129,6 +134,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const [canEatCategories, setCanEatCategories] = useState<Ingredient[]>(contextDefaultValue.canEatCategories);
   const [cannotEatCategories, setCannotEatCategories] = useState<Ingredient[]>(contextDefaultValue.cannotEatCategories);
+  const [foodEnglishName, setFoodEnglishName] = useState<string>(contextDefaultValue.foodEnglishName);
 
   const addBanIngredient = (ingredientId: number) => {
     setBanIngredient((prevBanIngredient) => [...prevBanIngredient, ingredientId]);
@@ -204,6 +210,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         cannotEatCategories,
         setCanEatCategories,
         setCannotEatCategories,
+        foodEnglishName,
+        setFoodEnglishName,
       }}
     >
       {children}

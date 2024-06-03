@@ -35,11 +35,11 @@ const FoodDetail = () => {
       try {
         const data = await getFoodFiltering(foodName ? foodName : "김치볶음밥", token as string);
         if (data) {
-          console.log(data);
           setCaneats(data.canEatCategories);
           setCannoteats(data.cannotEatCategories);
           setCanEatCategories(data.canEatCategories);
           setCannotEatCategories(data.cannotEatCategories);
+          
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -53,7 +53,6 @@ const FoodDetail = () => {
       try {
         const data = await getFoodGenerating(foodName ? foodName : "김치볶음밥", token as string);
         if (data) {
-          console.log(data);
           setCaneats(data.canEatCategories);
           setCannoteats(data.cannotEatCategories);
           setCanEatCategories(data.canEatCategories);
@@ -72,17 +71,17 @@ const FoodDetail = () => {
       } else if (menuSort === "ambiguous") {
         fetchDataAmbiguous();
       } else {
-        setLoading(false); // 추가: 데이터 로딩이 필요하지 않으면 로딩 상태를 false로 설정
+        setLoading(false);
       }
     } else {
-      setLoading(false); // 추가: 토큰이 없으면 로딩 상태를 false로 설정
+      setLoading(false);
     }
   }, [user.accessToken, foodName, isExistedMenuList, menuSort, setAccessToken]);
 
   return (
     <Box sx={containerStyle}>
       <>
-        <Title name={foodName ? foodName : '김치찌개'} />
+        <Title name={foodName ? foodName : '김치찌개'}/>
         <IngredientsBox tag={'cannot eat'} ingredients={cannoteats} />
         <IngredientsBox tag={'can eat'} ingredients={caneats} />
         {

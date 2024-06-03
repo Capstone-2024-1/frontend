@@ -1,19 +1,21 @@
 import { useUser } from '@/hook/useUser';
-import { setColor } from '@/utils/setColor'
-import { Box, CardMedia } from '@mui/material'
+import { setColor } from '@/utils/setColor';
+import { Box, CardMedia } from '@mui/material';
 import { useRouter } from 'next/router';
-import React from 'react'
+import React from 'react';
 
-const Title = ({name}:{name: string}) => {
+const Title = ({ name }: { name: string }) => {
   const router = useRouter();
-  const {isExistedMenuList} = useUser();
+  const { isExistedMenuList, foodEnglishName } = useUser();
+
   const handleBack = () => {
-    if(isExistedMenuList) {
+    if (isExistedMenuList) {
       router.push('/menu');
-    }else{
+    } else {
       router.push('/home');
     }
-  }
+  };
+
   return (
     <Box sx={containerStyle}>
       <CardMedia
@@ -22,10 +24,12 @@ const Title = ({name}:{name: string}) => {
         title="profile"
         sx={imageStyle}
         onClick={handleBack}
-            />
-      {name}
+      />
+      <Box sx={titleStyle}>
+        {name} ({foodEnglishName})
+      </Box>
     </Box>
-  )
+  );
 }
 
 export default Title;
@@ -36,10 +40,8 @@ const containerStyle = {
   bgcolor: setColor('main'),
   display: 'flex',
   alignItems: 'center',
-  textAlign: 'center',
   color: 'white',
-  textEdge: 'cap',
-  fontSize: '1.6rem',
+  fontSize: '1.4rem',
   fontStyle: 'normal',
   fontWeight: 'bold',
   lineHeight: 'normal',
@@ -50,4 +52,11 @@ const imageStyle = {
   width: '40px',
   height: '40px',
   margin: '10px',
-}
+};
+
+const titleStyle = {
+  width: '500px',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+};

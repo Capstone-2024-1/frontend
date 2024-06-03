@@ -12,7 +12,7 @@ const Orders = () => {
   return (
     <Box sx={boxStyle}>
       {menuList.map((menu, index)=>(
-        <Food key={index} name={menu.name} quantity={menu.quantity}/>
+        <Food key={index} name={menu.name} quantity={menu.quantity} englishName={menu.englishName}/>
       ))
       }
     </Box>

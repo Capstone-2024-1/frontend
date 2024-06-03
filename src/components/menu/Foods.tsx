@@ -72,10 +72,13 @@ const boxStyle = {
   justifyContent: 'center',
   color: 'white',
   fontWeight: 'bold',
-  fontSize: '1.6rem',
+  fontSize: '1.4rem',
   borderRadius: '0.625rem',
   cursor: 'pointer',
   zIndex: 3,
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
 };
 
 const containerStyle = {

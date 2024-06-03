@@ -24,11 +24,12 @@ interface Ingredient {
 
 const Food = ({ food }: FoodProp) => {
   const router = useRouter();
-  const {setCanEatCategories, setCannotEatCategories, setIsExistedMenuList} = useUser();
+  const {setCanEatCategories, setCannotEatCategories, setIsExistedMenuList, setFoodEnglishName} = useUser();
   const handleClick = () => {
     setIsExistedMenuList(true);
     setCanEatCategories(food.canEatCategories);
     setCannotEatCategories(food.cannotEatCategories);
+    setFoodEnglishName(food.englishName);
     router.push(`/menu/detail?name=${food.koreanName}`);
   }
   return (

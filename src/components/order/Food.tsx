@@ -1,8 +1,8 @@
-import { Box, CardMedia } from '@mui/material'
+import { Box, CardMedia, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 
-const Food = ({name, quantity}:{name: string, quantity: number}) => {
+const Food = ({name, quantity, englishName}:{name: string, quantity: number, englishName: string}) => {
   const [num, setNum] = useState<number>(quantity);
   
   const handlePlus = () => {
@@ -15,7 +15,8 @@ const Food = ({name, quantity}:{name: string, quantity: number}) => {
   return (
     <Box sx={boxStyle}>
       <Box sx={titleStyle}>
-        {name}
+      <Typography variant="h6" sx={nameStyle}>{name}</Typography>
+        <Typography variant="body2" sx={englishNameStyle}>{englishName}</Typography>
       </Box>
       <Box sx={{...addBoxStyle, marginTop: '30px'}}>
         <CardMedia
@@ -90,4 +91,16 @@ const numStyle = {
   '@media (max-width: 600px)': {
     right: '75px',
   },
+};
+
+const nameStyle = {
+  fontWeight: 'bold',
+  fontSize: '1.75rem',
+  fontFamily: 'Jua',
+};
+
+const englishNameStyle = {
+  fontSize: '1.25rem',
+  color: '#666',
+  fontFamily: 'Arial',
 };

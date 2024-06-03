@@ -6,13 +6,14 @@ import React, { useState } from 'react'
 
 interface Menu {
   name: string;
+  englishName: string;
   quantity: number;
 }
 
 const AddBox = ({handleClick}:{handleClick:()=>void}) => {
   const router = useRouter();
   const name = Array.isArray(router.query.name) ? router.query.name[0] : router.query.name;
-  const {menuList, setMenuList} = useUser();
+  const {menuList, setMenuList, foodEnglishName} = useUser();
 
   const [num, setNum] = useState<number>(0);
   
@@ -35,7 +36,7 @@ const AddBox = ({handleClick}:{handleClick:()=>void}) => {
         });
   
         if (!found) {
-          updatedList.push({ name, quantity: num });
+          updatedList.push({ name, englishName:foodEnglishName, quantity: num });
         }
         return updatedList;
       });
