@@ -101,6 +101,7 @@ const containerStyle = {
   bgcolor: setColor('lightGrey'),
   overflow: 'scroll',
   color: 'black',
+  paddingBottom: '80px',
 };
 
 const loadingStyle = {

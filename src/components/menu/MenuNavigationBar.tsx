@@ -7,8 +7,8 @@ const MenuNavigationBar = () => {
     <Box sx={containerStyle}>
       <Box sx={tagsStyle}>
         <EatTag tag={'can eat'}/>
-        <EatTag tag={'ambiguous'}/>
         <EatTag tag={'cannot eat'}/>
+        <EatTag tag={'ambiguous'}/>
       </Box>
     </Box>
   )

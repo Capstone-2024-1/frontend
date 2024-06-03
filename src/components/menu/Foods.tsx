@@ -84,4 +84,5 @@ const containerStyle = {
   overflow: 'scroll',
   color: 'black',
   height: 'calc(100vh - 90px)',
+  paddingBottom: '100px',
 };
