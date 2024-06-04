@@ -4,7 +4,7 @@ import { Box, CardMedia } from '@mui/material';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const Title = ({ name }: { name: string }) => {
+const Title = ({ name, english }: { name: string, english: string }) => {
   const router = useRouter();
   const { isExistedMenuList, foodEnglishName } = useUser();
 
@@ -26,7 +26,11 @@ const Title = ({ name }: { name: string }) => {
         onClick={handleBack}
       />
       <Box sx={titleStyle}>
-        {name} ({foodEnglishName})
+        {isExistedMenuList ? (
+          <>{name} ({foodEnglishName})</>
+        ) : (
+          <>{name} ({english})</>
+        )}
       </Box>
     </Box>
   );

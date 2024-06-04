@@ -23,6 +23,7 @@ const FoodDetail = () => {
   const [caneats, setCaneats] = useState<Ingredient[]>(canEatCategories);
   const [cannoteats, setCannoteats] = useState<Ingredient[]>(cannotEatCategories);
   const [loading, setLoading] = useState<boolean>(true);
+  const [english, setEnglish] = useState<string>('');
 
   useEffect(() => {
     const token = user.accessToken || localStorage.getItem('accessToken');
@@ -39,6 +40,7 @@ const FoodDetail = () => {
           setCannoteats(data.cannotEatCategories);
           setCanEatCategories(data.canEatCategories);
           setCannotEatCategories(data.cannotEatCategories);
+          setEnglish(data.englishName);
           
         }
       } catch (error) {
@@ -57,6 +59,7 @@ const FoodDetail = () => {
           setCannoteats(data.cannotEatCategories);
           setCanEatCategories(data.canEatCategories);
           setCannotEatCategories(data.cannotEatCategories);
+          setEnglish(data.englishName);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -81,7 +84,7 @@ const FoodDetail = () => {
   return (
     <Box sx={containerStyle}>
       <>
-        <Title name={foodName ? foodName : '김치찌개'}/>
+        <Title name={foodName ? foodName : '김치찌개'} english={english}/>
         <IngredientsBox tag={'cannot eat'} ingredients={cannoteats} />
         <IngredientsBox tag={'can eat'} ingredients={caneats} />
         {
