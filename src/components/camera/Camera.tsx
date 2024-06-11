@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import NavigationBar from '../Home/navigationBar/NavigationBar';
 import { processImage } from '@/utils/camera';
 import { useUser } from '@/hook/useUser';
@@ -12,6 +12,11 @@ const Camera = () => {
   const { user, categorizeItems, currentGroup } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
 
+  useEffect(() => {
+    fileInputRef.current?.click();
+    setLoading(true);
+  }, []);
+
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -21,12 +26,9 @@ const Camera = () => {
       } finally {
         // setLoading(false);
       }
+    } else {
+      setLoading(false);
     }
-  };
-
-  const handleButtonClick = () => {
-    setLoading(true);
-    fileInputRef.current?.click();
   };
 
   return (
@@ -41,7 +43,7 @@ const Camera = () => {
           onChange={handleFileChange}
         />
         <Button
-          onClick={handleButtonClick}
+          onClick={() => fileInputRef.current?.click()}
           variant="contained"
           color="primary"
           sx={captureButtonStyle}

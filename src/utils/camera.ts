@@ -1,3 +1,4 @@
+// camera.ts
 // export const getWebcam = (callback: (stream: MediaStream) => void): void => {
 //   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 //   const constraints = {
