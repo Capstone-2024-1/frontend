@@ -11,10 +11,17 @@ const Camera = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { user, categorizeItems, currentGroup } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
+  const [isIOS, setIsIOS] = useState<boolean>(false);
 
   useEffect(() => {
-    fileInputRef.current?.click();
-    setLoading(true);
+    const userAgent = window.navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+    setIsIOS(isIOS);
+
+    if (!isIOS) {
+      fileInputRef.current?.click();
+      setLoading(true);
+    }
   }, []);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,11 +31,15 @@ const Camera = () => {
       try {
         await processImage(file, user, categorizeItems, currentGroup, router);
       } finally {
-        // setLoading(false);
+        setLoading(false);
       }
     } else {
       setLoading(false);
     }
+  };
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
   };
 
   return (
@@ -42,14 +53,16 @@ const Camera = () => {
           style={{ display: 'none' }}
           onChange={handleFileChange}
         />
-        <Button
-          onClick={() => fileInputRef.current?.click()}
-          variant="contained"
-          color="primary"
-          sx={captureButtonStyle}
-        >
-          Upload Image
-        </Button>
+        {isIOS && (
+          <Button
+            onClick={handleClick}
+            variant="contained"
+            color="primary"
+            sx={captureButtonStyle}
+          >
+            Upload Image
+          </Button>
+        )}
       </Box>
       <NavigationBar />
     </Box>
