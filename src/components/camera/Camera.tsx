@@ -31,7 +31,7 @@ const Camera = () => {
       try {
         await processImage(file, user, categorizeItems, currentGroup, router);
       } finally {
-        setLoading(false);
+        // setLoading(false);
       }
     } else {
       setLoading(false);
