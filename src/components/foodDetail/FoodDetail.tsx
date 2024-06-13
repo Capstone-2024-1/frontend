@@ -13,6 +13,7 @@ interface Ingredient {
   englishName: string;
   koreanName: string;
   imageUrl: string;
+  isFood?: boolean | null;
 };
 
 const FoodDetail = () => {
@@ -24,6 +25,7 @@ const FoodDetail = () => {
   const [cannoteats, setCannoteats] = useState<Ingredient[]>(cannotEatCategories);
   const [loading, setLoading] = useState<boolean>(true);
   const [english, setEnglish] = useState<string>('');
+  const [isFood, setIsFood] = useState<boolean>(true);
 
   useEffect(() => {
     const token = user.accessToken || localStorage.getItem('accessToken');
@@ -36,11 +38,15 @@ const FoodDetail = () => {
       try {
         const data = await getFoodFiltering(foodName ? foodName : "김치볶음밥", token as string);
         if (data) {
-          setCaneats(data.canEatCategories);
-          setCannoteats(data.cannotEatCategories);
-          setCanEatCategories(data.canEatCategories);
-          setCannotEatCategories(data.cannotEatCategories);
-          setEnglish(data.englishName);
+          if(data.isFood === null){
+            setIsFood(false);
+          }else{
+            setCaneats(data.canEatCategories);
+            setCannoteats(data.cannotEatCategories);
+            setCanEatCategories(data.canEatCategories);
+            setCannotEatCategories(data.cannotEatCategories);
+            setEnglish(data.englishName);
+          }
           
         }
       } catch (error) {
@@ -85,13 +91,24 @@ const FoodDetail = () => {
     <Box sx={containerStyle}>
       <>
         <Title name={foodName ? foodName : '김치찌개'} english={english}/>
-        <IngredientsBox tag={'cannot eat'} ingredients={cannoteats} />
-        <IngredientsBox tag={'can eat'} ingredients={caneats} />
         {
-          isExistedMenuList &&
-          <SelectBox />
+          isFood &&
+          <>
+          <IngredientsBox tag={'cannot eat'} ingredients={cannoteats} />
+          <IngredientsBox tag={'can eat'} ingredients={caneats} />
+          {
+            isExistedMenuList &&
+            <SelectBox />
+          }
+          {loading && <Box sx={loadingStyle}>Loading...</Box>}
+          </>
         }
-        {loading && <Box sx={loadingStyle}>Loading...</Box>}
+        {
+          !isFood &&
+          <Box sx={notFoodStyle}>
+            It Is Not Food
+          </Box>
+        }
       </>
     </Box>
   );
@@ -122,3 +139,14 @@ const loadingStyle = {
   fontSize: '24px',
   color: 'gray',
 };
+
+const notFoodStyle = {
+  width: '100%',
+  height: '100%',
+  color: 'black',
+  display: 'flex',
+  justifyContent: 'center',
+  alignContent: 'center',
+  fontSize: '24px',
+  fontWeight: 'bold',
+}
