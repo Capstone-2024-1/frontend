@@ -7,9 +7,10 @@ import React, { useState, useEffect } from 'react';
 interface LogoutModalProps {
   modalOpen: boolean;
   handleClose: () => void;
+  onCreate: () => void;
 }
 
-const CreateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }) => {
+const CreateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose, onCreate }) => {
   const { user, setAccessToken } = useUser();
   const [groupname, setGroupname] = useState('');
 
@@ -26,10 +27,11 @@ const CreateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }) => 
     setGroupname(event.target.value);
   };
 
-  const createGroup = () => {
+  const createGroup = async () => {
     const token = user.accessToken || localStorage.getItem('accessToken');
     if (token) {
-      createNewGroup(groupname, token);
+      await createNewGroup(groupname, token);
+      onCreate();
       handleClose();
     } else {
       console.error('No access token available');

@@ -6,8 +6,8 @@ import Buttons from './Buttons';
 import { getGroupList } from '@/apis/group';
 import CreateModal from './CreateModal';
 import ParticipateModal from './ParticipateModal';
-import { getTempGroupList } from '@/utils/tempData';
 import { useUser } from '@/hook/useUser';
+
 interface Group {
   id: number;
   name: string;
@@ -48,13 +48,14 @@ const GroupList = () => {
     setOpenCreate(!openCreate);
   }
 
+  const fetchData = async () => {
+    const data = await getGroupList(user.accessToken);
+    setGroups(data);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getGroupList(user.accessToken);
-      setGroups(data);
-    };
     fetchData();
-  },[openCreate, openParticipate]);
+  }, [openCreate, openParticipate]);
 
   return (
     <Box sx={{...myStyle, bgcolor: setColor('lightGrey')}}>
@@ -85,8 +86,8 @@ const GroupList = () => {
             onClick={changeClick}
             />
       {click && <Box sx={overlayStyle}/>}
-      {openParticipate && <ParticipateModal modalOpen={openParticipate} handleClose={handleParticipate}/>}
-      {openCreate && <CreateModal modalOpen={openCreate} handleClose={handleCreate}/>}
+      {openParticipate && <ParticipateModal modalOpen={openParticipate} handleClose={handleParticipate} onParticipate={fetchData}/>}
+      {openCreate && <CreateModal modalOpen={openCreate} handleClose={handleCreate} onCreate={fetchData}/>}
       
     </Box>
   )
@@ -95,7 +96,6 @@ const GroupList = () => {
 export default GroupList;
 
 const myStyle = {
-  
   overflowX: 'hidden',
   color: 'black',
 };

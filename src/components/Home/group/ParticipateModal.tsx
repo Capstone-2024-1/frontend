@@ -7,9 +7,10 @@ import React, { useEffect, useState } from 'react';
 interface LogoutModalProps {
   modalOpen: boolean;
   handleClose: () => void;
+  onParticipate: () => void;
 }
 
-const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }) => {
+const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose, onParticipate }) => {
   const { user, setAccessToken } = useUser();
   const [code, setCode] = useState('');
 
@@ -26,10 +27,11 @@ const ParticipateModal: React.FC<LogoutModalProps> = ({ modalOpen, handleClose }
     setCode(event.target.value);
   };
 
-  const participateGroup = () => {
+  const participateGroup = async () => {
     const token = user.accessToken || localStorage.getItem('accessToken');
     if (token) {
-      participateNewGroup(code, token);
+      await participateNewGroup(code, token);
+      onParticipate();
       handleClose();
     } else {
       console.error('No access token available');
